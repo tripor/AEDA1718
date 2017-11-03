@@ -39,31 +39,35 @@ public:
 		  {
 
 		  getline(ficheiro,linha);
-
+		  ss<<linha;
+		  ss>>tipo;
 
 		  	 switch(tipo){
 
 		  	 case("Incendio_Florestal"):
-		  			 Acidente* temp = new Florestal();
-		  			 temp->lerInfo();
+		  		Acidente* temp = new Florestal();
+		  		temp->lerInfo(ss);
 
 		  		break;
 
 		  	 case("Incendio_Domesticos"):
 				Acidente* temp = new Domesticos();
-				temp->lerInfo();
+				temp->lerInfo(ss);
 
 				break;
 
 		  	 case("Assalto"):
+				Acidente* temp = new Assalto();
+				temp->lerInfo(ss);
 				break;
 
 		  	 case("Acidente_Viação"):
+				Acidente* temp = new Acidente_Viacao();
+				temp->lerInfo(ss);
 				break;
 
 		  	 default:
 		  		 throw AcidenteDesconhecido(tipo);
-
 		  	 }
 
 
@@ -73,7 +77,6 @@ public:
 
 
 };
-
 
 
 

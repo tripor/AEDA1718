@@ -22,6 +22,18 @@ public:
 	//Outros Metodos
 	//virtual u_int numero_Socorristas() const;
 	//virtual u_int numero_Veiculos() const;
+};
+
+class AcidenteDesconhecido{
+	std::string tipo;
+
+public:
+	AcidenteDesconhecido(std::string tipo){
+		this->tipo = tipo;
+	}
+	void tratamento_Tipo(){
+	std::cout << "Erro: Tipo de acidente '" << tipo << "' invalido\n";
+	}
 
 };
 
