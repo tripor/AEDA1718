@@ -31,23 +31,27 @@ public:
 
 
 	void LeFicheiroAcidente(){
+		  std::string linha;
 		  std::string tipo;
+		  sstream ss;
 		  std::ifstream ficheiro ("Acidente.txt");
 		  while (!ficheiro.eof())
 		  {
 
-		  getline(ficheiro,tipo);
+		  getline(ficheiro,linha);
+
+
 		  	 switch(tipo){
 
 		  	 case("Incendio_Florestal"):
 		  			 Acidente* temp = new Florestal();
-		  			 temp->LerInfo();
+		  			 temp->lerInfo();
 
 		  		break;
 
 		  	 case("Incendio_Domesticos"):
-				Acidente* temp = new Florestal();
-				  			 temp->LerInfo();
+				Acidente* temp = new Domesticos();
+				temp->lerInfo();
 
 				break;
 
