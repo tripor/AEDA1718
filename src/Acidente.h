@@ -20,8 +20,8 @@ public:
 	void setData(std::string d);
 	void setLocal(std::pair<int,int> par);
 	//Outros Metodos
-	virtual u_int numero_Socorristas() const;
-	virtual u_int numero_Veiculos() const;
+	//virtual u_int numero_Socorristas() const;
+	//virtual u_int numero_Veiculos() const;
 
 };
 
@@ -40,8 +40,8 @@ public:
 	void setNumeroCarrosBombeiros(u_int n);
 	void setNumeroBombeiros(u_int n);
 	//Outros Metodos
-	virtual u_int numero_Socorristas() const;
-	virtual u_int numero_Veiculos() const;
+	//virtual u_int numero_Socorristas() const;
+	//virtual u_int numero_Veiculos() const;
 
 };
 
