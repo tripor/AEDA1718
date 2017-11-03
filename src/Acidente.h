@@ -53,7 +53,7 @@ public:
 	void setNumeroCarrosBombeiros(u_int n);
 	void setNumeroBombeiros(u_int n);
 	//Outros Metodos
-	virtual void lerInfo(std::stringstream ss);
+	virtual void lerInfo(std::stringstream ss){}
 
 
 };
@@ -99,7 +99,7 @@ public:
 	//Metodos Set
 	void setTipoCasa(std::string s);
 	//Outros Metodos
-	void lerInfo(std::stringstream ss) ;
+	void lerInfo(std::stringstream ss);
 
 
 	class Tipo_Casa_Invalida{
@@ -129,7 +129,7 @@ public:
 	void setExisteFeridos(bool n);
 	void setTipoCasa(std::string s);
 	//Outros Metodos
-	void lerInfo(std::stringstream ss, Acidente* a1) const;
+	void lerInfo(std::stringstream ss);
 
 
 	class Tipo_Casa_Invalida{
@@ -162,7 +162,7 @@ public:
 	void setNumeroVeiculosEnvolvidos(u_int n);
 	void setTipoEstrada(std::string s);
 	//Outros Metodos
-	void lerInfo(std::stringstream ss, Acidente* a1) const;
+	void lerInfo(std::stringstream ss);
 
 
 	class Tipo_Estrada_Invalida{

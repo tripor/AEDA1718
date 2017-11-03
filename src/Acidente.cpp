@@ -81,14 +81,16 @@ void Florestal::setAreaChamas(u_int area){
 void Florestal::lerInfo(std::stringstream ss){
 	std::string d;
 	int x, y;
-	std::pair<int,int> p;
 	u_int n_carros, n_bombeiros, a;
 
 	ss >> d >> x >> y >> n_carros >> n_bombeiros >> a;
 
+	std::pair<int,int> p = std::make_pair(x,y); // construir o par
 	this->setData(d);
-
-
+	this->setLocal(p);
+	this->setNumeroCarrosBombeiros(n_carros);
+	this->setNumeroBombeiros(n_bombeiros);
+	this->setAreaChamas(a);
 }
 
 
@@ -104,6 +106,21 @@ std::string Domesticos::getTipoCasa() const{
 
 void Domesticos::setTipoCasa(std::string s){
 	this->tipo_casa = s;
+}
+
+void Domesticos::lerInfo(std::stringstream ss){
+	std::string d, s; // data e string "tipo_casa"
+	int x, y; // coordenadas
+	u_int n_carros, n_bombeiros; // numero de carros e bombeiros
+
+	ss >> d >> x >> y >> n_carros >> n_bombeiros >> s;
+
+	std::pair<int,int> p = std::make_pair(x,y); // construir o par
+	this->setData(d);
+	this->setLocal(p);
+	this->setNumeroCarrosBombeiros(n_carros);
+	this->setNumeroBombeiros(n_bombeiros);
+	this->setTipoCasa(s);
 }
 
 
@@ -127,6 +144,20 @@ void Assalto::setExisteFeridos(bool n){
 
 void Assalto::setTipoCasa(std::string s){
 	this->tipo_casa = s;
+}
+
+void Assalto::lerInfo(std::stringstream ss){
+	std::string d, s; // data e string "tipo_casa"
+	int x, y; // coordenadas
+	bool feridos;
+
+	ss >> d >> x >> y >> feridos >> s;
+
+	std::pair<int,int> p = std::make_pair(x,y); // construir o par
+	this->setData(d);
+	this->setLocal(p);
+	this->setExisteFeridos(feridos);
+	this->setTipoCasa(s);
 }
 
 
@@ -159,3 +190,19 @@ void Acidente_Viacao::setNumeroVeiculosEnvolvidos(u_int n){
 void Acidente_Viacao::setTipoEstrada(std::string s){
 	this->tipo_Estrada = s;
 }
+
+void Acidente_Viacao::lerInfo(std::stringstream ss){
+	std::string d, s; // data e string "tipo_estrada"
+	int x, y; // coordenadas
+	u_int n_feridos, n_veiculos_env; // numero de feridos graves e veiculos envolvidos
+
+	ss >> d >> x >> y >> n_feridos >> n_veiculos_env >> s;
+
+	std::pair<int,int> p = std::make_pair(x,y); // construir o par
+	this->setData(d);
+	this->setLocal(p);
+	this->setNumeroFeridosGraves(n_feridos);
+	this->setNumeroVeiculosEnvolvidos(n_veiculos_env);
+	this->setTipoEstrada(s);
+}
+

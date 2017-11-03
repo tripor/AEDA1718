@@ -13,24 +13,24 @@ class Menu{
 	std::vector<PostoSocorro*> postos_socorro;
 
 public:
-	std::vector<Acidente> GetAcidentes(){
+	std::vector<Acidente> getAcidentes(){
 		return acidentes;
 	}
 
-	std::vector<PostoSocorro> GetPostosSocorro(){
+	std::vector<PostoSocorro> getPostosSocorro(){
 		return postos_socorro;
 	}
 
-	void AdicionaAcidente(Acidente *acidente){
+	void adicionaAcidente(Acidente *acidente){
 		acidentes.push_back(acidente);
 	}
 
-	void AdicionaPostosSocorro(PostoSocorro *posto){
+	void adicionaPostosSocorro(PostoSocorro *posto){
 		postos_socorro.push_back(posto);
 	}
 
 
-	void LeFicheiroAcidente(){
+	void lerFicheiroAcidente(){
 		  std::string linha;
 		  std::string tipo;
 		  std::stringstream ss;
@@ -39,26 +39,37 @@ public:
 		  {
 
 		  getline(ficheiro,linha);
+		  ss << tipo;
 
 
 		  	 switch(tipo){
 
 		  	 case("Incendio_Florestal"):
-		  			 Acidente* temp = new Florestal();
-		  			 temp->lerInfo(ss);
+		  		Acidente* temp = new Florestal();
+		  		temp->lerInfo(ss);
+		  		this->adicionaAcidente(temp);
 
 		  		break;
 
 		  	 case("Incendio_Domesticos"):
 				Acidente* temp = new Domesticos();
 				temp->lerInfo(ss);
+				this->adicionaAcidente(temp);
 
 				break;
 
 		  	 case("Assalto"):
+				Acidente* temp = new Assalto();
+				temp->lerInfo(ss);
+				this->adicionaAcidente(temp);
+
 				break;
 
-		  	 case("Acidente_Viação"):
+		  	 case("Acidente_Viacao"):
+				Acidente* temp = new Acidente_Viacao();
+				temp->lerInfo(ss);
+				this->adicionaAcidente(temp);
+
 				break;
 
 		  	 default:
