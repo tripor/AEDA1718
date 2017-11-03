@@ -25,6 +25,19 @@ public:
 
 };
 
+class AcidenteDesconhecido{
+	std::string tipo;
+
+public:
+	AcidenteDesconhecido(std::string tipo){
+		this->tipo = tipo;
+	}
+	void tratamento_Tipo(){
+	std::cout << "Erro: Tipo de acidente '" << tipo << "' invalido\n";
+	}
+
+};
+
 class Incendios : public Acidente{
 	u_int numero_CarrosBombeiros;
 	u_int numero_Bombeiros;
