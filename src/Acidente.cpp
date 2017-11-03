@@ -36,11 +36,11 @@ void Acidente::setLocal(std::pair<int,int> par){
 	//Construtores
 
 /*
-Incendios::Incendios(u_int n_carros, u_int n_bombeiros, std::string d, std::pair<int,int> local): Acidente(d, local){
+	Incendios::Incendios(u_int n_carros, u_int n_bombeiros, std::string d, std::pair<int,int> local): Acidente(d, local){
 	this->numero_CarrosBombeiros = n_carros;
 	this->numero_Bombeiros = n_bombeiros;
-}
-*/
+}*/
+
 	//Metodos Get
 
 u_int Incendios::getNumeroCarrosBombeiros() const{

@@ -30,13 +30,37 @@ public:
 	}
 
 
-	void LeFicheiro(){
-		  string tipo;
-		  std::ofstream ficheiro ("Acidente.txt");
+	void LeFicheiroAcidente(){
+		  std::string tipo;
+		  std::ifstream ficheiro ("Acidente.txt");
 		  while (!ficheiro.eof())
 		  {
-		  getline(ficheiro,data);
 
+		  getline(ficheiro,tipo);
+		  	 switch(tipo){
+
+		  	 case("Incendio_Florestal"):
+		  			 Acidente* temp = new Florestal();
+		  			 temp->LerInfo();
+
+		  		break;
+
+		  	 case("Incendio_Domesticos"):
+				Acidente* temp = new Florestal();
+				  			 temp->LerInfo();
+
+				break;
+
+		  	 case("Assalto"):
+				break;
+
+		  	 case("Acidente_Viação"):
+				break;
+
+		  	 default:
+		  		 throw AcidenteDesconhecido(tipo);
+
+		  	 }
 
 
 		  }

@@ -6,7 +6,7 @@
 // Classe Acidente e suas derivadas
 
 class Acidente{
-	std::string data; // Formato YYYY-MM-DD
+	std::string data; // Formato YYYY-MM-DD-HH-MM
 	std::pair<int,int> local; // Sistema de coordenadas (x,y)
 public:
 	//Construtores e destrutor
@@ -20,8 +20,8 @@ public:
 	void setData(std::string d);
 	void setLocal(std::pair<int,int> par);
 	//Outros Metodos
-	virtual u_int numero_Socorristas() const = 0;
-	virtual u_int numero_Veiculos() const = 0;
+	//virtual u_int numero_Socorristas() const;
+	//virtual u_int numero_Veiculos() const;
 
 };
 
@@ -40,8 +40,8 @@ public:
 	void setNumeroCarrosBombeiros(u_int n);
 	void setNumeroBombeiros(u_int n);
 	//Outros Metodos
-	virtual u_int numero_Socorristas() const = 0;
-	virtual u_int numero_Veiculos() const = 0;
+	//virtual u_int numero_Socorristas() const;
+	//virtual u_int numero_Veiculos() const;
 
 };
 
@@ -56,8 +56,8 @@ public:
 	//Metodos Set
 	void setAreaChamas(u_int area);
 	//Outros Metodos
-	u_int numero_Socorristas() const{};
-	u_int numero_Veiculos() const{};
+	u_int numero_Socorristas() const;
+	u_int numero_Veiculos() const;
 
 
 	class Area_Invalida{
@@ -87,8 +87,8 @@ public:
 	//Metodos Set
 	void setTipoCasa(std::string s);
 	//Outros Metodos
-	u_int numero_Socorristas() const{};
-	u_int numero_Veiculos() const{};
+	u_int numero_Socorristas() const;
+	u_int numero_Veiculos() const;
 
 
 	class Tipo_Casa_Invalida{
@@ -151,8 +151,8 @@ public:
 	void setNumeroVeiculosEnvolvidos(u_int n);
 	void setTipoEstrada(std::string s);
 	//Outros Metodos
-	u_int numero_Socorristas() const{};
-	u_int numero_Veiculos() const{};
+	u_int numero_Socorristas() const;
+	u_int numero_Veiculos() const;
 
 	class Tipo_Estrada_Invalida{
 		public:
