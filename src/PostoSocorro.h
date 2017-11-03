@@ -22,6 +22,19 @@ public:
 	std::pair<int,int> getPos();
 };
 
+class AcidenteDesconhecido{
+	std::string tipo;
+
+public:
+	AcidenteDesconhecido(std::string tipo){
+		this->tipo = tipo;
+	}
+	void tratamento_Tipo(){
+	std::cout << "Erro: Tipo de acidente '" << tipo << "' invalido\n";
+	}
+
+};
+
 class Bombeiros : public PostoSocorro{
 	u_int numero_Ambulancias;
 	u_int numero_Autotanques;

@@ -62,7 +62,7 @@ public:
 				break;
 
 		  	 default:
-		  		 //throw AcidenteDesconhecido(tipo);
+		  		 throw AcidenteDesconhecido(tipo);
 
 		  	 }
 
