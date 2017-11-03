@@ -42,6 +42,7 @@ public:
 	//Outros Metodos
 	virtual void lerInfo(std::stringstream ss);
 
+
 };
 
 class Florestal : public Incendios{
