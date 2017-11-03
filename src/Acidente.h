@@ -56,8 +56,8 @@ public:
 	//Metodos Set
 	void setAreaChamas(u_int area);
 	//Outros Metodos
-	u_int numero_Socorristas() const;
-	u_int numero_Veiculos() const;
+	u_int numero_Socorristas() const{};
+	u_int numero_Veiculos() const{};
 
 
 	class Area_Invalida{
@@ -87,8 +87,8 @@ public:
 	//Metodos Set
 	void setTipoCasa(std::string s);
 	//Outros Metodos
-	u_int numero_Socorristas() const;
-	u_int numero_Veiculos() const;
+	u_int numero_Socorristas() const{};
+	u_int numero_Veiculos() const{};
 
 
 	class Tipo_Casa_Invalida{
@@ -151,8 +151,8 @@ public:
 	void setNumeroVeiculosEnvolvidos(u_int n);
 	void setTipoEstrada(std::string s);
 	//Outros Metodos
-	u_int numero_Socorristas() const;
-	u_int numero_Veiculos() const;
+	u_int numero_Socorristas() const{};
+	u_int numero_Veiculos() const{};
 
 	class Tipo_Estrada_Invalida{
 		public:

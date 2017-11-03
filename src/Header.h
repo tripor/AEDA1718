@@ -5,6 +5,7 @@
 #include <vector>
 #include <utility>
 #include <iostream>
+#include <fstream>
 
 typedef unsigned int u_int;
 
