@@ -45,13 +45,13 @@ public:
 
 		  	 case("Incendio_Florestal"):
 		  			 Acidente* temp = new Florestal();
-		  			 temp->lerInfo();
+		  			 temp->lerInfo(ss);
 
 		  		break;
 
 		  	 case("Incendio_Domesticos"):
 				Acidente* temp = new Domesticos();
-				temp->lerInfo();
+				temp->lerInfo(ss);
 
 				break;
 
@@ -62,7 +62,7 @@ public:
 				break;
 
 		  	 default:
-		  		 throw AcidenteDesconhecido(tipo);
+		  		 //throw AcidenteDesconhecido(tipo);
 
 		  	 }
 

@@ -1,5 +1,6 @@
 #include "Acidente.h"
 
+
 // Classe Acidente
 
 	//Construtores
@@ -75,6 +76,19 @@ u_int Florestal::getAreaChamas() const{
 
 void Florestal::setAreaChamas(u_int area){
 	this->area_Chamas = area;
+}
+
+void Florestal::lerInfo(std::stringstream ss){
+	std::string d;
+	int x, y;
+	std::pair<int,int> p;
+	u_int n_carros, n_bombeiros, a;
+
+	ss >> d >> x >> y >> n_carros >> n_bombeiros >> a;
+
+	this->setData(d);
+
+
 }
 
 

@@ -20,8 +20,8 @@ public:
 	void setData(std::string d);
 	void setLocal(std::pair<int,int> par);
 	//Outros Metodos
-	//virtual u_int numero_Socorristas() const;
-	//virtual u_int numero_Veiculos() const;
+	virtual void lerInfo(std::stringstream ss){}
+
 
 };
 
@@ -40,8 +40,7 @@ public:
 	void setNumeroCarrosBombeiros(u_int n);
 	void setNumeroBombeiros(u_int n);
 	//Outros Metodos
-	//virtual u_int numero_Socorristas() const;
-	//virtual u_int numero_Veiculos() const;
+	virtual void lerInfo(std::stringstream ss);
 
 };
 
@@ -56,8 +55,7 @@ public:
 	//Metodos Set
 	void setAreaChamas(u_int area);
 	//Outros Metodos
-	u_int numero_Socorristas() const;
-	u_int numero_Veiculos() const;
+	void lerInfo(std::stringstream ss);
 
 
 	class Area_Invalida{
@@ -87,8 +85,7 @@ public:
 	//Metodos Set
 	void setTipoCasa(std::string s);
 	//Outros Metodos
-	u_int numero_Socorristas() const;
-	u_int numero_Veiculos() const;
+	void lerInfo(std::stringstream ss) ;
 
 
 	class Tipo_Casa_Invalida{
@@ -118,8 +115,8 @@ public:
 	void setExisteFeridos(bool n);
 	void setTipoCasa(std::string s);
 	//Outros Metodos
-	u_int numero_Socorristas() const;
-	u_int numero_Veiculos() const;
+	void lerInfo(std::stringstream ss, Acidente* a1) const;
+
 
 	class Tipo_Casa_Invalida{
 		public:
@@ -151,8 +148,8 @@ public:
 	void setNumeroVeiculosEnvolvidos(u_int n);
 	void setTipoEstrada(std::string s);
 	//Outros Metodos
-	u_int numero_Socorristas() const;
-	u_int numero_Veiculos() const;
+	void lerInfo(std::stringstream ss, Acidente* a1) const;
+
 
 	class Tipo_Estrada_Invalida{
 		public:
