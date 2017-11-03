@@ -1,0 +1,7 @@
+Assalto 2017-06-23-15-20 5000 4500 true Particular
+
+
+
+Policia 20 2 400 6000 
+
+

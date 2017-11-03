@@ -6,7 +6,7 @@
 // Classe Acidente e suas derivadas
 
 class Acidente{
-	std::string data; // Formato YYYY-MM-DD
+	std::string data; // Formato YYYY-MM-DD-HH-MM
 	std::pair<int,int> local; // Sistema de coordenadas (x,y)
 public:
 	//Construtores e destrutor
