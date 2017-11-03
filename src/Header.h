@@ -6,6 +6,8 @@
 #include <utility>
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include "math.h"
 
 typedef unsigned int u_int;
 

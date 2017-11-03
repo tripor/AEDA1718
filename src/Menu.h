@@ -33,7 +33,7 @@ public:
 	void LeFicheiroAcidente(){
 		  std::string linha;
 		  std::string tipo;
-		  sstream ss;
+		  std::stringstream ss;
 		  std::ifstream ficheiro ("Acidente.txt");
 		  while (!ficheiro.eof())
 		  {
