@@ -19,9 +19,9 @@ typedef unsigned int u_int;
 #endif
 
 #ifdef _WIN32
-#define CleanScreen() system("CLS");
+#define ClearScreen() system("CLS");
 #else
-#define CleanScreen() system("Clear");
+#define ClearScreen() system("Clear");
 #endif
 
 
