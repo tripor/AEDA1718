@@ -28,6 +28,7 @@ public:
 	void adicionaPostosSocorro(PostoSocorro *posto){
 		postos_socorro.push_back(posto);
 	}
+	void menuOpcoesIniciais();
 
 
 	void lerFicheiroAcidente(){

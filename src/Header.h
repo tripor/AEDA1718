@@ -11,5 +11,20 @@
 
 typedef unsigned int u_int;
 
+#ifdef _WIN32
+#include <windows.h>
+#define Chars() SetConsoleCP(1252); SetConsoleOutputCP(1252);
+#else
+#define Chars() void;
+#endif
+
+#ifdef _WIN32
+#define CleanScreen() system("CLS");
+#else
+#define CleanScreen() system("Clear");
+#endif
+
+
+
 
 #endif /* HEADER_H_ */
