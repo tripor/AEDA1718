@@ -21,7 +21,7 @@ public:
 	void setLocal(std::pair<int,int> par);
 	//Outros Metodos
 	virtual void lerInfo(std::stringstream ss){}
-
+	virtual string GetTipoAcidente(){}
 
 };
 
@@ -54,7 +54,7 @@ public:
 	void setNumeroBombeiros(u_int n);
 	//Outros Metodos
 	virtual void lerInfo(std::stringstream ss){}
-
+	virtual string GetTipoAcidente(){}
 
 };
 
@@ -70,7 +70,7 @@ public:
 	void setAreaChamas(u_int area);
 	//Outros Metodos
 	void lerInfo(std::stringstream ss);
-
+	virtual string GetTipoAcidente();
 
 	class Area_Invalida{
 	public:
@@ -100,7 +100,7 @@ public:
 	void setTipoCasa(std::string s);
 	//Outros Metodos
 	void lerInfo(std::stringstream ss);
-
+	virtual string GetTipoAcidente();
 
 	class Tipo_Casa_Invalida{
 		public:
@@ -130,7 +130,7 @@ public:
 	void setTipoCasa(std::string s);
 	//Outros Metodos
 	void lerInfo(std::stringstream ss);
-
+	virtual string GetTipoAcidente();
 
 	class Tipo_Casa_Invalida{
 		public:
@@ -163,7 +163,7 @@ public:
 	void setTipoEstrada(std::string s);
 	//Outros Metodos
 	void lerInfo(std::stringstream ss);
-
+	virtual string GetTipoAcidente();
 
 	class Tipo_Estrada_Invalida{
 		public:
