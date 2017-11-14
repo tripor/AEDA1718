@@ -16,8 +16,16 @@ Acidente::Acidente(std::string d, std::pair<int,int> local){
 	//Operadores
 
 bool Acidente::operator== (const Acidente* & a) const{
-	// com ou sem * ?      if((*this)->getTipoAcidente() != (*a)->getTipoAcidente())
+	if(this->getTipoAcidente() != a->getTipoAcidente()){
+		return false;
+	}
+	if(this->getTipoAcidente() == "Florestal"){
 
+
+
+	}
+
+	return true;
 }
 
 	//Metodos Get

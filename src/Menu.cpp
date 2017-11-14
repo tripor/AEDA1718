@@ -46,19 +46,19 @@ void Menu::adicionaAcidente(){
 
 	if (opcao == "1")
 	{
-		//a = new Florestal;
+		a = new Florestal;
 	}
 	if (opcao == "2")
 	{
-		//a = new Domesticos;
+		a = new Domesticos;
 	}
 	if (opcao == "3")
 	{
-		//a = new Assalto;
+		a = new Assalto;
 	}
 	if (opcao == "4")
 	{
-		//a = new Acidente_Viacao;
+		a = new Acidente_Viacao;
 	}
 	if (opcao == "0")
 	{
