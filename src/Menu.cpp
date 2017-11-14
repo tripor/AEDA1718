@@ -218,7 +218,7 @@ void Menu::lerFicheiroAcidente() {
 		ss >> tipo;
 
 		if (tipo == "Incendio_Florestal") {
-			Acidente* temp = new Florestal();
+			Acidente *temp = new Florestal();
 			temp->lerInfo(ss);
 			this->adicionaAcidente(temp);
 

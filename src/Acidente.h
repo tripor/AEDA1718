@@ -6,13 +6,14 @@
 // Classe Acidente e suas derivadas
 
 class Acidente{
+protected:
 	std::string data; // Formato YYYY-MM-DD-HH-MM
 	std::pair<int,int> local; // Sistema de coordenadas (x,y)
 public:
 	//Construtores e destrutor
 	Acidente() {};
 	Acidente(std::string d, std::pair<int,int> local);
-	~Acidente() {};
+	virtual ~Acidente() {};
 	//Metodos Get
 	std::string getData() const;
 	std::pair<int,int> getLocal() const;
@@ -40,13 +41,13 @@ public:
 };
 
 class Incendios : public Acidente{
+protected:
 	u_int numero_CarrosBombeiros;
 	u_int numero_Bombeiros;
 public:
 	//Construtores e destrutor
-	Incendios():Acidente(){};
+	//Incendios();
 	Incendios(u_int n_carros, u_int n_bombeiros, std::string d, std::pair<int,int> local);
-	~Incendios();
 	//Metodos Get
 	u_int getNumeroCarrosBombeiros() const;
 	u_int getNumeroBombeiros() const;
@@ -54,7 +55,7 @@ public:
 	void setNumeroCarrosBombeiros(u_int n);
 	void setNumeroBombeiros(u_int n);
 	//Outros Metodos
-	virtual void lerInfo(std::stringstream ss){}
+	virtual void lerInfo(std::stringstream ss);
 	virtual std::string getTipoAcidente() const{return  " ";}
 
 };
@@ -63,8 +64,7 @@ class Florestal : public Incendios{
 	u_int area_Chamas;
 public:
 	//Construtores e destrutor
-	Florestal():Incendios(){}
-	~Florestal();
+	//Florestal(){};
 	//Metodos Get
 	u_int getAreaChamas() const;
 	//Metodos Set
@@ -93,8 +93,7 @@ class Domesticos : public Incendios{
 	std::string tipo_casa; // "Apartamento" ou "Moradia"
 public:
 	//Construtores e destrutor
-	Domesticos():Incendios(){}
-	~Domesticos();
+	Domesticos();
 	//Metodos Get
 	std::string getTipoCasa() const;
 	//Metodos Set
@@ -121,8 +120,7 @@ class Assalto : public Acidente{
 	std::string tipo_casa; // "Particular" ou "Comercial"
 public:
 	//Construtores e destrutor
-	Assalto(): Acidente(){}
-	~Assalto();
+	Assalto();
 	//Metodos Get
 	bool getExisteFeridos() const;
 	std::string getTipoCasa() const;
@@ -152,8 +150,7 @@ class Acidente_Viacao : public Acidente{
 	std::string tipo_Estrada; // "Nacional" ou "Auto-Estrada"
 public:
 	//Construtores e destrutor
-	Acidente_Viacao(): Acidente(){}
-	~Acidente_Viacao();
+	Acidente_Viacao();
 	//Metodos Get
 	u_int getNumeroFeridosGraves() const;
 	u_int getNumeroVeiculosEnvolvidos() const;
