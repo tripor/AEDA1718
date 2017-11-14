@@ -24,7 +24,7 @@ std::ofstream & Menu::create_ficheiro_acidente(){
 	return file;
 }
 
-void Menu::adicionaAcidente(){
+void Menu::adicionaAcidente(Acidente *acidente){
 
 	std::string opcao;
 
@@ -217,8 +217,6 @@ void Menu::lerFicheiroAcidente() {
 		ss << linha;
 		ss >> tipo;
 
-/*
-
 		if (tipo == "Incendio_Florestal") {
 			Acidente* temp = new Florestal();
 			temp->lerInfo(ss);
@@ -250,7 +248,7 @@ void Menu::lerFicheiroAcidente() {
 		else
 			throw AcidenteDesconhecido(tipo);
 
-			*/
+
 	}
 	ficheiro.close();
 }
@@ -260,7 +258,7 @@ void Menu::EscreveFicheiroAcidente() {
 	std::string tipo;
 	std::stringstream ss;
 	std::ofstream ficheiro;
-	/*
+
 	if (!this->existe_ficheiro_acidentes())
 		ficheiro = this->create_ficheiro_acidente();
 	else
@@ -268,7 +266,7 @@ void Menu::EscreveFicheiroAcidente() {
 	for (size_t i = 0; i < this->acidentes.size(); i++) {
 
 	}
-	*/
+
 	ficheiro.close();
 }
 

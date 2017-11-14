@@ -20,7 +20,7 @@ public:
 	void setData(std::string d);
 	void setLocal(std::pair<int,int> par);
 	//Outros Metodos
-	virtual void lerInfo(std::stringstream ss){}
+	virtual void lerInfo(std::stringstream ss) = 0;
 	virtual std::string getTipoAcidente() const = 0;
 	bool operator== (const Acidente* & a) const;
 

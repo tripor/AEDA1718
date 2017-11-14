@@ -17,7 +17,7 @@ public:
 	std::vector<Acidente*> getAcidentes();
 	std::vector<PostoSocorro*> getPostosSocorro();
 
-	void adicionaAcidente();
+	void adicionaAcidente(Acidente *acidente);
 	void adicionaPostosSocorro(PostoSocorro *posto);
 
 	void menuOpcoesIniciais();
