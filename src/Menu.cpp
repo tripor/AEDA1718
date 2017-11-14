@@ -1,10 +1,10 @@
 #include "Header.h"
 #include "Menu.h"
 
-std::vector<Acidente> Menu::getAcidentes(){
-	return acidentes;
+std::vector<Acidente*> Menu::getAcidentes(){
+	return this->acidentes;
 }
-std::vector<PostoSocorro> Menu::getPostosSocorro(){
+std::vector<PostoSocorro*> Menu::getPostosSocorro(){
 	return postos_socorro;
 }
 
@@ -147,47 +147,47 @@ void Menu::menuOpcoesPostosSocorro()
 void Menu::lerFicheiroAcidente() {
 	std::string linha;
 	std::string tipo;
-	std::stringstream ss;
 	std::ifstream ficheiro("Acidente.txt");
 	while (!ficheiro.eof()) {
 
+		std::stringstream ss;
 		getline(ficheiro, linha);
-		ss << tipo;
+		ss << linha;
+		ss >> tipo;
 
-		switch (tipo) {
 
-		case ("Incendio_Florestal"):
+		if (tipo == "Incendio_Florestal") {
 			Acidente* temp = new Florestal();
 			temp->lerInfo(ss);
 			this->adicionaAcidente(temp);
 
-			break;
+		}
 
-		case ("Incendio_Domesticos"):
+		else if (tipo == "Incendio_Domesticos") {
 			Acidente* temp = new Domesticos();
 			temp->lerInfo(ss);
 			this->adicionaAcidente(temp);
 
-			break;
+		}
 
-		case ("Assalto"):
+		else if (tipo == "Assalto") {
 			Acidente* temp = new Assalto();
 			temp->lerInfo(ss);
 			this->adicionaAcidente(temp);
 
-			break;
+		}
 
-		case ("Acidente_Viacao"):
+		else if (tipo == "Acidente_Viacao") {
 			Acidente* temp = new Acidente_Viacao();
 			temp->lerInfo(ss);
 			this->adicionaAcidente(temp);
 
-			break;
+		}
 
-		default:
+		else
 			throw AcidenteDesconhecido(tipo);
 
-		}
+	}
 
 	}
 	ficheiro.close();
@@ -197,47 +197,13 @@ void Menu::EscreveFicheiroAcidente() {
 	std::string linha;
 	std::string tipo;
 	std::stringstream ss;
-	std::ifstream ficheiro("Acidente.txt");
-	while (!ficheiro.eof()) {
+	if (!this->existe_ficheiro_acidentes())
+		std::ofstream ficheiro() = this->create_ficheiro_acidente();
+	else
+		std::ofstream ficheiro("Acidentes.txt");
+	for (size_t i = 0; i < this->acidentes.size(); i++) {
 
-		for (int i = 0; acidentes.size(); i++) {
-
-			switch (tipo) {
-
-			case ("Incendio_Florestal"):
-				Acidente* temp = new Florestal();
-				temp->lerInfo(ss);
-				this->adicionaAcidente(temp);
-
-				break;
-
-			case ("Incendio_Domesticos"):
-				Acidente* temp = new Domesticos();
-				temp->lerInfo(ss);
-				this->adicionaAcidente(temp);
-
-				break;
-
-			case ("Assalto"):
-				Acidente* temp = new Assalto();
-				temp->lerInfo(ss);
-				this->adicionaAcidente(temp);
-
-				break;
-
-			case ("Acidente_Viacao"):
-				Acidente* temp = new Acidente_Viacao();
-				temp->lerInfo(ss);
-				this->adicionaAcidente(temp);
-
-				break;
-
-			default:
-				throw AcidenteDesconhecido(tipo);
-
-			}
-
-		}
-
-		ficheiro.close();
 	}
+	ficheiro.close();
+}
+
