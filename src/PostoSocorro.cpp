@@ -1,6 +1,3 @@
-#include "Header.h"
-#include "Acidente.h"
-#include "PostoSocorro.h"
 #include "Menu.h"
 
 //Class PostoSocorro -----------------------------------------------------------------------------------------
@@ -12,7 +9,7 @@ PostoSocorro::PostoSocorro(u_int numero_Socorristas,u_int numero_Veiculos,std::p
 }
 
 bool PostoSocorro::operator< (const PostoSocorro & p) const{
-	return sqrt(pow((this->local.first - x_aci),2) + pow((this->local.second - y_aci),2)) < sqrt(pow((p.local.first - x_aci),2) + pow((p.local.second - y_aci),2));
+	//return sqrt(pow((this->local.first - x_aci),2) + pow((this->local.second - y_aci),2)) < sqrt(pow((p.local.first - x_aci),2) + pow((p.local.second - y_aci),2));
 }
 
 

@@ -2,9 +2,6 @@
 #define ACIDENTE_H_
 
 #include "Header.h"
-#include "Acidente.h"
-#include "PostoSocorro.h"
-#include "Menu.h"
 
 // Classe Acidente e suas derivadas
 
@@ -47,7 +44,7 @@ class Incendios : public Acidente{
 	u_int numero_Bombeiros;
 public:
 	//Construtores e destrutor
-	Incendios(){};
+	Incendios();
 	Incendios(u_int n_carros, u_int n_bombeiros, std::string d, std::pair<int,int> local);
 	~Incendios();
 	//Metodos Get
@@ -66,7 +63,7 @@ class Florestal : public Incendios{
 	u_int area_Chamas;
 public:
 	//Construtores e destrutor
-	Florestal(){};
+	Florestal();
 	~Florestal();
 	//Metodos Get
 	u_int getAreaChamas() const;
@@ -96,7 +93,7 @@ class Domesticos : public Incendios{
 	std::string tipo_casa; // "Apartamento" ou "Moradia"
 public:
 	//Construtores e destrutor
-	Domesticos(){};
+	Domesticos();
 	~Domesticos();
 	//Metodos Get
 	std::string getTipoCasa() const;
@@ -124,7 +121,7 @@ class Assalto : public Acidente{
 	std::string tipo_casa; // "Particular" ou "Comercial"
 public:
 	//Construtores e destrutor
-	Assalto(){};
+	Assalto();
 	~Assalto();
 	//Metodos Get
 	bool getExisteFeridos() const;
@@ -155,7 +152,7 @@ class Acidente_Viacao : public Acidente{
 	std::string tipo_Estrada; // "Nacional" ou "Auto-Estrada"
 public:
 	//Construtores e destrutor
-	Acidente_Viacao(){};
+	Acidente_Viacao();
 	~Acidente_Viacao();
 	//Metodos Get
 	u_int getNumeroFeridosGraves() const;

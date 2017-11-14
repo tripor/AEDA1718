@@ -2,9 +2,6 @@
 #define POSTOSOCORRO_H_
 
 #include "Header.h"
-#include "Acidente.h"
-#include "PostoSocorro.h"
-#include "Menu.h"
 
 // Classe PostoSocorro e suas derivadas
 
