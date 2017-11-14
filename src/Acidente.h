@@ -12,7 +12,7 @@ public:
 	//Construtores e destrutor
 	Acidente() {};
 	Acidente(std::string d, std::pair<int,int> local);
-	virtual ~Acidente() {};
+	~Acidente() {};
 	//Metodos Get
 	std::string getData() const;
 	std::pair<int,int> getLocal() const;
@@ -21,7 +21,7 @@ public:
 	void setLocal(std::pair<int,int> par);
 	//Outros Metodos
 	virtual void lerInfo(std::stringstream ss){}
-	virtual std::string getTipoAcidente() const{}
+	virtual std::string getTipoAcidente() const = 0;
 	bool operator== (const Acidente* & a) const;
 
 };
@@ -44,7 +44,7 @@ class Incendios : public Acidente{
 	u_int numero_Bombeiros;
 public:
 	//Construtores e destrutor
-	Incendios(): Acidente(){}
+	Incendios():Acidente(){};
 	Incendios(u_int n_carros, u_int n_bombeiros, std::string d, std::pair<int,int> local);
 	~Incendios();
 	//Metodos Get
@@ -55,7 +55,7 @@ public:
 	void setNumeroBombeiros(u_int n);
 	//Outros Metodos
 	virtual void lerInfo(std::stringstream ss){}
-	virtual std::string getTipoAcidente() const{}
+	virtual std::string getTipoAcidente() const{return  " ";}
 
 };
 
