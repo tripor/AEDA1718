@@ -20,6 +20,7 @@ public:
 	u_int getSocorristas();
 	u_int getVeiculos();
 	std::pair<int,int> getPos();
+	bool operator< (const PostoSocorro & p) const;
 };
 
 

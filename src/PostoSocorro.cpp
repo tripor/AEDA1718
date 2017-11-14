@@ -7,6 +7,12 @@ PostoSocorro::PostoSocorro(u_int numero_Socorristas,u_int numero_Veiculos,std::p
 	this->numero_Veiculos=numero_Veiculos;
 	this->local=local;
 }
+
+bool PostoSocorro::operator< (const PostoSocorro & p) const{
+	return sqrt(pow((this->local.first - x_aci),2) + pow((this->local.second - y_aci),2)) < sqrt(pow((p.local.first - x_aci),2) + pow((p.local.second - y_aci),2));
+}
+
+
 void PostoSocorro::setSocorristas(u_int numero_Socorristas)
 {
 	this->numero_Socorristas=numero_Socorristas;

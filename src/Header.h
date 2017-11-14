@@ -24,6 +24,8 @@ typedef unsigned int u_int;
 #define ClearScreen() system("Clear");
 #endif
 
+int x_aci = 0;
+int y_aci = 0;
 
 
 
