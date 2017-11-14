@@ -1,8 +1,4 @@
-#include "Header.h"
 #include "Acidente.h"
-#include "PostoSocorro.h"
-#include "Menu.h"
-
 
 // Classe Acidente
 
@@ -96,7 +92,7 @@ void Florestal::setAreaChamas(u_int area){
 	this->area_Chamas = area;
 }
 
-void Florestal::lerInfo(std::stringstream ss){
+void Florestal::lerInfo(std::stringstream &ss){
 	std::string d;
 	int x, y;
 	u_int n_carros, n_bombeiros, a;
@@ -126,7 +122,7 @@ void Domesticos::setTipoCasa(std::string s){
 	this->tipo_casa = s;
 }
 
-void Domesticos::lerInfo(std::stringstream ss){
+void Domesticos::lerInfo(std::stringstream &ss){
 	std::string d, s; // data e string "tipo_casa"
 	int x, y; // coordenadas
 	u_int n_carros, n_bombeiros; // numero de carros e bombeiros
@@ -164,7 +160,7 @@ void Assalto::setTipoCasa(std::string s){
 	this->tipo_casa = s;
 }
 
-void Assalto::lerInfo(std::stringstream ss){
+void Assalto::lerInfo(std::stringstream &ss){
 	std::string d, s; // data e string "tipo_casa"
 	int x, y; // coordenadas
 	bool feridos;
@@ -184,32 +180,34 @@ void Assalto::lerInfo(std::stringstream ss){
 
 	//Metodos Get
 
-u_int Acidente_Viacao::getNumeroFeridosGraves() const{
+u_int AcidenteViacao::getNumeroFeridosGraves() const{
 	return this->numero_FeridosGraves;
 }
 
-u_int Acidente_Viacao::getNumeroVeiculosEnvolvidos() const{
+u_int AcidenteViacao::getNumeroVeiculosEnvolvidos() const{
 	return this->numero_VeiculosEnvolvidos;
 }
 
-std::string Acidente_Viacao::getTipoEstrada() const{
+std::string AcidenteViacao::getTipoEstrada() const{
 	return this->tipo_Estrada;
 }
 
 	//Metodos Set
 
-void Acidente_Viacao::setNumeroFeridosGraves(u_int n){
+void AcidenteViacao::setNumeroFeridosGraves(u_int n){
 	this->numero_FeridosGraves = n;
 }
 
-void Acidente_Viacao::setNumeroVeiculosEnvolvidos(u_int n){
+void AcidenteViacao::setNumeroVeiculosEnvolvidos(u_int n){
 	this->numero_VeiculosEnvolvidos = n;
 }
-void Acidente_Viacao::setTipoEstrada(std::string s){
+void AcidenteViacao::setTipoEstrada(std::string s){
 	this->tipo_Estrada = s;
 }
 
-void Acidente_Viacao::lerInfo(std::stringstream ss){
+void AcidenteViacao::lerInfo(std::stringstream &ss)
+{
+
 	std::string d, s; // data e string "tipo_estrada"
 	int x, y; // coordenadas
 	u_int n_feridos, n_veiculos_env; // numero de feridos graves e veiculos envolvidos
@@ -222,5 +220,5 @@ void Acidente_Viacao::lerInfo(std::stringstream ss){
 	this->setNumeroFeridosGraves(n_feridos);
 	this->setNumeroVeiculosEnvolvidos(n_veiculos_env);
 	this->setTipoEstrada(s);
-}
 
+}
