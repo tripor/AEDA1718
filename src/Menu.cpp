@@ -1,6 +1,19 @@
 #include "Header.h"
 #include "Menu.h"
 
+std::vector<Acidente> Menu::getAcidentes(){
+	return acidentes;
+}
+std::vector<PostoSocorro> Menu::getPostosSocorro(){
+	return postos_socorro;
+}
+
+void Menu::adicionaAcidente(Acidente *acidente){
+	this->acidentes.push_back(acidente);
+}
+void Menu::adicionaPostosSocorro(PostoSocorro *posto){
+	postos_socorro.push_back(posto);
+}
 
 void Menu::menuOpcoesIniciais(){
 
@@ -36,7 +49,6 @@ void Menu::menuOpcoesIniciais(){
 	}
 
 }
-
 void Menu::menuOpcoesAcidente()
 {
 	ClearScreen();
@@ -85,7 +97,6 @@ void Menu::menuOpcoesAcidente()
 
 
 }
-
 void Menu::menuOpcoesPostosSocorro()
 {
 	ClearScreen();
@@ -131,7 +142,102 @@ void Menu::menuOpcoesPostosSocorro()
 		ClearScreen();
 		return;
 	}
-
 }
 
+void Menu::lerFicheiroAcidente() {
+	std::string linha;
+	std::string tipo;
+	std::stringstream ss;
+	std::ifstream ficheiro("Acidente.txt");
+	while (!ficheiro.eof()) {
 
+		getline(ficheiro, linha);
+		ss << tipo;
+
+		switch (tipo) {
+
+		case ("Incendio_Florestal"):
+			Acidente* temp = new Florestal();
+			temp->lerInfo(ss);
+			this->adicionaAcidente(temp);
+
+			break;
+
+		case ("Incendio_Domesticos"):
+			Acidente* temp = new Domesticos();
+			temp->lerInfo(ss);
+			this->adicionaAcidente(temp);
+
+			break;
+
+		case ("Assalto"):
+			Acidente* temp = new Assalto();
+			temp->lerInfo(ss);
+			this->adicionaAcidente(temp);
+
+			break;
+
+		case ("Acidente_Viacao"):
+			Acidente* temp = new Acidente_Viacao();
+			temp->lerInfo(ss);
+			this->adicionaAcidente(temp);
+
+			break;
+
+		default:
+			throw AcidenteDesconhecido(tipo);
+
+		}
+
+	}
+	ficheiro.close();
+}
+
+void Menu::EscreveFicheiroAcidente() {
+	std::string linha;
+	std::string tipo;
+	std::stringstream ss;
+	std::ifstream ficheiro("Acidente.txt");
+	while (!ficheiro.eof()) {
+
+		for (int i = 0; acidentes.size(); i++) {
+
+			switch (tipo) {
+
+			case ("Incendio_Florestal"):
+				Acidente* temp = new Florestal();
+				temp->lerInfo(ss);
+				this->adicionaAcidente(temp);
+
+				break;
+
+			case ("Incendio_Domesticos"):
+				Acidente* temp = new Domesticos();
+				temp->lerInfo(ss);
+				this->adicionaAcidente(temp);
+
+				break;
+
+			case ("Assalto"):
+				Acidente* temp = new Assalto();
+				temp->lerInfo(ss);
+				this->adicionaAcidente(temp);
+
+				break;
+
+			case ("Acidente_Viacao"):
+				Acidente* temp = new Acidente_Viacao();
+				temp->lerInfo(ss);
+				this->adicionaAcidente(temp);
+
+				break;
+
+			default:
+				throw AcidenteDesconhecido(tipo);
+
+			}
+
+		}
+
+		ficheiro.close();
+	}
