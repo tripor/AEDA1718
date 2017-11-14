@@ -2,6 +2,9 @@
 #define ACIDENTE_H_
 
 #include "Header.h"
+#include "Acidente.h"
+#include "PostoSocorro.h"
+#include "Menu.h"
 
 // Classe Acidente e suas derivadas
 
@@ -21,7 +24,8 @@ public:
 	void setLocal(std::pair<int,int> par);
 	//Outros Metodos
 	virtual void lerInfo(std::stringstream ss){}
-	virtual std::string GetTipoAcidente(){}
+	virtual std::string getTipoAcidente(){}
+	bool operator== (const Acidente* & a) const;
 
 };
 
@@ -43,7 +47,7 @@ class Incendios : public Acidente{
 	u_int numero_Bombeiros;
 public:
 	//Construtores e destrutor
-	Incendios();
+	Incendios(){};
 	Incendios(u_int n_carros, u_int n_bombeiros, std::string d, std::pair<int,int> local);
 	~Incendios();
 	//Metodos Get
@@ -54,7 +58,7 @@ public:
 	void setNumeroBombeiros(u_int n);
 	//Outros Metodos
 	virtual void lerInfo(std::stringstream ss){}
-	virtual std::string GetTipoAcidente(){}
+	virtual std::string getTipoAcidente(){}
 
 };
 
@@ -62,7 +66,7 @@ class Florestal : public Incendios{
 	u_int area_Chamas;
 public:
 	//Construtores e destrutor
-	Florestal();
+	Florestal(){};
 	~Florestal();
 	//Metodos Get
 	u_int getAreaChamas() const;
@@ -70,7 +74,7 @@ public:
 	void setAreaChamas(u_int area);
 	//Outros Metodos
 	void lerInfo(std::stringstream ss);
-	virtual std::string GetTipoAcidente();
+	std::string getTipoAcidente(){return "Florestal";}
 
 	class Area_Invalida{
 	public:
@@ -92,7 +96,7 @@ class Domesticos : public Incendios{
 	std::string tipo_casa; // "Apartamento" ou "Moradia"
 public:
 	//Construtores e destrutor
-	Domesticos();
+	Domesticos(){};
 	~Domesticos();
 	//Metodos Get
 	std::string getTipoCasa() const;
@@ -100,7 +104,7 @@ public:
 	void setTipoCasa(std::string s);
 	//Outros Metodos
 	void lerInfo(std::stringstream ss);
-	virtual std::string GetTipoAcidente();
+	std::string getTipoAcidente(){return "Domestico";}
 
 	class Tipo_Casa_Invalida{
 		public:
@@ -120,7 +124,7 @@ class Assalto : public Acidente{
 	std::string tipo_casa; // "Particular" ou "Comercial"
 public:
 	//Construtores e destrutor
-	Assalto();
+	Assalto(){};
 	~Assalto();
 	//Metodos Get
 	bool getExisteFeridos() const;
@@ -130,7 +134,7 @@ public:
 	void setTipoCasa(std::string s);
 	//Outros Metodos
 	void lerInfo(std::stringstream ss);
-	virtual std::string GetTipoAcidente();
+	std::string getTipoAcidente(){return "Assalto";}
 
 	class Tipo_Casa_Invalida{
 		public:
@@ -151,7 +155,7 @@ class Acidente_Viacao : public Acidente{
 	std::string tipo_Estrada; // "Nacional" ou "Auto-Estrada"
 public:
 	//Construtores e destrutor
-	Acidente_Viacao();
+	Acidente_Viacao(){};
 	~Acidente_Viacao();
 	//Metodos Get
 	u_int getNumeroFeridosGraves() const;
@@ -163,7 +167,7 @@ public:
 	void setTipoEstrada(std::string s);
 	//Outros Metodos
 	void lerInfo(std::stringstream ss);
-	virtual std::string GetTipoAcidente();
+	std::string getTipoAcidente(){return "Acidente_Viacao";}
 
 	class Tipo_Estrada_Invalida{
 		public:

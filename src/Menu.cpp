@@ -1,4 +1,6 @@
 #include "Header.h"
+#include "Acidente.h"
+#include "PostoSocorro.h"
 #include "Menu.h"
 
 std::vector<Acidente*> Menu::getAcidentes(){
@@ -8,10 +10,67 @@ std::vector<PostoSocorro*> Menu::getPostosSocorro(){
 	return postos_socorro;
 }
 
-void Menu::adicionaAcidente(Acidente *acidente){
-	this->acidentes.push_back(acidente);
+bool Menu::existe_ficheiro_acidentes() const {
+	if(std::ifstream("Acidentes.txt"))return true;
+	else return false;
+}
+std::ofstream & Menu::create_ficheiro_acidente(){
+	std::ofstream file("Acidentes.txt");
+	if(!file)
+	{
+		std::cout << "Aconteceu um erro a criar o ficheiro Acidentes.txt";
+		//atirar uma exceção
+	}
+	return file;
+}
+
+void Menu::adicionaAcidente(){
+
+	std::string opcao;
+
+	std::cout << "Indique o tipo de acidente: \n";
+	std::cout << "1 - Incendio Florestal\n";
+	std::cout << "2 - Incendio Domestico\n";
+	std::cout << "3 - Assalto\n";
+	std::cout << "4 - Acidente de Viacao\n";
+	std::cout << "0 - Voltar ao Menu Inicial\n";
+
+	while (!(opcao == "1" || opcao == "2" || opcao == "3" || opcao == "4" || opcao == "0"))
+		{
+			std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
+			std::cout << "Indique o tipo de acidente: ";
+			std::cin >> opcao;
+		}
+
+	Acidente *a;
+
+	if (opcao == "1")
+	{
+		a = new Florestal;
+	}
+	if (opcao == "2")
+	{
+		a = new Domesticos;
+	}
+	if (opcao == "3")
+	{
+		a = new Assalto;
+	}
+	if (opcao == "4")
+	{
+		a = new Acidente_Viacao;
+	}
+	if (opcao == "0")
+	{
+		return;
+	}
+	//falta a atribuicao, fazer por pointer?
+	//falta testar se acidente já existe
+	this->acidentes.push_back(a);
+
 }
 void Menu::adicionaPostosSocorro(PostoSocorro *posto){
+	//falta testar se posto já existe
 	postos_socorro.push_back(posto);
 }
 
@@ -155,6 +214,7 @@ void Menu::lerFicheiroAcidente() {
 		ss << linha;
 		ss >> tipo;
 
+/*
 
 		if (tipo == "Incendio_Florestal") {
 			Acidente* temp = new Florestal();
@@ -187,8 +247,7 @@ void Menu::lerFicheiroAcidente() {
 		else
 			throw AcidenteDesconhecido(tipo);
 
-	}
-
+			*/
 	}
 	ficheiro.close();
 }
@@ -197,13 +256,16 @@ void Menu::EscreveFicheiroAcidente() {
 	std::string linha;
 	std::string tipo;
 	std::stringstream ss;
+	std::ofstream ficheiro;
+	/*
 	if (!this->existe_ficheiro_acidentes())
-		std::ofstream ficheiro() = this->create_ficheiro_acidente();
+		ficheiro = this->create_ficheiro_acidente();
 	else
-		std::ofstream ficheiro("Acidentes.txt");
+		ficheiro("Acidentes.txt");
 	for (size_t i = 0; i < this->acidentes.size(); i++) {
 
 	}
+	*/
 	ficheiro.close();
 }
 

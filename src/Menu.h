@@ -4,32 +4,21 @@
 #include "Header.h"
 #include "Acidente.h"
 #include "PostoSocorro.h"
-
-
+#include "Menu.h"
 
 class Menu{
 
 	std::vector<Acidente*> acidentes;
 	std::vector<PostoSocorro*> postos_socorro;
-
-	bool existe_ficheiro_acidentes() const {
-		if(std::ifstream("Acidentes.txt"))return true;
-		else return false;
-	}
-	std::ofstream & create_ficheiro_acidente(){
-		std::ofstream file("Acidentes.txt");
-		if(!file)
-		{
-			std::cout << "Aconteceu um erro a criar o ficheiro Acidentes.txt";
-			//atirar uma exceção
-		}
-		return file;
-	}
 public:
+
+	std::ofstream & create_ficheiro_acidente();
+	bool existe_ficheiro_acidentes() const;
+
 	std::vector<Acidente*> getAcidentes();
 	std::vector<PostoSocorro*> getPostosSocorro();
 
-	void adicionaAcidente(Acidente *acidente);
+	void adicionaAcidente();
 	void adicionaPostosSocorro(PostoSocorro *posto);
 
 	void menuOpcoesIniciais();

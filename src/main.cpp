@@ -1,15 +1,9 @@
-/*
- * main.cpp
- *
- *  Created on: 31/10/2017
- *      Author: tripor
- */
 #include "Header.h"
+#include "Acidente.h"
+#include "PostoSocorro.h"
 #include "Menu.h"
-#include <iostream>
 
 using namespace std;
-
 
 int main()
 {
@@ -28,11 +22,7 @@ int main()
 		e1.menuOpcoesIniciais();
 	}
 
-
-
-
-
-
+	return 0;
 }
 
 

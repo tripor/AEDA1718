@@ -1,4 +1,7 @@
+#include "Header.h"
 #include "Acidente.h"
+#include "PostoSocorro.h"
+#include "Menu.h"
 
 
 // Classe Acidente
@@ -8,6 +11,13 @@
 Acidente::Acidente(std::string d, std::pair<int,int> local){
 	this->data = d;
 	this->local = local;
+}
+
+	//Operadores
+
+bool Acidente::operator== (const Acidente* & a) const{
+	// com ou sem * ?      if((*this)->getTipoAcidente() != (*a)->getTipoAcidente())
+
 }
 
 	//Metodos Get

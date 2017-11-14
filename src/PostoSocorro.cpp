@@ -1,4 +1,7 @@
+#include "Header.h"
+#include "Acidente.h"
 #include "PostoSocorro.h"
+#include "Menu.h"
 
 //Class PostoSocorro -----------------------------------------------------------------------------------------
 PostoSocorro::PostoSocorro(u_int numero_Socorristas,u_int numero_Veiculos,std::pair<int,int> local)
