@@ -67,5 +67,89 @@ public:
 };
 
 
+// CENAS!
+
+bool Acidente::operator== (const Acidente* & a) const{
+	if(this->getTipoAcidente() != a->getTipoAcidente()){
+		return false;
+	}
+
+	if(this->getData() != a->getData() || this->getLocal() != a->getLocal()){
+		return false;
+	}
+
+	if(this->getAllInfo() != a->getAllInfo()){
+		return false;
+	}
+
+	return true;
+}
+
+///////// Parte do Fernando A Copiar
+
+bool Menu::AcidenteExistente(Acidente* aci) const{
+	for(u_int i = 0; i < this->acidentes.size();i++){
+
+		// Acho que não dá por overload, porque queremos comparar os pointers. Criar funcao isEqual em vez de ==
+		if(aci == acidentes.at(i)){
+			return true;
+		}
+	}
+	return false;
+}
+
+
+//////// Parte Fernando A Copiar!
+
+
+std::string Florestal::getAllInfo() const{
+	std::stringstream ss;
+
+	ss << this->numero_CarrosBombeiros << ' ' << this->numero_Bombeiros << ' ' << this->area_Chamas;
+
+	std::string ret;
+	ss.str(ret);
+
+	return ret;
+}
+
+std::string Domesticos::getAllInfo() const{
+	std::stringstream ss;
+
+	ss << this->numero_CarrosBombeiros << ' ' << this->numero_Bombeiros << ' ' << this->tipo_casa;
+
+	std::string ret;
+	ss.str(ret);
+
+	return ret;
+}
+
+std::string Assalto::getAllInfo() const{
+	std::stringstream ss;
+
+	ss << this->existe_Feridos << ' ' << this->tipo_casa;
+
+	std::string ret;
+	ss.str(ret);
+
+	return ret;
+}
+
+std::string AcidenteViacao::getAllInfo() const{
+	std::stringstream ss;
+
+	ss << this->numero_FeridosGraves << ' ' << this->numero_VeiculosEnvolvidos << ' ' << this->tipo_Estrada;
+
+	std::string ret;
+	ss.str(ret);
+
+	return ret;
+}
+
+
+
+
+
+
 
 #endif /* POSTOSOCORRO_H_ */
