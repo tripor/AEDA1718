@@ -3,12 +3,6 @@
 // Classe Acidente
 
 	//Construtores
-
-Acidente::Acidente(std::string d, std::pair<int,int> local){
-	this->data = d;
-	this->local = local;
-}
-
 	//Operadores
 
 bool Acidente::operator== (const Acidente* & a) const{
@@ -49,12 +43,6 @@ void Acidente::setLocal(std::pair<int,int> par){
 // Classe Incendios
 
 	//Construtores
-
-/*
-	Incendios::Incendios(u_int n_carros, u_int n_bombeiros, std::string d, std::pair<int,int> local): Acidente(d, local){
-	this->numero_CarrosBombeiros = n_carros;
-	this->numero_Bombeiros = n_bombeiros;
-}*/
 
 	//Metodos Get
 

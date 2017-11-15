@@ -11,18 +11,18 @@ std::vector<PostoSocorro*> Menu::getPostosSocorro(){
 }
 
 bool Menu::existe_ficheiro_acidentes() const {
-	if(std::ifstream("Acidentes.txt"))return true;
+	if(std::ifstream("Acidente.txt"))return true;
 	else return false;
 }
-std::ofstream & Menu::create_ficheiro_acidente(){
-	std::ofstream file("Acidentes.txt");
+/*std::ofstream & Menu::create_ficheiro_acidente(){
+	std::ifstream file("Acidente.txt");
 	if(!file)
 	{
 		std::cout << "Aconteceu um erro a criar o ficheiro Acidentes.txt";
 		//atirar uma exceção
 	}
 	return file;
-}
+}*/
 
 void Menu::adicionaAcidente(Acidente *acidente){
 
@@ -58,7 +58,7 @@ void Menu::adicionaAcidente(Acidente *acidente){
 	}
 	if (opcao == "4")
 	{
-		a = new Acidente_Viacao;
+		a = new AcidenteViacao;
 	}
 	if (opcao == "0")
 	{
@@ -239,7 +239,7 @@ void Menu::lerFicheiroAcidente() {
 		}
 
 		else if (tipo == "Acidente_Viacao") {
-			Acidente* temp = new Acidente_Viacao;
+			Acidente* temp = new AcidenteViacao;
 			temp->lerInfo(ss);
 			this->adicionaAcidente(temp);
 
@@ -251,6 +251,7 @@ void Menu::lerFicheiroAcidente() {
 
 	}
 	ficheiro.close();
+
 }
 
 void Menu::EscreveFicheiroAcidente() {

@@ -12,7 +12,7 @@ protected:
 public:
 	//Construtores e destrutor
 	Acidente(){this->data=" ";this->local=std::make_pair(0,0);}
-	Acidente(std::string d, std::pair<int,int> local);
+	Acidente(std::string d, std::pair<int,int> local){this->data=d;this->local=local;}
 	virtual ~Acidente(){};
 	//Metodos Get
 	std::string getData() const;
@@ -21,8 +21,8 @@ public:
 	void setData(std::string d);
 	void setLocal(std::pair<int,int> par);
 	//Outros Metodos
-	virtual void lerInfo(std::stringstream &ss) =0;
-	virtual std::string getTipoAcidente() const;
+	virtual void lerInfo(std::stringstream &ss) = 0;
+	virtual std::string getTipoAcidente() const = 0;
 	bool operator== (const Acidente* & a) const;
 
 };
@@ -40,24 +40,28 @@ public:
 
 };
 
-class Incendios : public Acidente{
+class Incendios : public virtual Acidente{
 protected:
 	u_int numero_CarrosBombeiros;
 	u_int numero_Bombeiros;
 public:
+
 	//Construtores e destrutor
 	Incendios():Acidente(){this->numero_Bombeiros=0;this->numero_CarrosBombeiros=0;};
-	Incendios(u_int n_carros, u_int n_bombeiros, std::string d, std::pair<int,int> local);
-	virtual ~Incendios(){};
+	Incendios(u_int n_carros, u_int n_bombeiros, std::string d, std::pair<int,int> local): Acidente(d, local){
+		this->numero_CarrosBombeiros = n_carros;
+		this->numero_Bombeiros = n_bombeiros;
+	}
+	~Incendios(){};
 	//Metodos Get
 	u_int getNumeroCarrosBombeiros() const;
 	u_int getNumeroBombeiros() const;
 	//Metodos Set
 	void setNumeroCarrosBombeiros(u_int n);
 	void setNumeroBombeiros(u_int n);
-	//Outros Metodos
-	//virtual void lerInfo(std::stringstream ss);
-	//virtual std::string getTipoAcidente() const{return  " ";}
+	//Outros Metodos*/
+	void lerInfo(std::stringstream ss);
+	std::string getTipoAcidente() const{return  " ";}
 
 };
 
@@ -75,19 +79,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const {return "Florestal";}
 
-	class Area_Invalida{
-	public:
-		int area;
-		Area_Invalida(int a){area = a;}
-		void tratamento_Area(){
-			if(area == 0){
-				std::cout << "Erro: Tipo de variável inserido inválido ou valor de área invalido\n";
-			}
-			else if (area < 0){
-				std::cout << "Erro: Área negativa inserida\n";
-			}
-		}
-	};
+
 
 };
 
@@ -105,14 +97,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "Domestico";}
 
-	class Tipo_Casa_Invalida{
-		public:
-			std::string tipo;
-			Tipo_Casa_Invalida(std::string s){tipo = s;}
-			void tratamento_Tipo(){
-				std::cout << "Erro: Tipo de casa '" << tipo << "' inválido\n";
-			}
-		};
+
 
 
 };
@@ -138,6 +123,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "Assalto";}
 };
+
 class Tipo_Casa_Invalida {
 public:
 	std::string tipo;
@@ -178,7 +164,6 @@ public:
 
 };
 
-
 class Tipo_Estrada_Invalida {
 public:
 	std::string tipo;
@@ -189,7 +174,19 @@ public:
 		std::cout << "Erro: Tipo de estrada '" << tipo << "' inválido\n";
 	}
 };
-
+class Area_Invalida{
+	public:
+		int area;
+		Area_Invalida(int a){area = a;}
+		void tratamento_Area(){
+			if(area == 0){
+				std::cout << "Erro: Tipo de variável inserido inválido ou valor de área invalido\n";
+			}
+			else if (area < 0){
+				std::cout << "Erro: Área negativa inserida\n";
+			}
+		}
+	};
 
 
 #endif /* ACIDENTE_H_ */
