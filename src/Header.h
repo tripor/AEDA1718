@@ -91,7 +91,14 @@ public:
 		return o;
 	}
 
-
 };
+
+u_int nCarrosBombeirosArea(u_int a){
+	return ((a/1000) + 1);
+}
+
+u_int nBombeirosArea(u_int a){
+	return (a/100) + 1;
+}
 
 #endif /* HEADER_H_ */
