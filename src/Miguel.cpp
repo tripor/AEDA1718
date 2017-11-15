@@ -1,4 +1,4 @@
-#include "Header.h"
+/*#include "Header.h"
 #include "PostoSocorro.h"
 #include "Acidente.h"
 #include "Menu.h"
@@ -79,4 +79,4 @@ void EscreveFicheiroAcidente(){
 	}
 		  ficheiro.close();
 }
-
+*/

@@ -1,4 +1,4 @@
-#include "Header.h"
+/*#include "Header.h"
 #include "Menu.h"
 #include "Acidente.h"
 #include "PostoSocorro.h"
@@ -72,11 +72,11 @@ void Menu::criarAcidente(){
 	if (opcao == "0") {
 		return;
 	}
-*/
+
 
 
 	return;
 }
 
 
-
+*/
