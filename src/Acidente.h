@@ -23,7 +23,9 @@ public:
 	//Outros Metodos
 	virtual void lerInfo(std::stringstream &ss) = 0;
 	virtual std::string getTipoAcidente() const = 0;
-	bool operator== (const Acidente* & a) const;
+	virtual std::string getAllInfo() const = 0;
+	bool acidenteIgual(Acidente* a1) const;
+	//bool operator== (const Acidente & a) const;
 
 };
 
@@ -62,6 +64,7 @@ public:
 	//Outros Metodos*/
 	void lerInfo(std::stringstream ss);
 	std::string getTipoAcidente() const{return  " ";}
+	std::string getAllInfo() const{return " ";}
 
 };
 
@@ -78,6 +81,7 @@ public:
 	//Outros Metodos
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const {return "Florestal";}
+	std::string getAllInfo() const;
 
 
 
@@ -96,6 +100,7 @@ public:
 	//Outros Metodos
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "Domestico";}
+	std::string getAllInfo() const;
 
 
 
@@ -122,6 +127,8 @@ public:
 	//Outros Metodos
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "Assalto";}
+	std::string getAllInfo() const;
+
 };
 
 class Tipo_Casa_Invalida {
@@ -157,7 +164,8 @@ public:
 
 
 	void lerInfo(std::stringstream &ss);
-	std::string getTipoAcidente() const{return "Acidente_Viacao";}
+	std::string getTipoAcidente() const{return "AcidenteViacao";}
+	std::string getAllInfo() const;
 
 
 

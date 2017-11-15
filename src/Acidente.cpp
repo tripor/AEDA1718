@@ -5,18 +5,43 @@
 	//Construtores
 	//Operadores
 
-bool Acidente::operator== (const Acidente* & a) const{
-	if(this->getTipoAcidente() != a->getTipoAcidente()){
+/*
+
+bool Acidente::operator== (const Acidente & a) const{
+	if(getTipoAcidente() != a.getTipoAcidente()){
 		return false;
 	}
-	if(this->getTipoAcidente() == "Florestal"){
 
+	if(getData() != a.getData() || getLocal() != a.getLocal()){
+		return false;
+	}
 
-
+	if(getAllInfo() != a.getAllInfo()){
+		return false;
 	}
 
 	return true;
 }
+
+*/
+
+bool Acidente::acidenteIgual(Acidente* a1) const{
+	if(a1->getTipoAcidente() != this->getTipoAcidente()){
+			return false;
+	}
+
+	if(a1->getData() != this->getData() || a1->getLocal() != this->getLocal()){
+		return false;
+	}
+
+	if(a1->getAllInfo() != this->getAllInfo()){
+		return false;
+	}
+
+	return true;
+
+}
+
 
 	//Metodos Get
 
@@ -210,3 +235,53 @@ void AcidenteViacao::lerInfo(std::stringstream &ss)
 	this->setTipoEstrada(s);
 
 }
+
+
+
+//////// Parte Fernando A Copiar!
+
+
+std::string Florestal::getAllInfo() const{
+	std::stringstream ss;
+
+	ss << this->numero_CarrosBombeiros << ' ' << this->numero_Bombeiros << ' ' << this->area_Chamas;
+
+	std::string ret;
+	ss.str(ret);
+
+	return ret;
+}
+
+std::string Domesticos::getAllInfo() const{
+	std::stringstream ss;
+
+	ss << this->numero_CarrosBombeiros << ' ' << this->numero_Bombeiros << ' ' << this->tipo_casa;
+
+	std::string ret;
+	ss.str(ret);
+
+	return ret;
+}
+
+std::string Assalto::getAllInfo() const{
+	std::stringstream ss;
+
+	ss << this->existe_Feridos << ' ' << this->tipo_casa;
+
+	std::string ret;
+	ss.str(ret);
+
+	return ret;
+}
+
+std::string AcidenteViacao::getAllInfo() const{
+	std::stringstream ss;
+
+	ss << this->numero_FeridosGraves << ' ' << this->numero_VeiculosEnvolvidos << ' ' << this->tipo_Estrada;
+
+	std::string ret;
+	ss.str(ret);
+
+	return ret;
+}
+

@@ -11,6 +11,8 @@ class Menu{
 	std::vector<PostoSocorro*> postos_socorro;
 public:
 
+	bool AcidenteExistente(Acidente* aci) const;
+
 	//std::ofstream & create_ficheiro_acidente();
 	bool existe_ficheiro_acidentes() const;
 

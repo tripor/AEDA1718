@@ -10,6 +10,17 @@ std::vector<PostoSocorro*> Menu::getPostosSocorro(){
 	return postos_socorro;
 }
 
+bool Menu::AcidenteExistente(Acidente* aci) const{
+	for(u_int i = 0; i < this->acidentes.size();i++){
+		if(aci->acidenteIgual(acidentes.at(i))){
+			return true;
+		}
+	}
+	return false;
+}
+
+
+
 bool Menu::existe_ficheiro_acidentes() const {
 	if(std::ifstream("Acidente.txt"))return true;
 	else return false;
