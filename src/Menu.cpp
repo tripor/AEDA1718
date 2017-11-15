@@ -269,9 +269,10 @@ void Menu::EscreveFicheiroAcidente() {
 	std::string linha;
 	std::string tipo;
 	std::stringstream ss;
-	std::ofstream ficheiro("Acidente.txt");
+	std::ofstream ficheiro("Acidente.txt",std::ofstream::out|std::ofstream::trunc);
 	for (size_t i = 0; i < this->acidentes.size(); i++) {
-		ficheiro << this->acidentes.at(i)->getData() << ' '
+		ficheiro << this->acidentes.at(i)->getTipoAcidente() << ' '
+				<< this->acidentes.at(i)->getData() << ' '
 				<< this->acidentes.at(i)->getLocal().first << ' '
 				<< this->acidentes.at(i)->getLocal().second << ' '
 				<< this->acidentes.at(i)->getAllInfo() << std::endl;
@@ -280,8 +281,44 @@ void Menu::EscreveFicheiroAcidente() {
 	ficheiro.close();
 }
 
-void Menu::lerFicheiroPostoSocorro()
-{
+void Menu::lerFicheiroPostoSocorro() {
+	std::string linha;
+	std::string tipo;
+	std::ifstream ficheiro("PostoSocorro.txt");
+	while (!ficheiro.eof()) {
+		std::stringstream ss;
+		getline(ficheiro, linha);
+		ss << linha;
+		ss >> tipo;
+		if (tipo == "Bombeiros") {
+			PostoSocorro* temp = new Bombeiros;
+			temp->guardarInformacao(ss);
+			this->adicionaPostosSocorro(temp);
+		} else if (tipo == "Policia") {
+			PostoSocorro* temp = new Policia;
+			temp->guardarInformacao(ss);
+			this->adicionaPostosSocorro(temp);
+		} else if (tipo == "Inem") {
+			PostoSocorro* temp = new Inem;
+			temp->guardarInformacao(ss);
+			this->adicionaPostosSocorro(temp);
+		}
+	}
+	ficheiro.close();
+
+}
+void Menu::escreverFicheiroPostoSocorro() {
+	std::string linha;
+	std::string tipo;
+	std::stringstream ss;
+	std::ofstream ficheiro("PostoSocorro.txt",
+			std::ofstream::out | std::ofstream::trunc);
+	for (size_t i = 0; i < this->acidentes.size(); i++) {
+		ficheiro << this->postos_socorro.at(i)->getTipo() << ' '
+				<< this->postos_socorro.at(i)->getAllInfo();
+	}
+
+	ficheiro.close();
 
 }
 
