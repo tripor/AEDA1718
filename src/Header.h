@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream>
 #include "math.h"
+#include <stdlib.h>
 
 typedef unsigned int u_int;
 
@@ -93,12 +94,8 @@ public:
 
 };
 
-u_int nCarrosBombeirosArea(u_int a){
-	return ((a/1000) + 1);
-}
+u_int nCarrosBombeirosArea(u_int a);
 
-u_int nBombeirosArea(u_int a){
-	return (a/100) + 1;
-}
+u_int nBombeirosArea(u_int a);
 
 #endif /* HEADER_H_ */

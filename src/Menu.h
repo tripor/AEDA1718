@@ -9,6 +9,7 @@ class Menu{
 
 	std::vector<Acidente*> acidentes;
 	std::vector<PostoSocorro*> postos_socorro;
+	bool terminar;
 public:
 
 	bool AcidenteExistente(Acidente* aci) const;
@@ -31,6 +32,8 @@ public:
 
 	void lerFicheiroPostoSocorro();
 	void escreverFicheiroPostoSocorro();
+
+	void criarAcidente();
 };
 
 

@@ -246,7 +246,7 @@ void AcidenteViacao::lerInfo(std::stringstream &ss)
 
 
 
-//////// Parte Fernando A Copiar!
+//////// Parte Fernando
 
 
 std::string Florestal::getAllInfo() const{
@@ -291,5 +291,22 @@ std::string AcidenteViacao::getAllInfo() const{
 	ss.str(ret);
 
 	return ret;
+}
+
+void Florestal::infoUtilizador(){
+
+	ClearScreen();
+
+	u_int area;
+
+	std::cout << "Área do incêndio: ";
+	std::cin >> area;
+
+	//testar se o input é valido!!!
+
+	this->setNumeroCarrosBombeiros(nCarrosBombeirosArea(area));
+	this->setNumeroBombeiros(nBombeirosArea(area));
+
+
 }
 

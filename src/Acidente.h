@@ -25,6 +25,7 @@ public:
 	virtual void lerInfo(std::stringstream &ss) = 0;
 	virtual std::string getTipoAcidente() const = 0;
 	virtual std::string getAllInfo() const = 0;
+	virtual void infoUtilizador() = 0;
 	bool acidenteIgual(Acidente* a1) const;
 	//bool operator== (const Acidente & a) const;
 
@@ -66,6 +67,7 @@ public:
 	void lerInfo(std::stringstream ss);
 	std::string getTipoAcidente() const{return  " ";}
 	std::string getAllInfo() const{return " ";}
+	void infoUtilizador(){};
 
 };
 
@@ -83,7 +85,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const {return "Florestal";}
 	std::string getAllInfo() const;
-
+	void infoUtilizador();
 
 
 };
@@ -102,7 +104,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "Domestico";}
 	std::string getAllInfo() const;
-
+	void infoUtilizador(){}
 
 
 
@@ -129,6 +131,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "Assalto";}
 	std::string getAllInfo() const;
+	void infoUtilizador(){}
 
 };
 
@@ -167,6 +170,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "AcidenteViacao";}
 	std::string getAllInfo() const;
+	void infoUtilizador(){}
 
 
 

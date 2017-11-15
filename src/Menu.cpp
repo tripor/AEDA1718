@@ -3,6 +3,15 @@
 #include "PostoSocorro.h"
 #include "Menu.h"
 
+u_int nCarrosBombeirosArea(u_int a){
+	return ((a/1000) + 1);
+}
+
+u_int nBombeirosArea(u_int a){
+	return (a/100) + 1;
+}
+
+
 std::vector<Acidente*> Menu::getAcidentes(){
 	return this->acidentes;
 }
@@ -35,65 +44,29 @@ bool Menu::existe_ficheiro_acidentes() const {
 	return file;
 }*/
 
-void Menu::adicionaAcidente(Acidente *acidente){
 
-	std::string opcao;
-
-	std::cout << "Indique o tipo de acidente: \n";
-	std::cout << "1 - Incendio Florestal\n";
-	std::cout << "2 - Incendio Domestico\n";
-	std::cout << "3 - Assalto\n";
-	std::cout << "4 - Acidente de Viacao\n";
-	std::cout << "0 - Voltar ao Menu Inicial\n";
-
-	while (!(opcao == "1" || opcao == "2" || opcao == "3" || opcao == "4" || opcao == "0"))
-		{
-			std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
-			std::cout << "Indique o tipo de acidente: ";
-			std::cin >> opcao;
-		}
-
-	Acidente *a;
-
-	if (opcao == "1")
-	{
-		a = new Florestal;
-	}
-	if (opcao == "2")
-	{
-		a = new Domesticos;
-	}
-	if (opcao == "3")
-	{
-		a = new Assalto;
-	}
-	if (opcao == "4")
-	{
-		a = new AcidenteViacao;
-	}
-	if (opcao == "0")
-	{
-		return;
-	}
-	//falta a atribuicao, fazer por pointer?
-	//falta testar se acidente já existe
-	this->acidentes.push_back(a);
-
-}
 void Menu::adicionaPostosSocorro(PostoSocorro *posto){
-
-
 
 	//falta testar se posto já existe
 	postos_socorro.push_back(posto);
 }
+
+void Menu::adicionaAcidente(Acidente *acidente){
+	if(this->AcidenteExistente(acidente)){
+		//lancar exececao
+	}
+	else{
+		this->acidentes.push_back(acidente);
+	}
+}
+
 
 void Menu::menuOpcoesIniciais(){
 
 	ClearScreen();
 
 	this->lerFicheiroAcidente();
-	//this->lerFicheiroPostos();
+	this->lerFicheiroPostoSocorro();
 
 	std::string opcao;
 
@@ -121,6 +94,9 @@ void Menu::menuOpcoesIniciais(){
 		this->menuOpcoesAcidente();
 	}
 
+
+	this->EscreveFicheiroAcidente();
+	this->escreverFicheiroPostoSocorro();
 }
 void Menu::menuOpcoesAcidente()
 {
@@ -150,7 +126,8 @@ void Menu::menuOpcoesAcidente()
 	if (opcao == "1")
 	{
 		ClearScreen();
-		// FALTA FUNCAO!
+		this->criarAcidente();
+		return;
 	}
 	if (opcao == "2")
 	{
@@ -167,7 +144,6 @@ void Menu::menuOpcoesAcidente()
 		ClearScreen();
 		return;
 	}
-
 
 }
 void Menu::menuOpcoesPostosSocorro()
@@ -220,14 +196,13 @@ void Menu::menuOpcoesPostosSocorro()
 void Menu::lerFicheiroAcidente() {
 	std::string linha;
 	std::string tipo;
-	std::ifstream ficheiro("Acidente.txt");
-	while (!ficheiro.eof()) {
+	std::ifstream ficheiro;
+	ficheiro.open("Acidente.txt");
+	while (getline(ficheiro, linha)) {
 
-		std::stringstream ss;
-		getline(ficheiro, linha);
-		ss << linha;
+		std::stringstream ss(linha);
 		ss >> tipo;
-
+		system("pause");
 		if (tipo == "Incendio_Florestal") {
 			Acidente *temp= new Florestal;
 			temp->lerInfo(ss);
@@ -249,17 +224,12 @@ void Menu::lerFicheiroAcidente() {
 
 		}
 
-		else if (tipo == "Acidente_Viacao") {
+		else if (tipo == "AcidenteViacao") {
 			Acidente* temp = new AcidenteViacao;
 			temp->lerInfo(ss);
 			this->adicionaAcidente(temp);
 
 		}
-
-		else
-			throw AcidenteDesconhecido(tipo);
-
-
 	}
 	ficheiro.close();
 
@@ -285,10 +255,8 @@ void Menu::lerFicheiroPostoSocorro() {
 	std::string linha;
 	std::string tipo;
 	std::ifstream ficheiro("PostoSocorro.txt");
-	while (!ficheiro.eof()) {
-		std::stringstream ss;
-		getline(ficheiro, linha);
-		ss << linha;
+	while (getline(ficheiro, linha)) {
+		std::stringstream ss(linha);
 		ss >> tipo;
 		if (tipo == "Bombeiros") {
 			PostoSocorro* temp = new Bombeiros;
@@ -320,5 +288,53 @@ void Menu::escreverFicheiroPostoSocorro() {
 
 	ficheiro.close();
 
+}
+
+
+void Menu::criarAcidente(){
+
+	std::string opcao;
+
+	std::cout << "Indique o tipo de acidente: \n";
+	std::cout << "1 - Incendio Florestal\n";
+	std::cout << "2 - Incendio Domestico\n";
+	std::cout << "3 - Assalto\n";
+	std::cout << "4 - Acidente de Viacao\n";
+	std::cout << "0 - Voltar ao Menu Inicial\n";
+
+	std::cout << "Indique o tipo de acidente: ";
+	std::cin >> opcao;
+
+	while (!(opcao == "1" || opcao == "2" || opcao == "3" || opcao == "4" || opcao == "0")) {
+		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
+		std::cout << "Indique o tipo de acidente: ";
+		std::cin >> opcao;
+	}
+
+	Acidente *a;
+
+	if (opcao == "1") {
+		a = new Florestal;
+		a->infoUtilizador();
+		std::cout << "Feito!\n";
+	}
+
+	/*
+	if (opcao == "2") {
+		a = new Domesticos;
+	}
+	if (opcao == "3") {
+		a = new Assalto;
+	}
+	if (opcao == "4") {
+		a = new AcidenteViacao;
+	}
+	if (opcao == "0") {
+		return;
+	}
+	*/
+
+
+	return;
 }
 
