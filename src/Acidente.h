@@ -7,17 +7,18 @@
 
 class Acidente{
 protected:
-	std::string data; // Formato YYYY-MM-DD-HH-MM
+	Data data; // Formato YYYY-MM-DD-HH-MM
 	std::pair<int,int> local; // Sistema de coordenadas (x,y)
 public:
 	//Construtores e destrutor
-	Acidente(){this->data=" ";this->local=std::make_pair(0,0);}
-	Acidente(std::string d, std::pair<int,int> local){this->data=d;this->local=local;}
+	Acidente(){this->data = Data();this->local=std::make_pair(0,0);}
+	Acidente(Data d, std::pair<int,int> local){this->data=d;this->local=local;}
 	virtual ~Acidente(){};
 	//Metodos Get
-	std::string getData() const;
+	Data getData() const;
 	std::pair<int,int> getLocal() const;
 	//Metodos Set
+	void setData(Data d);
 	void setData(std::string d);
 	void setLocal(std::pair<int,int> par);
 	//Outros Metodos
@@ -50,7 +51,7 @@ public:
 
 	//Construtores e destrutor
 	Incendios():Acidente(){this->numero_Bombeiros=0;this->numero_CarrosBombeiros=0;};
-	Incendios(u_int n_carros, u_int n_bombeiros, std::string d, std::pair<int,int> local): Acidente(d, local){
+	Incendios(u_int n_carros, u_int n_bombeiros, Data d, std::pair<int,int> local): Acidente(d, local){
 		this->numero_CarrosBombeiros = n_carros;
 		this->numero_Bombeiros = n_bombeiros;
 	}

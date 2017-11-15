@@ -270,16 +270,18 @@ void Menu::EscreveFicheiroAcidente() {
 	std::string tipo;
 	std::stringstream ss;
 	std::ofstream ficheiro("Acidente.txt");
-
-	if (!this->existe_ficheiro_acidentes())
-	{
-	}
-	else
-		ficheiro.open("Acidente.txt");
 	for (size_t i = 0; i < this->acidentes.size(); i++) {
-
+		ficheiro << this->acidentes.at(i)->getData() << ' '
+				<< this->acidentes.at(i)->getLocal().first << ' '
+				<< this->acidentes.at(i)->getLocal().second << ' '
+				<< this->acidentes.at(i)->getAllInfo() << std::endl;
 	}
 
 	ficheiro.close();
+}
+
+void Menu::lerFicheiroPostoSocorro()
+{
+
 }
 

@@ -29,6 +29,8 @@ public:
 	void lerFicheiroAcidente();
 	void EscreveFicheiroAcidente();
 
+	void lerFicheiroPostoSocorro();
+	void escreverFicheiroPostoSocorro();
 };
 
 

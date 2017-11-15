@@ -30,7 +30,7 @@ bool Acidente::acidenteIgual(Acidente* a1) const{
 			return false;
 	}
 
-	if(a1->getData() != this->getData() || a1->getLocal() != this->getLocal()){
+	if(!(a1->getData() == this->getData()) || a1->getLocal() != this->getLocal()){
 		return false;
 	}
 
@@ -45,7 +45,7 @@ bool Acidente::acidenteIgual(Acidente* a1) const{
 
 	//Metodos Get
 
-std::string Acidente::getData() const{
+Data Acidente::getData() const{
 	return this->data;
 }
 
@@ -55,10 +55,18 @@ std::pair<int,int> Acidente::getLocal() const{
 
 	//Metodos Set
 
-void Acidente::setData(std::string d){
+void Acidente::setData(Data d){
 	this->data = d;
 }
-
+void Acidente::setData(std::string d)
+{
+	u_int ano,mes,dia,hora,minuto;
+	char hifen='-';
+	std::stringstream retirar;
+	retirar << d;
+	retirar >> ano >> hifen >> mes >> hifen >> dia >> hifen >> hora >> hifen >> minuto ;
+	this->data=Data(ano,mes,dia,hora,minuto);
+}
 void Acidente::setLocal(std::pair<int,int> par){
 	this->local = par;
 }
