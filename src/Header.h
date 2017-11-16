@@ -86,12 +86,33 @@ public:
 		return (this->ano == a.ano && this->mes == a.mes && this->dia == a.dia
 				&& this->hora == a.hora && this->minuto == a.minuto);
 	}
+	bool operator <(const Data & a) {
+		if(this->ano < a.ano){
+			return true;
+		}
+		else if (this->mes < a.mes){
+			return true;
+		}
+		else if (this->dia < a.dia){
+			return true;
+		}
+		else if (this->hora < a.hora){
+			return true;
+		}
+		else if (this->minuto < a.minuto){
+			return true;
+		}
+		return false;
+	}
+
 	friend std::ostream & operator<<(std::ostream & o, const Data & data) {
 		o << data.ano << "-" << data.mes << "-" << data.dia << "-" << data.hora
 				<< "-" << data.minuto;
 		return o;
 	}
-	void printDate();
+	void printDate(){
+		std::cout << ano << "-" << mes << "-" << dia << " " << hora << "h" << minuto;
+	}
 };
 
 u_int nCarrosBombeirosArea(u_int a);
