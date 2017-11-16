@@ -104,7 +104,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "Domestico";}
 	std::string getAllInfo() const;
-	void infoUtilizador(){}
+	void infoUtilizador();
 
 
 
@@ -131,7 +131,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "Assalto";}
 	std::string getAllInfo() const;
-	void infoUtilizador(){}
+	void infoUtilizador();
 
 };
 
@@ -170,7 +170,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "AcidenteViacao";}
 	std::string getAllInfo() const;
-	void infoUtilizador(){}
+	void infoUtilizador();
 
 
 

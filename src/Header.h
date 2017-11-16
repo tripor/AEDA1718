@@ -91,11 +91,19 @@ public:
 				<< "-" << data.minuto;
 		return o;
 	}
-
+	void printDate();
 };
 
 u_int nCarrosBombeirosArea(u_int a);
 
 u_int nBombeirosArea(u_int a);
+
+u_int numeroCarBombeirosApart();
+
+u_int numeroBombeirosApart();
+
+u_int numeroCarBombeirosMoradia();
+
+u_int numeroBombeirosMoradia();
 
 #endif /* HEADER_H_ */

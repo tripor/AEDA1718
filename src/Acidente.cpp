@@ -293,6 +293,8 @@ std::string AcidenteViacao::getAllInfo() const{
 	return ret;
 }
 
+// INFO UTILIZADOR
+
 void Florestal::infoUtilizador(){
 
 	ClearScreen();
@@ -309,4 +311,134 @@ void Florestal::infoUtilizador(){
 
 
 }
+
+void Domesticos::infoUtilizador(){
+
+	std::string opcao;
+	std::cout << "Lista de opções: ";
+	std::cout << "1 - Apartamento\n";
+	std::cout << "2 - Moradia\n";
+
+	std::cout << "Indique o tipo de casa: ";
+	std::cin >> opcao;
+
+	//testar se o input é valido!!!
+
+	while (!(opcao == "1" || opcao == "2")) {
+		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
+		std::cout << "Indique o tipo de casa: ";
+		std::cin >> opcao;
+	}
+
+	if(opcao == "1"){
+		this->setNumeroCarrosBombeiros(numeroCarBombeirosApart());
+		this->setNumeroBombeiros(numeroBombeirosApart());
+	}
+
+	if(opcao == "2"){
+		this->setNumeroCarrosBombeiros(numeroCarBombeirosMoradia());
+		this->setNumeroBombeiros(numeroBombeirosMoradia());
+	}
+
+}
+
+void Assalto::infoUtilizador(){
+
+	std::string opcao;
+
+	std::cout << "Existem feridos?(S/N) ";
+	std::cin >> opcao;
+
+	//testar se o input é valido!!!
+
+	while (!(opcao == "S" || opcao == "N" || opcao == "s" || opcao == "n")) {
+		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
+		std::cout << "Existem feridos?(S/N) ";
+		std::cin >> opcao;
+	}
+
+	bool feridos = false;
+
+	if (opcao == "S" || opcao == "s") {
+		feridos = true;
+		this->setExisteFeridos(feridos);
+	}
+
+	if (opcao == "N" || opcao == "n") {
+		feridos = false;
+		this->setExisteFeridos(feridos);
+	}
+
+	std::cout << "\nLista de opções: ";
+	std::cout << "1 - Particular\n";
+	std::cout << "2 - Comercial\n";
+
+	std::cout << "Indique o tipo de casa: ";
+	std::cin >> opcao;
+
+	//testar se o input é valido!!!
+
+	while (!(opcao == "1" || opcao == "2" || opcao == "0")) {
+		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
+		std::cout << "Indique o tipo de casa: ";
+		std::cin >> opcao;
+	}
+
+	if (opcao == "1") {
+		this->setTipoCasa("Particular");
+	}
+
+	if (opcao == "2") {
+		this->setTipoCasa("Comercial");
+	}
+
+}
+
+void AcidenteViacao::infoUtilizador(){
+
+	std::string opcao;
+
+	std::cout << "Numero de feridos graves: ";
+	std::cin >> opcao;
+
+	// TESTAR INPUT + EXCECAO
+
+	u_int n = std::stoi(opcao);
+
+	this->setNumeroFeridosGraves(n);
+
+	std::cout << "\nNumero de veiculos envolvidos: ";
+	std::cin >> opcao;
+
+	// TESTAR INPUT + EXCECAO
+
+	n = std::stoi(opcao);
+
+	this->setNumeroVeiculosEnvolvidos(n);
+
+	std::cout << "\nLista de opções: ";
+	std::cout << "1 - Estrada Nacional\n";
+	std::cout << "2 - Auto Estrada\n";
+
+	std::cout << "Indique o tipo de estrada: ";
+	std::cin >> opcao;
+
+	//testar se o input é valido!!!
+
+	while (!(opcao == "1" || opcao == "2")) {
+		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
+		std::cout << "Indique o tipo de casa: ";
+		std::cin >> opcao;
+	}
+
+	if (opcao == "1") {
+		this->setTipoEstrada("Nacional");
+	}
+
+	if (opcao == "2") {
+		this->setTipoEstrada("Auto-Estrada");
+	}
+
+}
+
 

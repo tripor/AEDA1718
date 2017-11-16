@@ -23,17 +23,25 @@ public:
 	void adicionaAcidente(Acidente *acidente);
 	void adicionaPostosSocorro(PostoSocorro *posto);
 
-	void menuOpcoesIniciais();
-	void menuOpcoesAcidente();
-	void menuOpcoesPostosSocorro();
+	void menuOpcoesIniciais_0();
+	void menuOpcoesAcidente_1();
+	void menuOpcoesPostosSocorro_1();
 
+	//Funcoes ler e escrever
 	void lerFicheiroAcidente();
 	void EscreveFicheiroAcidente();
 
 	void lerFicheiroPostoSocorro();
 	void escreverFicheiroPostoSocorro();
 
+	//Funcoes menu acidente
 	void criarAcidente();
+	void removerAcidente();
+
+	//Funcoes print dos vetores
+	void printAcidentes();
+	void printPostos();
+
 };
 
 

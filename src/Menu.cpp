@@ -3,6 +3,8 @@
 #include "PostoSocorro.h"
 #include "Menu.h"
 
+// Incendios Florestais
+
 u_int nCarrosBombeirosArea(u_int a){
 	return ((a/1000) + 1);
 }
@@ -11,6 +13,25 @@ u_int nBombeirosArea(u_int a){
 	return (a/100) + 1;
 }
 
+// Incendios Domesticos
+
+u_int numeroCarBombeirosApart(){
+	return 2;
+}
+
+u_int numeroBombeirosApart(){
+	return 10;
+}
+
+u_int numeroCarBombeirosMoradia(){
+	return 3;
+}
+
+u_int numeroBombeirosMoradia(){
+	return 15;
+}
+
+// Get methods
 
 std::vector<Acidente*> Menu::getAcidentes(){
 	return this->acidentes;
@@ -61,7 +82,7 @@ void Menu::adicionaAcidente(Acidente *acidente){
 }
 
 
-void Menu::menuOpcoesIniciais(){
+void Menu::menuOpcoesIniciais_0(){
 
 	ClearScreen();
 
@@ -91,14 +112,16 @@ void Menu::menuOpcoesIniciais(){
 	if (opcao == "1")
 	{
 		ClearScreen();
-		this->menuOpcoesAcidente();
+		this->menuOpcoesAcidente_1();
 	}
 
+
+	// Escrever para ficheiro os vetores
 
 	this->EscreveFicheiroAcidente();
 	this->escreverFicheiroPostoSocorro();
 }
-void Menu::menuOpcoesAcidente()
+void Menu::menuOpcoesAcidente_1()
 {
 	ClearScreen();
 
@@ -146,7 +169,7 @@ void Menu::menuOpcoesAcidente()
 	}
 
 }
-void Menu::menuOpcoesPostosSocorro()
+void Menu::menuOpcoesPostosSocorro_1()
 {
 	ClearScreen();
 
@@ -337,4 +360,58 @@ void Menu::criarAcidente(){
 
 	return;
 }
+
+
+
+
+void Menu::removerAcidente(){
+
+	std::string opcao;
+
+	std::cout << "Tipos de acidente: \n";
+	std::cout << "1 - Incendio Florestal\n";
+	std::cout << "2 - Incendio Domestico\n";
+	std::cout << "3 - Assalto\n";
+	std::cout << "4 - Acidente de Viacao\n";
+	std::cout << "0 - Voltar ao Menu Inicial\n";
+
+	std::cout << "Indique o tipo de acidente a remover: ";
+	std::cin >> opcao;
+
+	while (!(opcao == "1" || opcao == "2" || opcao == "3" || opcao == "4" || opcao == "0")) {
+		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
+		std::cout << "Indique o tipo de acidente: ";
+		std::cin >> opcao;
+	}
+
+	Acidente *a;
+
+	if (opcao == "1") {
+		a = new Florestal;
+		a->infoUtilizador();
+		std::cout << "Feito!\n";
+	}
+
+	/*
+	if (opcao == "2") {
+		a = new Domesticos;
+	}
+	if (opcao == "3") {
+		a = new Assalto;
+	}
+	if (opcao == "4") {
+		a = new AcidenteViacao;
+	}
+	if (opcao == "0") {
+		return;
+	}
+	*/
+
+
+	return;
+
+
+}
+
+
 

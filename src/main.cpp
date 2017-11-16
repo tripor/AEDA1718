@@ -14,7 +14,7 @@ int main()
 
 	while (true)
 	{
-		e1.menuOpcoesIniciais();
+		e1.menuOpcoesIniciais_0();
 	}
 
 	return 0;

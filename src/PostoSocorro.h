@@ -33,10 +33,13 @@ public:
 	u_int getSocorristas();
 	u_int getVeiculos();
 	std::pair<int,int> getPos();
+	void printAcidentesAtribuidos();
+
 	bool operator< (const PostoSocorro & p) const;
 	virtual std::string getTipo()=0;
 	virtual std::string getAllInfo()=0;
 	virtual void guardarInformacao(std::stringstream &receber)=0;
+
 };
 
 
