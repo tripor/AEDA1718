@@ -12,6 +12,9 @@ class Menu{
 	bool terminar;
 public:
 
+	Menu();
+	bool getTerminar() const;
+
 	bool AcidenteExistente(Acidente* aci) const;
 
 	//std::ofstream & create_ficheiro_acidente();

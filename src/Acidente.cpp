@@ -1,29 +1,5 @@
 #include "Acidente.h"
 
-// Classe Acidente
-
-	//Construtores
-	//Operadores
-
-/*
-
-bool Acidente::operator== (const Acidente & a) const{
-	if(getTipoAcidente() != a.getTipoAcidente()){
-		return false;
-	}
-
-	if(getData() != a.getData() || getLocal() != a.getLocal()){
-		return false;
-	}
-
-	if(getAllInfo() != a.getAllInfo()){
-		return false;
-	}
-
-	return true;
-}
-
-*/
 
 bool Acidente::acidenteIgual(Acidente* a1) const{
 	if(a1->getTipoAcidente() != this->getTipoAcidente()){
@@ -253,10 +229,8 @@ std::string Florestal::getAllInfo() const{
 	std::stringstream ss;
 
 	ss << this->numero_CarrosBombeiros << ' ' << this->numero_Bombeiros << ' ' << this->area_Chamas;
-
 	std::string ret;
-	ss.str(ret);
-
+	ret=ss.str();
 	return ret;
 }
 
@@ -297,7 +271,7 @@ std::string AcidenteViacao::getAllInfo() const{
 
 void Florestal::infoUtilizador(){
 
-	ClearScreen();
+	//ClearScreen();
 
 	u_int area;
 
@@ -308,8 +282,7 @@ void Florestal::infoUtilizador(){
 
 	this->setNumeroCarrosBombeiros(nCarrosBombeirosArea(area));
 	this->setNumeroBombeiros(nBombeirosArea(area));
-
-
+	this->setAreaChamas(area);
 }
 
 void Domesticos::infoUtilizador(){

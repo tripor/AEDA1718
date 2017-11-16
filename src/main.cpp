@@ -12,11 +12,10 @@ int main()
 	e1.lerFicheiroAcidente();
 	e1.lerFicheiroPostoSocorro();
 
-	while (true)
+	while (!e1.getTerminar())
 	{
 		e1.menuOpcoesIniciais_0();
 	}
-
 	return 0;
 }
 

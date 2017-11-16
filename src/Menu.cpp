@@ -32,6 +32,14 @@ u_int numeroBombeirosMoradia(){
 }
 
 // Get methods
+Menu::Menu() {
+	this->terminar = false;
+	this->acidentes.clear();
+	this->postos_socorro.clear();
+}
+bool Menu::getTerminar() const {
+	return this->terminar;
+}
 
 std::vector<Acidente*> Menu::getAcidentes(){
 	return this->acidentes;
@@ -84,8 +92,7 @@ void Menu::adicionaAcidente(Acidente *acidente){
 
 void Menu::menuOpcoesIniciais_0(){
 
-	ClearScreen();
-
+	//ClearScreen();
 	this->lerFicheiroAcidente();
 	this->lerFicheiroPostoSocorro();
 
@@ -96,12 +103,13 @@ void Menu::menuOpcoesIniciais_0(){
 	std::cout << "Lista de Acoes: \n";
 	std::cout << "1 - Acoes sobre Acidentes\n";
 	std::cout << "2 - Acoes sobre Postos de Socorro\n";
+	std::cout << "0 - Sair\n";
 
 	std::cout << "Indique o digito correspondente a opcao desejada: ";
 	std::cin >> opcao;
 
 
-	while (!(opcao == "1" || opcao == "2"))
+	while (!(opcao == "1" || opcao == "2" || opcao == "0"))
 	{
 		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
 		std::cout << "Indique o digito correspondente a opção desejada: ";
@@ -111,19 +119,19 @@ void Menu::menuOpcoesIniciais_0(){
 
 	if (opcao == "1")
 	{
-		ClearScreen();
+		//learScreen();
 		this->menuOpcoesAcidente_1();
 	}
-
-
+	if (opcao == "0") {
+		this->terminar=true;
+	}
 	// Escrever para ficheiro os vetores
-
 	this->EscreveFicheiroAcidente();
 	this->escreverFicheiroPostoSocorro();
 }
 void Menu::menuOpcoesAcidente_1()
 {
-	ClearScreen();
+	//ClearScreen();
 
 	std::string opcao;
 
@@ -220,12 +228,11 @@ void Menu::lerFicheiroAcidente() {
 	std::string linha;
 	std::string tipo;
 	std::ifstream ficheiro;
-	ficheiro.open("Acidente.txt");
+	ficheiro.open("src/Acidente.txt");
 	while (getline(ficheiro, linha)) {
 
 		std::stringstream ss(linha);
 		ss >> tipo;
-		system("pause");
 		if (tipo == "Incendio_Florestal") {
 			Acidente *temp= new Florestal;
 			temp->lerInfo(ss);
@@ -262,7 +269,7 @@ void Menu::EscreveFicheiroAcidente() {
 	std::string linha;
 	std::string tipo;
 	std::stringstream ss;
-	std::ofstream ficheiro("Acidente.txt",std::ofstream::out|std::ofstream::trunc);
+	std::ofstream ficheiro("src/Acidente.txt",std::ofstream::out|std::ofstream::trunc);
 	for (size_t i = 0; i < this->acidentes.size(); i++) {
 		ficheiro << this->acidentes.at(i)->getTipoAcidente() << ' '
 				<< this->acidentes.at(i)->getData() << ' '
@@ -270,14 +277,13 @@ void Menu::EscreveFicheiroAcidente() {
 				<< this->acidentes.at(i)->getLocal().second << ' '
 				<< this->acidentes.at(i)->getAllInfo() << std::endl;
 	}
-
 	ficheiro.close();
 }
 
 void Menu::lerFicheiroPostoSocorro() {
 	std::string linha;
 	std::string tipo;
-	std::ifstream ficheiro("PostoSocorro.txt");
+	std::ifstream ficheiro("src/PostoSocorro.txt");
 	while (getline(ficheiro, linha)) {
 		std::stringstream ss(linha);
 		ss >> tipo;
@@ -302,13 +308,12 @@ void Menu::escreverFicheiroPostoSocorro() {
 	std::string linha;
 	std::string tipo;
 	std::stringstream ss;
-	std::ofstream ficheiro("PostoSocorro.txt",
+	std::ofstream ficheiro("src/PostoSocorro.txt",
 			std::ofstream::out | std::ofstream::trunc);
-	for (size_t i = 0; i < this->acidentes.size(); i++) {
+	for (size_t i = 0; i < this->postos_socorro.size(); i++) {
 		ficheiro << this->postos_socorro.at(i)->getTipo() << ' '
 				<< this->postos_socorro.at(i)->getAllInfo();
 	}
-
 	ficheiro.close();
 
 }
@@ -339,7 +344,8 @@ void Menu::criarAcidente(){
 	if (opcao == "1") {
 		a = new Florestal;
 		a->infoUtilizador();
-		std::cout << "Feito!\n";
+		this->adicionaAcidente(a);
+		std::cout << "Feito!" << std::endl;
 	}
 
 	/*
