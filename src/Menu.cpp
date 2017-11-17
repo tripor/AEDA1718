@@ -31,12 +31,15 @@ u_int numeroBombeirosMoradia(){
 	return 15;
 }
 
-// Get methods
+//Construtor
 Menu::Menu() {
 	this->terminar = false;
 	this->acidentes.clear();
 	this->postos_socorro.clear();
 }
+
+// Get methods
+
 bool Menu::getTerminar() const {
 	return this->terminar;
 }
@@ -47,6 +50,8 @@ std::vector<Acidente*> Menu::getAcidentes(){
 std::vector<PostoSocorro*> Menu::getPostosSocorro(){
 	return postos_socorro;
 }
+
+// Outros metodos
 
 bool Menu::AcidenteExistente(Acidente* aci) const{
 	for(u_int i = 0; i < this->acidentes.size();i++){
@@ -74,6 +79,8 @@ bool Menu::existe_ficheiro_acidentes() const {
 }*/
 
 
+// Metodos para adicionar acidentes/postos socorro ao vetor
+
 void Menu::adicionaPostosSocorro(PostoSocorro *posto){
 
 	//falta testar se posto já existe
@@ -88,6 +95,10 @@ void Menu::adicionaAcidente(Acidente *acidente){
 		this->acidentes.push_back(acidente);
 	}
 }
+
+////////////////////////
+// MENUS
+////////////////////////
 
 
 void Menu::menuOpcoesIniciais_0(){
@@ -129,6 +140,8 @@ void Menu::menuOpcoesIniciais_0(){
 	this->EscreveFicheiroAcidente();
 	this->escreverFicheiroPostoSocorro();
 }
+
+
 void Menu::menuOpcoesAcidente_1()
 {
 	//ClearScreen();
@@ -177,6 +190,8 @@ void Menu::menuOpcoesAcidente_1()
 	}
 
 }
+
+
 void Menu::menuOpcoesPostosSocorro_1()
 {
 	ClearScreen();
@@ -224,7 +239,13 @@ void Menu::menuOpcoesPostosSocorro_1()
 	}
 }
 
+
+/////////////////////////////////
+// OPERACOES COM FICHEIROS
+/////////////////////////////////
+
 void Menu::lerFicheiroAcidente() {
+
 	std::string linha;
 	std::string tipo;
 	std::ifstream ficheiro;
@@ -233,14 +254,14 @@ void Menu::lerFicheiroAcidente() {
 
 		std::stringstream ss(linha);
 		ss >> tipo;
-		if (tipo == "Incendio_Florestal") {
+		if (tipo == "Florestal") {
 			Acidente *temp= new Florestal;
 			temp->lerInfo(ss);
 			this->adicionaAcidente(temp);
 
 		}
 
-		else if (tipo == "Incendio_Domesticos") {
+		else if (tipo == "Domestico") {
 			Acidente* temp = new Domesticos;
 			temp->lerInfo(ss);
 			this->adicionaAcidente(temp);
@@ -278,9 +299,13 @@ void Menu::EscreveFicheiroAcidente() {
 				<< this->acidentes.at(i)->getAllInfo() << std::endl;
 	}
 	ficheiro.close();
+	//Limpar os vetores
+	this->acidentes.clear();
+	this->postos_socorro.clear();
 }
 
 void Menu::lerFicheiroPostoSocorro() {
+
 	std::string linha;
 	std::string tipo;
 	std::ifstream ficheiro("src/PostoSocorro.txt");
@@ -304,6 +329,7 @@ void Menu::lerFicheiroPostoSocorro() {
 	ficheiro.close();
 
 }
+
 void Menu::escreverFicheiroPostoSocorro() {
 	std::string linha;
 	std::string tipo;
@@ -316,8 +342,15 @@ void Menu::escreverFicheiroPostoSocorro() {
 	}
 	ficheiro.close();
 
+	//Limpar os vetores
+	this->acidentes.clear();
+	this->postos_socorro.clear();
 }
 
+
+/////////////////////////////////////
+// FUNCOES MENU ACIDENTE
+/////////////////////////////////////
 
 void Menu::criarAcidente(){
 
@@ -343,6 +376,7 @@ void Menu::criarAcidente(){
 
 	if (opcao == "1") {
 		a = new Florestal;
+		a->infoUtilizadorGeral();
 		a->infoUtilizador();
 		this->adicionaAcidente(a);
 		std::cout << "Feito!" << std::endl;
@@ -363,11 +397,8 @@ void Menu::criarAcidente(){
 	}
 	*/
 
-
 	return;
 }
-
-
 
 
 void Menu::removerAcidente(){
@@ -394,6 +425,7 @@ void Menu::removerAcidente(){
 
 	if (opcao == "1") {
 		a = new Florestal;
+		a->infoUtilizadorGeral();
 		a->infoUtilizador();
 		std::cout << "Feito!\n";
 	}
@@ -413,9 +445,7 @@ void Menu::removerAcidente(){
 	}
 	*/
 
-
 	return;
-
 
 }
 

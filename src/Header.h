@@ -50,15 +50,15 @@ public:
 		}
 		if (hora >= 24) {
 			this->dia = hora / 24;
-			this->hora = hora % 24;
+			this->hora += hora % 24;
 		}
 		if (dia >= 32) {
 			this->mes = dia / 31;
-			this->dia = dia % 31;
+			this->dia += dia % 31;
 		}
 		if (mes >= 13) {
 			this->ano = mes / 13;
-			this->mes = mes % 13;
+			this->mes += mes % 13;
 		}
 	}
 

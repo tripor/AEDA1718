@@ -29,20 +29,11 @@ public:
 	bool acidenteIgual(Acidente* a1) const;
 	//bool operator== (const Acidente & a) const;
 
-};
-
-class AcidenteDesconhecido{
-	std::string tipo;
-
-public:
-	AcidenteDesconhecido(std::string tipo){
-		this->tipo = tipo;
-	}
-	void tratamento_Tipo(){
-	std::cout << "Erro: Tipo de acidente '" << tipo << "' invalido\n";
-	}
+	void infoUtilizadorGeral();
 
 };
+
+
 
 class Incendios : public virtual Acidente{
 protected:
@@ -106,8 +97,6 @@ public:
 	std::string getAllInfo() const;
 	void infoUtilizador();
 
-
-
 };
 
 
@@ -135,16 +124,7 @@ public:
 
 };
 
-class Tipo_Casa_Invalida {
-public:
-	std::string tipo;
-	Tipo_Casa_Invalida(std::string s) {
-		tipo = s;
-	}
-	void tratamento_Tipo() {
-		std::cout << "Erro: Tipo de casa '" << tipo << "' inválido\n";
-	}
-};
+
 
 class AcidenteViacao : public Acidente{
 	u_int numero_FeridosGraves;
@@ -172,10 +152,42 @@ public:
 	std::string getAllInfo() const;
 	void infoUtilizador();
 
+};
 
 
+
+
+////////////////////////////////////////////////////
+// EXCECOES
+////////////////////////////////////////////////////
+
+class AcidenteDesconhecido{
+	std::string tipo;
+
+public:
+	AcidenteDesconhecido(std::string tipo){
+		this->tipo = tipo;
+	}
+	void tratamento_Tipo(){
+	std::cout << "Erro: Tipo de acidente '" << tipo << "' invalido\n";
+	}
 
 };
+
+
+
+class Tipo_Casa_Invalida {
+public:
+	std::string tipo;
+	Tipo_Casa_Invalida(std::string s) {
+		tipo = s;
+	}
+	void tratamento_Tipo() {
+		std::cout << "Erro: Tipo de casa '" << tipo << "' inválido\n";
+	}
+};
+
+
 
 class Tipo_Estrada_Invalida {
 public:
@@ -187,6 +199,9 @@ public:
 		std::cout << "Erro: Tipo de estrada '" << tipo << "' inválido\n";
 	}
 };
+
+
+
 class Area_Invalida{
 	public:
 		int area;
