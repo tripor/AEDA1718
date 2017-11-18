@@ -90,12 +90,42 @@ void Menu::printPostos(){
 
 		std::stringstream ss;
 	for(unsigned int i = 0; i<postos_socorro.size(); i++){
+		ss << postos_socorro.at(i)->getAllInfo();
+		std::string n_socorristas;
+		ss >> n_socorristas;
+		std::cout << "< Numero de socorristas: " << n_socorristas<< std::endl;
 
-		std::cout << "< Numero de socorristas" << postos_socorro.at(i)->getSocorristas()<< std::endl;
-		std::cout << "< Numero de veiculos" << postos_socorro.at(i)->getVeiculos()<< std::endl;
-		std::cout << "<" << "[" << postos_socorro.at(i)->getPos().first<<",";
-		std::cout <<postos_socorro.at(i)->getPos().second <<"]"<<std::endl;
+		std::string n_veiculos;
+		ss >> n_veiculos;
+		std::cout << "< Numero de veiculos: " << n_veiculos<< std::endl;
 
+		std::string corX;
+		std::string corY;
+		ss >> corX;
+		ss >> corY;
+		std::cout << "<" << "[" << corX<<",";
+		std::cout << corY <<"]"<<std::endl;
+
+		std::string TipoPosto;
+		TipoPosto = postos_socorro.at(i)->getTipo();
+
+		if(TipoPosto=="Bombeiros"){
+			std::string n_ambulancia;
+			ss >> n_ambulancia;
+			std::cout << "Numero de ambulancias: " << n_ambulancia << std::endl;
+			std::string n_autotanques;
+			ss >> n_autotanques;
+			std::cout << "Numero de autotanques: " << n_autotanques << std::endl;
+		}
+		else if(TipoPosto=="Policia"){
+			std::string veiculo;
+			std::cout << "Veiculo: " << veiculo << std::endl;
+		}
+
+		else if(TipoPosto=="Inem"){
+			std::string Veiculo;
+			std::cout << "Veiculo: " << Veiculo << std::endl;
+		}
 
 	}
 }
