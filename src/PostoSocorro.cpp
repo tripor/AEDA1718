@@ -59,7 +59,7 @@ std::string Bombeiros::getAllInfo() {
 			<< this->getPos().first << '-' << this->getPos().second << ' '
 			<< this->getAmbulancias() << ' ' << this->getAutotanques();
 	std::string res;
-	devolver.str(res);
+	res = devolver.str();
 	return res;
 }
 void Bombeiros::guardarInformacao(std::stringstream &receber)
@@ -91,7 +91,7 @@ std::string Policia::getAllInfo() {
 			<< this->getPos().first << '-' << this->getPos().second << ' '
 			<< this->getVeiculo();
 	std::string res;
-	devolver.str(res);
+	res = devolver.str();
 	return res;
 }
 void Policia::guardarInformacao(std::stringstream &receber)
@@ -124,7 +124,7 @@ std::string Inem::getAllInfo()
 				<< this->getPos().first << '-' << this->getPos().second << ' '
 				<< this->getVeiculo();
 		std::string res;
-		devolver.str(res);
+		res = devolver.str();
 		return res;
 }
 void Inem::guardarInformacao(std::stringstream &receber)
