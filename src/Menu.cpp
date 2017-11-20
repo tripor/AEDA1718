@@ -293,7 +293,7 @@ void Menu::EscreveFicheiroAcidente() {
 	std::ofstream ficheiro("src/Acidente.txt",std::ofstream::out|std::ofstream::trunc);
 	for (size_t i = 0; i < this->acidentes.size(); i++) {
 		ficheiro << this->acidentes.at(i)->getTipoAcidente() << ' '
-				<< this->acidentes.at(i)->getData() << ' '
+				<< this->acidentes.at(i)->getData().getDataString() << ' '
 				<< this->acidentes.at(i)->getLocal().first << ' '
 				<< this->acidentes.at(i)->getLocal().second << ' '
 				<< this->acidentes.at(i)->getAllInfo() << std::endl;

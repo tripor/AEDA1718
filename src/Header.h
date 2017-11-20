@@ -44,6 +44,11 @@ public:
 		this->minuto = 0;
 	}
 	Data(u_int ano, u_int mes, u_int dia, u_int hora, u_int minuto) {
+		this->ano=ano;
+		this->mes=mes;
+		this->dia=dia;
+		this->hora=hora;
+		this->minuto=minuto;
 		if (minuto >= 60) {
 			this->hora = minuto / 60;
 			this->minuto = minuto % 60;
@@ -76,6 +81,11 @@ public:
 	}
 	u_int getMinuto() {
 		return minuto;
+	}
+	std::string getDataString(){
+		std::stringstream devolver;
+		devolver << ano << "-" << mes << "-" << dia << "-" << hora << "-" << minuto;
+		return devolver.str();
 	}
 
 	Data operator +(const Data & a) {

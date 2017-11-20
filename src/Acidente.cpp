@@ -30,7 +30,8 @@ void Acidente::setData(std::string d)
 	std::stringstream retirar;
 	retirar << d;
 	retirar >> ano >> hifen >> mes >> hifen >> dia >> hifen >> hora >> hifen >> minuto ;
-	this->data=Data(ano,mes,dia,hora,minuto);
+	Data devolver(ano,mes,dia,hora,minuto);
+	this->data=devolver;
 }
 void Acidente::setLocal(std::pair<int,int> par){
 	this->local = par;

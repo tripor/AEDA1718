@@ -4,7 +4,7 @@
 #include "Menu.h"
 
 //////// PARTE A COPIAR
-
+/*
 
 
 void Menu::printAcidentes(){
