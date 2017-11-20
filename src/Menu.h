@@ -37,6 +37,12 @@ public:
 	void adicionaAcidente(Acidente *acidente);
 	void adicionaPostosSocorro(PostoSocorro *posto);
 
+	//ATRIBUICAO DE ACIDENTES
+	void atribuiAcidentes();
+
+	//Ordenar vetores
+	void ordenaVetorAcidentes();
+	void ordenaVetorPostosSocorro();
 
 	//Varios menus
 	void menuOpcoesIniciais_0();
