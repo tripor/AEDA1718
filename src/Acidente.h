@@ -28,6 +28,7 @@ public:
 	virtual void infoUtilizador() = 0;
 	bool acidenteIgual(Acidente* a1) const;
 	//bool operator== (const Acidente & a) const;
+	bool operator< (const Acidente & aci) const;
 
 	void infoUtilizadorGeral();
 

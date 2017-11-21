@@ -45,6 +45,8 @@ public:
 	virtual std::string getAllInfo()=0;
 	virtual void guardarInformacao(std::stringstream &receber)=0;
 
+	bool menorDistancia(PostoSocorro & a, PostoSocorro & b, std::pair<int, int> p);
+
 };
 
 class Bombeiros: public PostoSocorro {
