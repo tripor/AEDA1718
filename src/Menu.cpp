@@ -372,7 +372,7 @@ void Menu::escreverFicheiroPostoSocorro() {
 
 void Menu::criarAcidente(){
 	string opcao;
-
+	cout << endl;
 	cout << "+----------------------------------------+" << endl;
 	cout << "|   Indique o tipo de acidente:          |" << endl;
 	cout << "|   1 - Incendio Florestal               |" << endl;
@@ -443,7 +443,7 @@ void Menu::criarAcidente(){
 
 void Menu::criarPosto(){
 	string opcao;
-
+	cout << endl;
 	cout << "+----------------------------------------+" << endl;
 	cout << "|   Indique o tipo de posto:             |" << endl;
 	cout << "|   1 - Bombeiros                        |" << endl;
@@ -506,7 +506,7 @@ void Menu::removerAcidente(){
 
 	this->printAcidentes();
 
-	cout << "Indique o tipo de acidente a remover: ";
+	cout << "Indique o numero do acidente a remover: ";
 	getline(cin, opcao);
 	if (opcao == "0") {
 		return;
@@ -530,7 +530,7 @@ void Menu::removerPosto(){
 
 	this->printPostos();
 
-	cout << "Indique o tipo de posto a remover: ";
+	cout << "Indique o numero do posto a remover: ";
 	getline(cin, opcao);
 	if (opcao == "0") {
 		return;
@@ -577,7 +577,7 @@ void Menu::printAcidentes() {
 
 	for (unsigned int i = 0; i < acidentes.size(); i++) {
 
-		cout << string('=',20);
+		cout << "=====================" << endl;
 		cout << i+1 << "- ";
 		cout << "Tipo: " << acidentes.at(i)->getTipoAcidente() << "| ";
 		cout << "Local: x=" << acidentes.at(i)->getLocal().first << "| ";
@@ -592,7 +592,7 @@ void Menu::printAcidentes() {
 
 void Menu::printPostos(){
 	for(unsigned int i = 0; i<postos_socorro.size(); i++){
-		cout << string('=',20);
+		cout << "=====================" << endl;
 		cout << i+1 << "- ";
 		cout << "Tipo de posto: " << this->postos_socorro.at(i)->getTipo() << " |";
 		cout << " " << this->postos_socorro.at(i)->getAllInfoFormatoPrint()<< endl;

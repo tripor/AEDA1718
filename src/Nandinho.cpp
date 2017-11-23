@@ -137,7 +137,7 @@ void Menu::atribuiAcidentes(){
 
 
 		if(tipo == "Domestico"){
-			//Precisa de posto de bombeiros
+			//Precisa de posto de bombeiros (ambulancia sempre?)
 
 		}
 		if(tipo == "Assalto"){
