@@ -14,18 +14,24 @@ public:
 	Acidente(){this->data = Data();this->local=std::make_pair(0,0);}
 	Acidente(Data d, std::pair<int,int> local){this->data=d;this->local=local;}
 	virtual ~Acidente(){};
+
 	//Metodos Get
 	Data getData() const;
 	std::pair<int,int> getLocal() const;
+
 	//Metodos Set
 	void setData(Data d);
 	void setData(std::string d);
 	void setLocal(std::pair<int,int> par);
-	//Outros Metodos
+
+	//Metodos Virtuais
 	virtual void lerInfo(std::stringstream &ss) = 0;
 	virtual std::string getTipoAcidente() const = 0;
 	virtual std::string getAllInfo() const = 0;
+	virtual std::string getAllInfoFormatoPrint() const = 0;
 	virtual void infoUtilizador() = 0;
+
+	//Outros
 	bool acidenteIgual(Acidente* a1) const;
 	//bool operator== (const Acidente & a) const;
 	bool operator< (const Acidente & aci) const;
@@ -59,6 +65,7 @@ public:
 	void lerInfo(std::stringstream ss);
 	std::string getTipoAcidente() const{return  " ";}
 	std::string getAllInfo() const{return " ";}
+	std::string getAllInfoFormatoPrint() const{return " ";}
 	void infoUtilizador(){};
 
 };
@@ -77,6 +84,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const {return "Florestal";}
 	std::string getAllInfo() const;
+	std::string getAllInfoFormatoPrint() const;
 	void infoUtilizador();
 
 
@@ -96,6 +104,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "Domestico";}
 	std::string getAllInfo() const;
+	std::string getAllInfoFormatoPrint() const;
 	void infoUtilizador();
 
 };
@@ -121,6 +130,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "Assalto";}
 	std::string getAllInfo() const;
+	std::string getAllInfoFormatoPrint() const;
 	void infoUtilizador();
 
 };
@@ -151,71 +161,10 @@ public:
 	void lerInfo(std::stringstream &ss);
 	std::string getTipoAcidente() const{return "AcidenteViacao";}
 	std::string getAllInfo() const;
+	std::string getAllInfoFormatoPrint() const;
 	void infoUtilizador();
 
 };
-
-
-
-
-////////////////////////////////////////////////////
-// EXCECOES
-////////////////////////////////////////////////////
-
-class AcidenteDesconhecido{
-	std::string tipo;
-
-public:
-	AcidenteDesconhecido(std::string tipo){
-		this->tipo = tipo;
-	}
-	void tratamento_Tipo(){
-	std::cout << "Erro: Tipo de acidente '" << tipo << "' invalido\n";
-	}
-
-};
-
-
-
-class Tipo_Casa_Invalida {
-public:
-	std::string tipo;
-	Tipo_Casa_Invalida(std::string s) {
-		tipo = s;
-	}
-	void tratamento_Tipo() {
-		std::cout << "Erro: Tipo de casa '" << tipo << "' inválido\n";
-	}
-};
-
-
-
-class Tipo_Estrada_Invalida {
-public:
-	std::string tipo;
-	Tipo_Estrada_Invalida(std::string s) {
-		tipo = s;
-	}
-	void tratamento_Tipo() {
-		std::cout << "Erro: Tipo de estrada '" << tipo << "' inválido\n";
-	}
-};
-
-
-
-class Area_Invalida{
-	public:
-		int area;
-		Area_Invalida(int a){area = a;}
-		void tratamento_Area(){
-			if(area == 0){
-				std::cout << "Erro: Tipo de variável inserido inválido ou valor de área invalido\n";
-			}
-			else if (area < 0){
-				std::cout << "Erro: Área negativa inserida\n";
-			}
-		}
-	};
 
 
 #endif /* ACIDENTE_H_ */

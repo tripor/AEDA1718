@@ -43,9 +43,13 @@ public:
 	bool operator<(const PostoSocorro & p) const;
 	virtual std::string getTipo()=0;
 	virtual std::string getAllInfo()=0;
+	virtual std::string getAllInfoFormatoPrint()  = 0;
 	virtual void guardarInformacao(std::stringstream &receber)=0;
+	virtual void infoUtilizador() = 0;
 
 	bool menorDistancia(PostoSocorro & a, PostoSocorro & b, std::pair<int, int> p);
+
+	void infoUtilizadorGeral();
 
 };
 
@@ -71,8 +75,10 @@ public:
 		return "Bombeiros";
 	}
 	std::string getAllInfo();
+	std::string getAllInfoFormatoPrint() ;
 	//set
 	void guardarInformacao(std::stringstream &receber);
+	void infoUtilizador();
 };
 
 class Policia: public PostoSocorro {
@@ -93,8 +99,10 @@ public:
 		return "Policia";
 	}
 	std::string getAllInfo();
+	std::string getAllInfoFormatoPrint() ;
 	//set
 	void guardarInformacao(std::stringstream &receber);
+	void infoUtilizador();
 
 };
 
@@ -116,20 +124,13 @@ public:
 		return "Inem";
 	}
 	std::string getAllInfo();
+	std::string getAllInfoFormatoPrint() ;
 	//set
 	void guardarInformacao(std::stringstream &receber);
+	void infoUtilizador();
 
 };
 
-class NumeroIncorreto {
-	int numero;
-public:
-	NumeroIncorreto(int numero) {
-		this->numero = numero;
-	}
-	int getNumero() {
-		return numero;
-	}
-};
+
 
 #endif /* POSTOSOCORRO_H_ */

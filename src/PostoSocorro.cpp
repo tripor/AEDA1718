@@ -1,7 +1,8 @@
 #include "Menu.h"
 
+using namespace std;
 //Class PostoSocorro -----------------------------------------------------------------------------------------
-PostoSocorro::PostoSocorro(u_int numero_Socorristas,u_int numero_Veiculos,std::pair<int,int> local)
+PostoSocorro::PostoSocorro(u_int numero_Socorristas,u_int numero_Veiculos,pair<int,int> local)
 {
 	this->numero_Socorristas=numero_Socorristas;
 	this->numero_Veiculos=numero_Veiculos;
@@ -23,7 +24,7 @@ void PostoSocorro::setVeiculos(u_int numero_Veiculos)
 {
 	this->numero_Veiculos=numero_Veiculos;
 }
-void PostoSocorro::setPosicao(std::pair<int,int> local)
+void PostoSocorro::setPosicao(pair<int,int> local)
 {
 	this->local=local;
 }
@@ -35,12 +36,45 @@ u_int PostoSocorro::getVeiculos()
 {
 	return this->numero_Veiculos;
 }
-std::pair<int,int> PostoSocorro::getPos()
+pair<int,int> PostoSocorro::getPos()
 {
 	return this->local;
 }
+void PostoSocorro::infoUtilizadorGeral()
+{
+	string socorristast,veiculost;
+	u_int socorristas,veiculos;
+	cout << endl << "Número de Socorristas: ";
+	getline(cin,socorristast);
+	eNumero(socorristast);
+	socorristas=stoi(socorristast);
+	this->setSocorristas(socorristas);
+
+	cout << endl << "Número de Veiculos: ";
+	getline(cin, veiculost);
+	eNumero(veiculost);
+	veiculos = stoi(veiculost);
+	this->setVeiculos(veiculos);
+
+	string x_coordt, y_coordt;
+	int x_coord, y_coord;
+
+	cout << "\nCoordenada X do posto: ";
+	getline(cin, x_coordt);
+	eNumero(x_coordt);
+	x_coord = stoi(x_coordt);
+
+	cout << "\nCoordenada Y do posto: ";
+	getline(cin, y_coordt);
+	eNumero(y_coordt);
+	y_coord = stoi(y_coordt);
+
+	pair<int, int> p = make_pair(x_coord, y_coord);
+
+	this->setPosicao(p);
+}
 //Class Bombeiros ----------------------------------------------------------------------------------------------
-Bombeiros::Bombeiros(u_int numero_Socorristas,std::pair<int,int> local,u_int numero_Ambulancias,u_int numero_Autotanques):PostoSocorro(numero_Socorristas,numero_Ambulancias+numero_Autotanques,local)
+Bombeiros::Bombeiros(u_int numero_Socorristas,pair<int,int> local,u_int numero_Ambulancias,u_int numero_Autotanques):PostoSocorro(numero_Socorristas,numero_Ambulancias+numero_Autotanques,local)
 {
 	this->numero_Ambulancias=numero_Ambulancias;
 	this->numero_Autotanques=numero_Autotanques;
@@ -53,91 +87,143 @@ u_int Bombeiros::getAutotanques()
 {
 	return this->numero_Autotanques;
 }
-std::string Bombeiros::getAllInfo() {
-	std::stringstream devolver;
+string Bombeiros::getAllInfo() {
+	stringstream devolver;
 	devolver << this->getSocorristas() << ' ' << this->getVeiculos() << ' '
 			<< this->getPos().first << '-' << this->getPos().second << ' '
 			<< this->getAmbulancias() << ' ' << this->getAutotanques();
-	std::string res;
-	res = devolver.str();
-	return res;
+	return devolver.str();
 }
-void Bombeiros::guardarInformacao(std::stringstream &receber)
+string Bombeiros::getAllInfoFormatoPrint()
+{
+	stringstream devolver;
+	devolver << "Número de socorristas: " << this->getSocorristas() << " Número de veiculos: " << this->getVeiculos() << " Posição: X="
+			<< this->getPos().first << " Y=" << this->getPos().second << " Número de ambulancias: "
+			<< this->getAmbulancias() << " Número de AutoTanques: " << this->getAutotanques();
+	return devolver.str();
+}
+void Bombeiros::guardarInformacao(stringstream &receber)
 {
 	char hifen='-';
 	u_int numero_Socorristas,numero_Veiculos,numero_Ambulancias,numero_Autotanques;
 	int x,y;
-	std::pair<int,int> temp;
+	pair<int,int> temp;
 	receber >> numero_Socorristas >> numero_Veiculos >> x >> hifen >> y >> numero_Ambulancias >> numero_Autotanques;
-	temp=std::make_pair(x,y);
+	temp=make_pair(x,y);
 	this->setSocorristas(numero_Socorristas);
 	this->setVeiculos(numero_Veiculos);
 	this->setPosicao(temp);
 	this->numero_Ambulancias=numero_Ambulancias;
 	this->numero_Autotanques=numero_Autotanques;
 }
+void Bombeiros::infoUtilizador()
+{
+	string ambulanciast,autotanquest;
+	u_int ambulancias,autotanques;
+	cout << endl << "Numero de Ambulancias: ";
+	getline(cin, ambulanciast);
+	eNumero (ambulanciast);
+	ambulancias = stoi(ambulanciast);
+	this->numero_Ambulancias=ambulancias;
+
+	cout << endl << "Numero de Autotanques: ";
+	getline(cin, autotanquest);
+	eNumero(autotanquest);
+	autotanques = stoi(autotanquest);
+	this->numero_Autotanques=autotanques;
+}
 //Class Policia --------------------------------------------------------------------------------------------------
-Policia::Policia(u_int numero_Socorristas,u_int numero_Veiculos,std::pair<int,int> local,std::string veiculo):PostoSocorro(numero_Socorristas,numero_Veiculos,local)
+Policia::Policia(u_int numero_Socorristas,u_int numero_Veiculos,pair<int,int> local,string veiculo):PostoSocorro(numero_Socorristas,numero_Veiculos,local)
 {
 	this->veiculo=veiculo;
 }
-std::string Policia::getVeiculo()
+string Policia::getVeiculo()
 {
 	return this->veiculo;
 }
-std::string Policia::getAllInfo() {
-	std::stringstream devolver;
+string Policia::getAllInfo() {
+	stringstream devolver;
 	devolver << this->getSocorristas() << ' ' << this->getVeiculos() << ' '
 			<< this->getPos().first << '-' << this->getPos().second << ' '
 			<< this->getVeiculo();
-	std::string res;
+	string res;
 	res = devolver.str();
 	return res;
 }
-void Policia::guardarInformacao(std::stringstream &receber)
+string Policia::getAllInfoFormatoPrint()
+{
+	stringstream devolver;
+	devolver << "Número de socorristas: " << this->getSocorristas() << " Número de veiculos: " << this->getVeiculos() << " Posição: X="
+			<< this->getPos().first << " Y=" << this->getPos().second << " Tipo de veiculo:  "
+			<< this->getVeiculo();
+	return devolver.str();
+}
+void Policia::guardarInformacao(stringstream &receber)
 {
 	char hifen='-';
 	u_int numero_Socorristas,numero_Veiculos;
-	std::string tipo;
+	string tipo;
 	int x,y;
-	std::pair<int,int> temp;
+	pair<int,int> temp;
 	receber >> numero_Socorristas >> numero_Veiculos >> x >> hifen >> y >> tipo;
-	temp=std::make_pair(x,y);
+	temp=make_pair(x,y);
 	this->setSocorristas(numero_Socorristas);
 	this->setVeiculos(numero_Veiculos);
 	this->setPosicao(temp);
+	this->veiculo=tipo;
+}
+void Policia::infoUtilizador()
+{
+	string tipo;
+	cout << endl << "Tipo de veiculo: ";
+	getline(cin, tipo);
 	this->veiculo=tipo;
 }
 //Class Inem -----------------------------------------------------------------------------------------------------
-Inem::Inem(u_int numero_Socorristas,u_int numero_Veiculos,std::pair<int,int> local,std::string veiculo):PostoSocorro(numero_Socorristas,numero_Veiculos,local)
+Inem::Inem(u_int numero_Socorristas,u_int numero_Veiculos,pair<int,int> local,string veiculo):PostoSocorro(numero_Socorristas,numero_Veiculos,local)
 {
 	this->veiculo=veiculo;
 }
-std::string Inem::getVeiculo()
+string Inem::getVeiculo()
 {
 	return this->veiculo;
 }
-std::string Inem::getAllInfo()
+string Inem::getAllInfo()
 {
-	std::stringstream devolver;
+	stringstream devolver;
 		devolver << this->getSocorristas() << ' ' << this->getVeiculos() << ' '
 				<< this->getPos().first << '-' << this->getPos().second << ' '
 				<< this->getVeiculo();
-		std::string res;
+		string res;
 		res = devolver.str();
 		return res;
 }
-void Inem::guardarInformacao(std::stringstream &receber)
+string Inem::getAllInfoFormatoPrint()
+{
+	stringstream devolver;
+	devolver << "Número de socorristas: " << this->getSocorristas() << " Número de veiculos: " << this->getVeiculos() << " Posição: X="
+			<< this->getPos().first << " Y=" << this->getPos().second << " Tipo de veiculo:  "
+			<< this->getVeiculo();
+	return devolver.str();
+}
+void Inem::guardarInformacao(stringstream &receber)
 {
 	char hifen='-';
 	u_int numero_Socorristas,numero_Veiculos;
-	std::string tipo;
+	string tipo;
 	int x,y;
-	std::pair<int,int> temp;
+	pair<int,int> temp;
 	receber >> numero_Socorristas >> numero_Veiculos >> x >> hifen >> y >> tipo;
-	temp=std::make_pair(x,y);
+	temp=make_pair(x,y);
 	this->setSocorristas(numero_Socorristas);
 	this->setVeiculos(numero_Veiculos);
 	this->setPosicao(temp);
 	this->veiculo=tipo;
+}
+void Inem::infoUtilizador()
+{
+	string tipo;
+		cout << endl << "Tipo de veiculo: ";
+		getline(cin, tipo);
+		this->veiculo=tipo;
 }

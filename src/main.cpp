@@ -2,6 +2,7 @@
 #include "Acidente.h"
 #include "PostoSocorro.h"
 #include "Menu.h"
+#include "erros.h"
 
 using namespace std;
 
@@ -14,8 +15,17 @@ int main()
 
 	while (!e1.getTerminar())
 	{
-		e1.menuOpcoesIniciais_0();
+		try{
+			e1.menuOpcoesIniciais_0();
+		}
+		catch(Erro *e)
+		{
+			cout << e->getInfoErro() << endl;
+		}
 	}
+
+	e1.EscreveFicheiroAcidente();
+	e1.escreverFicheiroPostoSocorro();
 	return 0;
 }
 

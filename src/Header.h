@@ -8,7 +8,8 @@
 #include <fstream>
 #include <sstream>
 #include "math.h"
-#include <stdlib.h>
+
+#include <cstdlib>
 
 typedef unsigned int u_int;
 
@@ -120,10 +121,13 @@ public:
 				<< "-" << data.minuto;
 		return o;
 	}
-	void printDate(){
-		std::cout << ano << "-" << mes << "-" << dia << " " << hora << "h" << minuto;
+	std::string getDataFormato(){
+		std::stringstream ss;
+		ss << ano << "-" << mes << "-" << dia << " " << hora << ":" << minuto;
+		return ss.str();
 	}
 };
+
 
 u_int nCarrosBombeirosArea(u_int a);
 

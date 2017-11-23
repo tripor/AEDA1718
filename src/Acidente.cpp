@@ -1,6 +1,7 @@
 #include "Acidente.h"
-
-
+#include "erros.h"
+#include "Menu.h"
+using namespace std;
 
 
 //////////////////////////////////////
@@ -14,7 +15,7 @@ Data Acidente::getData() const{
 	return this->data;
 }
 
-std::pair<int,int> Acidente::getLocal() const{
+pair<int,int> Acidente::getLocal() const{
 	return this->local;
 }
 
@@ -23,17 +24,17 @@ std::pair<int,int> Acidente::getLocal() const{
 void Acidente::setData(Data d){
 	this->data = d;
 }
-void Acidente::setData(std::string d)
+void Acidente::setData(string d)
 {
 	u_int ano,mes,dia,hora,minuto;
 	char hifen;
-	std::stringstream retirar;
+	stringstream retirar;
 	retirar << d;
 	retirar >> ano >> hifen >> mes >> hifen >> dia >> hifen >> hora >> hifen >> minuto ;
 	Data devolver(ano,mes,dia,hora,minuto);
 	this->data=devolver;
 }
-void Acidente::setLocal(std::pair<int,int> par){
+void Acidente::setLocal(pair<int,int> par){
 	this->local = par;
 }
 
@@ -60,57 +61,49 @@ bool Acidente::acidenteIgual(Acidente* a1) const{
 
 void Acidente::infoUtilizadorGeral(){
 
-	//PARTE DAS INFOS GERAIS A TODOS OS ACIDENTES
-	std::string opcao;
-	std::cout << "\nData em formato YYYY-MM-DD-HH-MM?(S/N) ";
-	std::cin >> opcao;
-
-	//testar se o input é valido!!!
-
-	while (!(opcao == "S" || opcao == "N" || opcao == "s" || opcao == "n")) {
-		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
-		std::cout << "Data em formato YYYY-MM-DD-HH-MM?(S/N) ";
-		std::cin >> opcao;
-	}
-
-	std::string data_string;
-
-	if (opcao == "S" || opcao == "s") {
-		std::cout << "\nData: ";
-		//TESTAR INPUT + EXCECAO
-		std::cin >> data_string;
-		this->setData(data_string);
-	}
-
+	string anot, mest, diat, horat, minutot;
 	u_int ano, mes, dia, hora, minuto;
+	cout << "\nAno: ";
+	getline(cin,anot);
+	eNumero(anot);
+	ano = stoi(anot);
 
-	if (opcao == "N" || opcao == "n") {
-		//TESTAR INPUT + EXCECAO !!!
-		//TESTAR INPUT + EXCECAO !!!
-		//TESTAR INPUT + EXCECAO !!!
+	cout << "\nMes: ";
+	getline(cin, mest);
+	eNumero(mest);
+	mes = stoi(mest);
 
-		std::cout << "\nAno: ";
-		std::cin >> ano;
-		std::cout << "\nMes: ";
-		std::cin >> mes;
-		std::cout << "\nDia: ";
-		std::cin >> dia;
-		std::cout << "\nHora: ";
-		std::cin >> hora;
-		std::cout << "\nMinuto: ";
-		std::cin >> minuto;
-		this->setData(Data(ano, mes, dia, hora, minuto));
-	}
+	cout << "\nDia: ";
+	getline(cin, diat);
+	eNumero(diat);
+	dia = stoi(diat);
 
+	cout << "\nHora: ";
+	getline(cin, horat);
+	eNumero(horat);
+	hora = stoi(horat);
+
+	cout << "\nMinuto: ";
+	getline(cin, minutot);
+	eNumero(minutot);
+	minuto = stoi(minutot);
+
+	this->setData(Data(ano, mes, dia, hora, minuto));
+
+	string  x_coordt, y_coordt;
 	int x_coord, y_coord;
 
-	//TESTAR INPUT + EXCECAO !!!
-	std::cout << "\nCoordenada X do acidente: ";
-	std::cin >> x_coord;
-	std::cout << "\nCoordenada Y do acidente: ";
-	std::cin >> y_coord;
+	cout << "\nCoordenada X do acidente: ";
+	getline(cin, x_coordt);
+	eNumero(x_coordt);
+	x_coord = stoi(x_coordt);
 
-	std::pair<int,int> p = std::make_pair(x_coord,y_coord);
+	cout << "\nCoordenada Y do acidente: ";
+	getline(cin, y_coordt);
+	eNumero(y_coordt);
+	y_coord = stoi(y_coordt);
+
+	pair<int,int> p = make_pair(x_coord,y_coord);
 
 	this->setLocal(p);
 }
@@ -165,14 +158,14 @@ void Florestal::setAreaChamas(u_int area){
 
 	//Metodos Virtuais
 
-void Florestal::lerInfo(std::stringstream &ss){
-	std::string d;
+void Florestal::lerInfo(stringstream &ss){
+	string d;
 	int x, y;
 	u_int n_carros, n_bombeiros, a;
 
 	ss >> d >> x >> y >> n_carros >> n_bombeiros >> a;
 
-	std::pair<int,int> p = std::make_pair(x,y); // construir o par
+	pair<int,int> p = make_pair(x,y); // construir o par
 	this->setData(d);
 	this->setLocal(p);
 	this->setNumeroCarrosBombeiros(n_carros);
@@ -180,21 +173,31 @@ void Florestal::lerInfo(std::stringstream &ss){
 	this->setAreaChamas(a);
 }
 
-std::string Florestal::getAllInfo() const{
-	std::stringstream ss;
+string Florestal::getAllInfo() const{
+	stringstream ss;
 
 	ss << this->numero_CarrosBombeiros << ' ' << this->numero_Bombeiros << ' ' << this->area_Chamas;
-	std::string ret;
-	ret=ss.str();
-	return ret;
+
+	return ss.str();
+}
+
+string Florestal::getAllInfoFormatoPrint() const {
+	stringstream ss;
+
+	ss << "Numero de Carros Bombeiros: " << this->numero_CarrosBombeiros << " Numeros Bombeiros: " << this->numero_Bombeiros << " Area das chamas: " << this->area_Chamas;
+
+	return ss.str();
 }
 
 void Florestal::infoUtilizador(){
 
+	string areat;
 	u_int area;
 
-	std::cout << "Área do incêndio: ";
-	std::cin >> area;
+	cout << "Área do incêndio: ";
+	getline(cin,areat);
+	eNumero(areat);
+	area=stoi(areat);
 
 	//testar se o input é valido!!!
 
@@ -210,13 +213,13 @@ void Florestal::infoUtilizador(){
 
 	//Metodos Get
 
-std::string Domesticos::getTipoCasa() const{
+string Domesticos::getTipoCasa() const{
 	return this->tipo_casa;
 }
 
 	//Metodos Set
 
-void Domesticos::setTipoCasa(std::string s){
+void Domesticos::setTipoCasa(string s){
 	this->tipo_casa = s;
 }
 
@@ -225,14 +228,14 @@ void Domesticos::setTipoCasa(std::string s){
 
 	//Metodos Virtuais
 
-void Domesticos::lerInfo(std::stringstream &ss){
-	std::string d, s; // data e string "tipo_casa"
+void Domesticos::lerInfo(stringstream &ss){
+	string d, s; // data e string "tipo_casa"
 	int x, y; // coordenadas
 	u_int n_carros, n_bombeiros; // numero de carros e bombeiros
 
 	ss >> d >> x >> y >> n_carros >> n_bombeiros >> s;
 
-	std::pair<int,int> p = std::make_pair(x,y); // construir o par
+	pair<int,int> p = make_pair(x,y); // construir o par
 	this->setData(d);
 	this->setLocal(p);
 	this->setNumeroCarrosBombeiros(n_carros);
@@ -240,44 +243,46 @@ void Domesticos::lerInfo(std::stringstream &ss){
 	this->setTipoCasa(s);
 }
 
-std::string Domesticos::getAllInfo() const{
-	std::stringstream ss;
+string Domesticos::getAllInfo() const{
+	stringstream ss;
 
 	ss << this->numero_CarrosBombeiros << ' ' << this->numero_Bombeiros << ' ' << this->tipo_casa;
 
-	std::string ret;
-	ret=ss.str();
+	return ss.str();
+}
+string Domesticos::getAllInfoFormatoPrint() const {
+	stringstream ss;
 
-	return ret;
+	ss << "Numero de Carros de Bombeiros: " << this->numero_CarrosBombeiros << " Numero de Bombeiros: " << this->numero_Bombeiros << " Tipo de Casa: " << this->tipo_casa;
+
+	return ss.str();
 }
 
 
 void Domesticos::infoUtilizador(){
 
-	std::string opcao;
-	std::cout << "Lista de opções: ";
-	std::cout << "1 - Apartamento\n";
-	std::cout << "2 - Moradia\n";
+	string opcao;
+	cout << "Lista de opções: ";
+	cout << "1 - Apartamento\n";
+	cout << "2 - Moradia\n";
 
-	std::cout << "Indique o tipo de casa: ";
-	std::cin >> opcao;
+	cout << "Indique o tipo de casa: ";
+	getline(cin,opcao);
 
 	//testar se o input é valido!!!
-
-	while (!(opcao == "1" || opcao == "2")) {
-		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
-		std::cout << "Indique o tipo de casa: ";
-		std::cin >> opcao;
-	}
 
 	if(opcao == "1"){
 		this->setNumeroCarrosBombeiros(numeroCarBombeirosApart());
 		this->setNumeroBombeiros(numeroBombeirosApart());
 	}
 
-	if(opcao == "2"){
+	else if(opcao == "2"){
 		this->setNumeroCarrosBombeiros(numeroCarBombeirosMoradia());
 		this->setNumeroBombeiros(numeroBombeirosMoradia());
+	}
+	else
+	{
+		throw new Opcao_Nao_Valida(opcao);
 	}
 
 }
@@ -293,7 +298,7 @@ bool Assalto::getExisteFeridos() const{
 	return this->existe_Feridos;
 }
 
-std::string Assalto::getTipoCasa() const{
+string Assalto::getTipoCasa() const{
 	return this->tipo_casa;
 }
 
@@ -303,7 +308,7 @@ void Assalto::setExisteFeridos(bool n){
 	this->existe_Feridos = n;
 }
 
-void Assalto::setTipoCasa(std::string s){
+void Assalto::setTipoCasa(string s){
 	this->tipo_casa = s;
 }
 
@@ -313,45 +318,41 @@ void Assalto::setTipoCasa(std::string s){
 
 	//Metodos Virtuais
 
-void Assalto::lerInfo(std::stringstream &ss){
-	std::string d, s; // data e string "tipo_casa"
+void Assalto::lerInfo(stringstream &ss){
+	string d, s; // data e string "tipo_casa"
 	int x, y; // coordenadas
 	bool feridos;
 
 	ss >> d >> x >> y >> feridos >> s;
 
-	std::pair<int,int> p = std::make_pair(x,y); // construir o par
+	pair<int,int> p = make_pair(x,y); // construir o par
 	this->setData(d);
 	this->setLocal(p);
 	this->setExisteFeridos(feridos);
 	this->setTipoCasa(s);
 }
 
-std::string Assalto::getAllInfo() const{
-	std::stringstream ss;
+string Assalto::getAllInfo() const{
+	stringstream ss;
 
 	ss << this->existe_Feridos << ' ' << this->tipo_casa;
 
-	std::string ret;
-	ret=ss.str();
+	return ss.str();
+}
+string Assalto::getAllInfoFormatoPrint() const {
+	stringstream ss;
 
-	return ret;
+	ss << "Feridos: " << this->existe_Feridos << " Tipo de Casa: " << this->tipo_casa;
+
+	return ss.str();
 }
 
 void Assalto::infoUtilizador(){
 
-	std::string opcao;
+	string opcao;
 
-	std::cout << "Existem feridos?(S/N) ";
-	std::cin >> opcao;
-
-	//testar se o input é valido!!!
-
-	while (!(opcao == "S" || opcao == "N" || opcao == "s" || opcao == "n")) {
-		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
-		std::cout << "Existem feridos?(S/N) ";
-		std::cin >> opcao;
-	}
+	cout << "Existem feridos?(S/N) ";
+	getline(cin,opcao);
 
 	bool feridos = false;
 
@@ -360,33 +361,27 @@ void Assalto::infoUtilizador(){
 		this->setExisteFeridos(feridos);
 	}
 
-	if (opcao == "N" || opcao == "n") {
+	else if (opcao == "N" || opcao == "n") {
 		feridos = false;
 		this->setExisteFeridos(feridos);
 	}
+	else throw new Opcao_Nao_Valida(opcao);
 
-	std::cout << "\nLista de opções: ";
-	std::cout << "1 - Particular\n";
-	std::cout << "2 - Comercial\n";
+	cout << "\nLista de opções: ";
+	cout << "1 - Particular\n";
+	cout << "2 - Comercial\n";
 
-	std::cout << "Indique o tipo de casa: ";
-	std::cin >> opcao;
-
-	//testar se o input é valido!!!
-
-	while (!(opcao == "1" || opcao == "2" || opcao == "0")) {
-		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
-		std::cout << "Indique o tipo de casa: ";
-		std::cin >> opcao;
-	}
+	cout << "Indique o tipo de casa: ";
+	getline(cin,opcao);
 
 	if (opcao == "1") {
 		this->setTipoCasa("Particular");
 	}
 
-	if (opcao == "2") {
+	else if (opcao == "2") {
 		this->setTipoCasa("Comercial");
 	}
+	else throw  new Opcao_Nao_Valida(opcao);
 
 }
 
@@ -405,7 +400,7 @@ u_int AcidenteViacao::getNumeroVeiculosEnvolvidos() const{
 	return this->numero_VeiculosEnvolvidos;
 }
 
-std::string AcidenteViacao::getTipoEstrada() const{
+string AcidenteViacao::getTipoEstrada() const{
 	return this->tipo_Estrada;
 }
 
@@ -418,7 +413,7 @@ void AcidenteViacao::setNumeroFeridosGraves(u_int n){
 void AcidenteViacao::setNumeroVeiculosEnvolvidos(u_int n){
 	this->numero_VeiculosEnvolvidos = n;
 }
-void AcidenteViacao::setTipoEstrada(std::string s){
+void AcidenteViacao::setTipoEstrada(string s){
 	this->tipo_Estrada = s;
 }
 
@@ -428,16 +423,16 @@ void AcidenteViacao::setTipoEstrada(std::string s){
 
 	//Metodos Virtuais
 
-void AcidenteViacao::lerInfo(std::stringstream &ss)
+void AcidenteViacao::lerInfo(stringstream &ss)
 {
 
-	std::string d, s; // data e string "tipo_estrada"
+	string d, s; // data e string "tipo_estrada"
 	int x, y; // coordenadas
 	u_int n_feridos, n_veiculos_env; // numero de feridos graves e veiculos envolvidos
 
 	ss >> d >> x >> y >> n_feridos >> n_veiculos_env >> s;
 
-	std::pair<int,int> p = std::make_pair(x,y); // construir o par
+	pair<int,int> p = make_pair(x,y); // construir o par
 	this->setData(d);
 	this->setLocal(p);
 	this->setNumeroFeridosGraves(n_feridos);
@@ -447,62 +442,55 @@ void AcidenteViacao::lerInfo(std::stringstream &ss)
 }
 
 
-std::string AcidenteViacao::getAllInfo() const{
-	std::stringstream ss;
+string AcidenteViacao::getAllInfo() const{
+	stringstream ss;
 
 	ss << this->numero_FeridosGraves << ' ' << this->numero_VeiculosEnvolvidos << ' ' << this->tipo_Estrada;
 
-	std::string ret;
-	ret=ss.str();
+	return ss.str();
+}
+string AcidenteViacao::getAllInfoFormatoPrint() const {
+	stringstream ss;
 
-	return ret;
+	ss << "Numero de feridos: " << this->numero_FeridosGraves << " Numero de Veiculos involvidos: " << this->numero_VeiculosEnvolvidos << " Tipo de Estrada: " << this->tipo_Estrada;
+
+	return ss.str();
 }
 
 
 void AcidenteViacao::infoUtilizador(){
 
-	std::string opcao;
+	string opcao;
 
-	std::cout << "Numero de feridos graves: ";
-	std::cin >> opcao;
-
-	// TESTAR INPUT + EXCECAO
-
-	u_int n = std::stoi(opcao);
+	cout << "Numero de feridos graves: ";
+	getline(cin,opcao);
+	eNumero(opcao);
+	u_int n = stoi(opcao);
 
 	this->setNumeroFeridosGraves(n);
 
-	std::cout << "\nNumero de veiculos envolvidos: ";
-	std::cin >> opcao;
-
-	// TESTAR INPUT + EXCECAO
-
-	n = std::stoi(opcao);
+	cout << "\nNumero de veiculos envolvidos: ";
+	getline(cin,opcao);
+	eNumero(opcao);
+	n = stoi(opcao);
 
 	this->setNumeroVeiculosEnvolvidos(n);
 
-	std::cout << "\nLista de opções: ";
-	std::cout << "1 - Estrada Nacional\n";
-	std::cout << "2 - Auto Estrada\n";
+	cout << "\nLista de opções: ";
+	cout << "1 - Estrada Nacional\n";
+	cout << "2 - Auto Estrada\n";
 
-	std::cout << "Indique o tipo de estrada: ";
-	std::cin >> opcao;
-
-	//testar se o input é valido!!!
-
-	while (!(opcao == "1" || opcao == "2")) {
-		std::cout << "\n(!) A opcao fornecida nao e valida (!)\n\n";
-		std::cout << "Indique o tipo de casa: ";
-		std::cin >> opcao;
-	}
+	cout << "Indique o tipo de estrada: ";
+	getline(cin,opcao);
 
 	if (opcao == "1") {
 		this->setTipoEstrada("Nacional");
 	}
 
-	if (opcao == "2") {
+	else if (opcao == "2") {
 		this->setTipoEstrada("Auto-Estrada");
 	}
+	else throw new Opcao_Nao_Valida(opcao);
 
 }
 

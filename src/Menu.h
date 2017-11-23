@@ -5,6 +5,7 @@
 #include "Acidente.h"
 #include "PostoSocorro.h"
 
+void eNumero(std::string testar);
 class Menu{
 
 	std::vector<Acidente*> acidentes;
@@ -36,6 +37,8 @@ public:
 	// falta bool PostoSocorroExsitente(PostoSocorro *posto)
 	void adicionaAcidente(Acidente *acidente);
 	void adicionaPostosSocorro(PostoSocorro *posto);
+	void retirarAcidente(u_int posicao);
+	void retirarPosto(u_int posicao);
 
 	//ATRIBUICAO DE ACIDENTES
 	void atribuiAcidentes();
@@ -54,10 +57,14 @@ public:
 	void criarAcidente();
 	void removerAcidente();
 
+	void criarPosto();
+	void removerPosto();
 
 	//Funcoes print dos vetores
 	void printAcidentes();
 	void printPostos();
+
+	//Outros
 
 };
 
