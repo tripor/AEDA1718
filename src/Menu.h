@@ -60,6 +60,8 @@ public:
 	void criarPosto();
 	void removerPosto();
 
+	void printAcidentesAlocados();
+
 	//Funcoes print dos vetores
 	void printAcidentes();
 	void printPostos();

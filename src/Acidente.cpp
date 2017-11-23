@@ -367,7 +367,7 @@ void Assalto::infoUtilizador(){
 	}
 	else throw new Opcao_Nao_Valida(opcao);
 
-	cout << "\nLista de opções: ";
+	cout << "\nLista de opções: \n";
 	cout << "1 - Particular\n";
 	cout << "2 - Comercial\n";
 
@@ -476,7 +476,7 @@ void AcidenteViacao::infoUtilizador(){
 
 	this->setNumeroVeiculosEnvolvidos(n);
 
-	cout << "\nLista de opções: ";
+	cout << "\nLista de opções: \n";
 	cout << "1 - Estrada Nacional\n";
 	cout << "2 - Auto Estrada\n";
 

@@ -1,2 +1,5 @@
-Florestal 2015-5-23-5-30 500 5000 15 141 1400
-Domestico 2000-5-23-5-16 6000 5 3 15  
+Assalto 2000-12-3-4-50 3 4 1 Comercial
+Domestico 2002-6-4-22-0 4000 4000 2 10 
+AcidenteViacao 2004-3-12-22-30 4000 3400 12 4 Auto-Estrada
+Assalto 2014-1-30-12-30 300 123 1 Particular
+Assalto 2015-5-4-23-30 500 500 1 Particular

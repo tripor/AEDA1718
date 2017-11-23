@@ -12,6 +12,7 @@ int main()
 	Menu e1;
 	e1.lerFicheiroAcidente();
 	e1.lerFicheiroPostoSocorro();
+	e1.ordenaVetorAcidentes();
 
 	while (!e1.getTerminar())
 	{
@@ -23,7 +24,7 @@ int main()
 			cout << e->getInfoErro() << endl;
 		}
 	}
-
+	e1.ordenaVetorAcidentes();
 	e1.EscreveFicheiroAcidente();
 	e1.escreverFicheiroPostoSocorro();
 	return 0;

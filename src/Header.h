@@ -51,20 +51,20 @@ public:
 		this->hora=hora;
 		this->minuto=minuto;
 		if (minuto >= 60) {
-			this->hora = minuto / 60;
+			this->hora += minuto / 60;
 			this->minuto = minuto % 60;
 		}
 		if (hora >= 24) {
-			this->dia = hora / 24;
-			this->hora += hora % 24;
+			this->dia += hora / 24;
+			this->hora = hora % 24;
 		}
 		if (dia >= 32) {
-			this->mes = dia / 31;
-			this->dia += dia % 31;
+			this->mes += dia / 31;
+			this->dia = dia % 30;
 		}
 		if (mes >= 13) {
-			this->ano = mes / 13;
-			this->mes += mes % 13;
+			this->ano += mes / 13;
+			this->mes = mes % 12;
 		}
 	}
 
@@ -101,16 +101,16 @@ public:
 		if(this->ano < a.ano){
 			return true;
 		}
-		else if (this->mes < a.mes){
+		else if (this->ano == a.ano && this->mes < a.mes){
 			return true;
 		}
-		else if (this->dia < a.dia){
+		else if (this->ano == a.ano && this->mes == a.mes && this->dia < a.dia){
 			return true;
 		}
-		else if (this->hora < a.hora){
+		else if (this->ano == a.ano && this->mes == a.mes && this->dia == a.dia && this->hora < a.hora){
 			return true;
 		}
-		else if (this->minuto < a.minuto){
+		else if (this->ano == a.ano && this->mes == a.mes && this->dia == a.dia && this->hora == a.hora && this->minuto < a.minuto){
 			return true;
 		}
 		return false;

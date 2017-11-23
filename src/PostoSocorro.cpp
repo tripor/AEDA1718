@@ -132,13 +132,21 @@ void Bombeiros::infoUtilizador()
 	getline(cin, ambulanciast);
 	eNumero (ambulanciast);
 	ambulancias = stoi(ambulanciast);
-	this->numero_Ambulancias=ambulancias;
+
 
 	cout << endl << "Numero de Autotanques: ";
 	getline(cin, autotanquest);
 	eNumero(autotanquest);
 	autotanques = stoi(autotanquest);
-	this->numero_Autotanques=autotanques;
+
+	if(ambulancias + autotanques != this->getVeiculos()){
+		//throw new Opcao_Nao_Valida(opcao);
+	}
+	else{
+		this->numero_Ambulancias=ambulancias;
+		this->numero_Autotanques=autotanques;
+	}
+
 }
 //Class Policia --------------------------------------------------------------------------------------------------
 Policia::Policia(u_int numero_Socorristas,u_int numero_Veiculos,pair<int,int> local,string veiculo):PostoSocorro(numero_Socorristas,numero_Veiculos,local)
@@ -183,9 +191,24 @@ void Policia::guardarInformacao(stringstream &receber)
 void Policia::infoUtilizador()
 {
 	string tipo;
-	cout << endl << "Tipo de veiculo: ";
-	getline(cin, tipo);
-	this->veiculo=tipo;
+
+	cout << "\nLista de opções: \n";
+	cout << "1 - Moto\n";
+	cout << "2 - Carro\n";
+
+	cout << "Indique o tipo de veiculo: ";
+	getline(cin,tipo);
+
+	if (tipo == "1") {
+		this->veiculo = "Moto";
+	}
+
+	else if (tipo == "2") {
+		this->veiculo = "Carro";
+	}
+	//else throw new Opcao_Nao_Valida(opcao);
+
+
 }
 //Class Inem -----------------------------------------------------------------------------------------------------
 Inem::Inem(u_int numero_Socorristas,u_int numero_Veiculos,pair<int,int> local,string veiculo):PostoSocorro(numero_Socorristas,numero_Veiculos,local)
@@ -231,7 +254,45 @@ void Inem::guardarInformacao(stringstream &receber)
 void Inem::infoUtilizador()
 {
 	string tipo;
-		cout << endl << "Tipo de veiculo: ";
-		getline(cin, tipo);
-		this->veiculo=tipo;
+
+	cout << "\nLista de opções: \n";
+	cout << "1 - Ambulancia\n";
+	cout << "2 - Carro\n";
+	cout << "3 - Moto\n";
+
+	cout << "Indique o tipo de veiculo: ";
+	getline(cin,tipo);
+
+	if (tipo == "1") {
+		this->veiculo = "Ambulancia";
+	}
+
+	else if (tipo == "2") {
+		this->veiculo = "Carro";
+	}
+	else if (tipo == "3") {
+		this->veiculo = "Moto";
+	}
+
+	//else throw new Opcao_Nao_Valida(opcao);
+
+
 }
+
+void PostoSocorro::printAcidentesAtribuidos(){
+
+	for (unsigned int i = 0; i < this->acidenteAtribuidos.size(); i++) {
+
+		cout << endl << string('=',20);
+		cout << i+1 << "- ";
+		cout << "Tipo: " << acidenteAtribuidos.at(i)->getTipoAcidente() << "| ";
+		cout << "Local: x=" << acidenteAtribuidos.at(i)->getLocal().first << "| ";
+		cout << " y= " << acidenteAtribuidos.at(i)->getLocal().second << "| ";
+		cout << " Data: " << acidenteAtribuidos.at(i)->getData().getDataFormato() << " | ";
+
+		cout << this->acidenteAtribuidos.at(i)->getAllInfoFormatoPrint() << endl;
+
+	}
+
+}
+
