@@ -40,6 +40,8 @@ public:
 	void retirarAcidente(u_int posicao);
 	void retirarPosto(u_int posicao);
 
+	void clearVetoresDosPostos();
+
 	//ATRIBUICAO DE ACIDENTES
 	void atribuiAcidentes();
 

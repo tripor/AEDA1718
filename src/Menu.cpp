@@ -145,6 +145,8 @@ void Menu::retirarPosto(u_int posicao)
 
 void Menu::menuOpcoesIniciais_0(){
 
+	this->clearVetoresDosPostos();
+	this->atribuiAcidentes();
 	string opcao;
 	cout << endl;
 	cout << "+------------Menu Inicial-------------+" << endl;
@@ -573,7 +575,7 @@ void Menu::printAcidentesAlocados(){
 
 	this->printPostos();
 
-	cout << "Indique o tipo de posto a remover: ";
+	cout << "Indique o numero do posto a visualizar: ";
 	getline(cin, opcao);
 	if (opcao == "0") {
 		return;
@@ -594,7 +596,7 @@ void Menu::printAcidentesAlocados(){
 
 
 void Menu::printAcidentes() {
-
+	cout << endl;
 	for (unsigned int i = 0; i < acidentes.size(); i++) {
 
 		cout << "=====================" << endl;
@@ -606,11 +608,12 @@ void Menu::printAcidentes() {
 
 		cout << this->acidentes.at(i)->getAllInfoFormatoPrint() << endl;
 
-
 	}
+	cout << "=====================" << endl;
 }
 
 void Menu::printPostos(){
+	cout << endl;
 	for(unsigned int i = 0; i<postos_socorro.size(); i++){
 		cout << "=====================" << endl;
 		cout << i+1 << "- ";
@@ -618,8 +621,14 @@ void Menu::printPostos(){
 		cout << " " << this->postos_socorro.at(i)->getAllInfoFormatoPrint()<< endl;
 
 	}
+	cout << "=====================" << endl;
 }
 
 
-
+void Menu::clearVetoresDosPostos(){
+	for(unsigned int i = 0; i < this->postos_socorro.size();i++){
+		postos_socorro.at(i)->clearAcidentesATratar();
+		postos_socorro.at(i)->clearAcidentesAtribuidos();
+	}
+}
 

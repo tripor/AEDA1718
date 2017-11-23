@@ -34,6 +34,8 @@ public:
 	void setPosicao(std::pair<int, int> local);
 	void setAcidentesTratar(std::vector<Acidente*> v1);
 	void setAcidentesAtribuidos(std::vector<Acidente*> v1);
+	void clearAcidentesAtribuidos(){this->acidenteAtribuidos.clear();}
+	void clearAcidentesATratar(){this->acidenteATratar.clear();}
 
 	//get
 	u_int getSocorristas();

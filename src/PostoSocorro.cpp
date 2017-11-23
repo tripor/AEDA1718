@@ -281,10 +281,10 @@ void Inem::infoUtilizador()
 }
 
 void PostoSocorro::printAcidentesAtribuidos(){
-
+	cout << endl;
 	for (unsigned int i = 0; i < this->acidenteAtribuidos.size(); i++) {
 
-		cout << endl << string('=',20);
+		cout << "=====================" << endl;
 		cout << i+1 << "- ";
 		cout << "Tipo: " << acidenteAtribuidos.at(i)->getTipoAcidente() << "| ";
 		cout << "Local: x=" << acidenteAtribuidos.at(i)->getLocal().first << "| ";
@@ -294,6 +294,6 @@ void PostoSocorro::printAcidentesAtribuidos(){
 		cout << this->acidenteAtribuidos.at(i)->getAllInfoFormatoPrint() << endl;
 
 	}
-
+	cout << "=====================" << endl;
 }
 
