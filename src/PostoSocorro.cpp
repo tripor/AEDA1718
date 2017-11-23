@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "erros.h"
 
 using namespace std;
 //Class PostoSocorro -----------------------------------------------------------------------------------------
@@ -105,9 +106,9 @@ string Bombeiros::getAllInfo() {
 string Bombeiros::getAllInfoFormatoPrint()
 {
 	stringstream devolver;
-	devolver << "Número de socorristas: " << this->getSocorristas() << " Número de veiculos: " << this->getVeiculos() << " Posição: X="
-			<< this->getPos().first << " Y=" << this->getPos().second << " Número de ambulancias: "
-			<< this->getAmbulancias() << " Número de AutoTanques: " << this->getAutotanques();
+	devolver << "Número de socorristas: " << this->getSocorristas() << " | Número de veiculos: " << this->getVeiculos() << " | Posição: X="
+			<< this->getPos().first << " Y=" << this->getPos().second << " | Número de ambulancias: "
+			<< this->getAmbulancias() << " | Número de AutoTanques: " << this->getAutotanques();
 	return devolver.str();
 }
 void Bombeiros::guardarInformacao(stringstream &receber)
@@ -140,7 +141,7 @@ void Bombeiros::infoUtilizador()
 	autotanques = stoi(autotanquest);
 
 	if(ambulancias + autotanques != this->getVeiculos()){
-		//throw new Opcao_Nao_Valida(opcao);
+		throw new Numero_De_Veiculos();
 	}
 	else{
 		this->numero_Ambulancias=ambulancias;
@@ -169,8 +170,8 @@ string Policia::getAllInfo() {
 string Policia::getAllInfoFormatoPrint()
 {
 	stringstream devolver;
-	devolver << "Número de socorristas: " << this->getSocorristas() << " Número de veiculos: " << this->getVeiculos() << " Posição: X="
-			<< this->getPos().first << " Y=" << this->getPos().second << " Tipo de veiculo:  "
+	devolver << "Número de socorristas: " << this->getSocorristas() << " | Número de veiculos: " << this->getVeiculos() << " | Posição: X="
+			<< this->getPos().first << " Y=" << this->getPos().second << " | Tipo de veiculo:  "
 			<< this->getVeiculo();
 	return devolver.str();
 }
@@ -206,7 +207,7 @@ void Policia::infoUtilizador()
 	else if (tipo == "2") {
 		this->veiculo = "Carro";
 	}
-	//else throw new Opcao_Nao_Valida(opcao);
+	else throw new Opcao_Nao_Valida(tipo);
 
 
 }
@@ -232,8 +233,8 @@ string Inem::getAllInfo()
 string Inem::getAllInfoFormatoPrint()
 {
 	stringstream devolver;
-	devolver << "Número de socorristas: " << this->getSocorristas() << " Número de veiculos: " << this->getVeiculos() << " Posição: X="
-			<< this->getPos().first << " Y=" << this->getPos().second << " Tipo de veiculo:  "
+	devolver << "Número de socorristas: " << this->getSocorristas() << " | Número de veiculos: " << this->getVeiculos() << " | Posição: X="
+			<< this->getPos().first << " Y=" << this->getPos().second << " | Tipo de veiculo:  "
 			<< this->getVeiculo();
 	return devolver.str();
 }
@@ -274,7 +275,7 @@ void Inem::infoUtilizador()
 		this->veiculo = "Moto";
 	}
 
-	//else throw new Opcao_Nao_Valida(opcao);
+	else throw new Opcao_Nao_Valida(tipo);
 
 
 }

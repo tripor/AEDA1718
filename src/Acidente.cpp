@@ -184,7 +184,7 @@ string Florestal::getAllInfo() const{
 string Florestal::getAllInfoFormatoPrint() const {
 	stringstream ss;
 
-	ss << "Numero de Carros Bombeiros: " << this->numero_CarrosBombeiros << " Numeros Bombeiros: " << this->numero_Bombeiros << " Area das chamas: " << this->area_Chamas;
+	ss << "Numero de Carros Bombeiros: " << this->numero_CarrosBombeiros << " | Numeros Bombeiros: " << this->numero_Bombeiros << " | Area das chamas: " << this->area_Chamas;
 
 	return ss.str();
 }
@@ -253,7 +253,7 @@ string Domesticos::getAllInfo() const{
 string Domesticos::getAllInfoFormatoPrint() const {
 	stringstream ss;
 
-	ss << "Numero de Carros de Bombeiros: " << this->numero_CarrosBombeiros << " Numero de Bombeiros: " << this->numero_Bombeiros << " Tipo de Casa: " << this->tipo_casa;
+	ss << "Numero de Carros de Bombeiros: " << this->numero_CarrosBombeiros << " | Numero de Bombeiros: " << this->numero_Bombeiros << " | Tipo de Casa: " << this->tipo_casa;
 
 	return ss.str();
 }
@@ -342,7 +342,7 @@ string Assalto::getAllInfo() const{
 string Assalto::getAllInfoFormatoPrint() const {
 	stringstream ss;
 
-	ss << "Feridos: " << this->existe_Feridos << " Tipo de Casa: " << this->tipo_casa;
+	ss << "Feridos: " << this->existe_Feridos << " | Tipo de Casa: " << this->tipo_casa;
 
 	return ss.str();
 }
@@ -452,7 +452,7 @@ string AcidenteViacao::getAllInfo() const{
 string AcidenteViacao::getAllInfoFormatoPrint() const {
 	stringstream ss;
 
-	ss << "Numero de feridos: " << this->numero_FeridosGraves << " Numero de Veiculos involvidos: " << this->numero_VeiculosEnvolvidos << " Tipo de Estrada: " << this->tipo_Estrada;
+	ss << "Numero de feridos: " << this->numero_FeridosGraves << " | Numero de Veiculos involvidos: " << this->numero_VeiculosEnvolvidos << " | Tipo de Estrada: " << this->tipo_Estrada;
 
 	return ss.str();
 }

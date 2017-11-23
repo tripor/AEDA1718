@@ -91,7 +91,29 @@ class Numero_negativo: public Erro {
 	std::stringstream info;
 public:
 	Numero_negativo(int numero) {
-		info << "(!) Foi inserido o número negativo \"" << numero << "\" (!)";
+		info << "(!) Foi inserido um número negativo \"" << numero << "\" (!)";
+	}
+	std::string getInfoErro() const {
+		return info.str();
+	}
+};
+
+class Numero_Demasiado_Grande: public Erro {
+	std::stringstream info;
+public:
+	Numero_Demasiado_Grande(std::string numero) {
+		info << "(!) Foi inserido o número demasiado grande \"" << numero << "\" (!)";
+	}
+	std::string getInfoErro() const {
+		return info.str();
+	}
+};
+
+class Numero_De_Veiculos: public Erro {
+	std::stringstream info;
+public:
+	Numero_De_Veiculos() {
+		info << "(!) O número inserido de veiculos de cada tipo não coincide com o número total de veiculos (!)";
 	}
 	std::string getInfoErro() const {
 		return info.str();

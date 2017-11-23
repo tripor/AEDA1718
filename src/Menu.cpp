@@ -11,6 +11,14 @@ void eNumero(std::string testar) {
 		it++;
 	if (!(!testar.empty() && it == testar.end()))
 		throw new Nao_e_numero(testar);
+	if(testar.size()>10)
+	{
+		throw new Numero_Demasiado_Grande(testar);
+	}
+	else if(testar.size()==10 && "2147483647"<testar)
+	{
+		throw new Numero_Demasiado_Grande(testar);
+	}
 }
 // Incendios Florestais
 
@@ -144,6 +152,8 @@ void Menu::menuOpcoesIniciais_0(){
 	cout << "|   1 - Acoes sobre Acidentes         |" << endl;
 	cout << "|   2 - Acoes sobre Postos de Socorro |" << endl;
 	cout << "|   3 - Listar Acidentes Atribuidos   |" << endl;
+	cout << "|   4 - Listar Acidentes              |" << endl;
+	cout << "|   5 - Listar Postos de Socorro      |" << endl;
 	cout << "|   0 - Sair                          |" << endl;
 	cout << "+-------------------------------------+" << endl;
 
@@ -164,10 +174,20 @@ void Menu::menuOpcoesIniciais_0(){
 	{
 		this->menuOpcoesPostosSocorro_1();
 	}
-	else if(opcao == "3"){
+	else if(opcao == "3")
+	{
 		this->printAcidentesAlocados();
 	}
-	else if (opcao == "0") {
+	else if(opcao == "4")
+	{
+		this->printAcidentes();
+	}
+	else if(opcao == "5")
+	{
+		this->printPostos();
+	}
+	else if (opcao == "0")
+	{
 		this->terminar=true;
 	}
 	else
@@ -493,7 +513,7 @@ void Menu::criarPosto(){
 	} else if (opcao == "0") {
 		return;
 	} else
-		throw Opcao_Nao_Valida(opcao);
+		throw new Opcao_Nao_Valida(opcao);
 
 
 }
@@ -579,9 +599,9 @@ void Menu::printAcidentes() {
 
 		cout << "=====================" << endl;
 		cout << i+1 << "- ";
-		cout << "Tipo: " << acidentes.at(i)->getTipoAcidente() << "| ";
-		cout << "Local: x=" << acidentes.at(i)->getLocal().first << "| ";
-		cout << " y= " << acidentes.at(i)->getLocal().second << "| ";
+		cout << "Tipo: " << acidentes.at(i)->getTipoAcidente() << " | ";
+		cout << "Local: x=" << acidentes.at(i)->getLocal().first << " | ";
+		cout << " y= " << acidentes.at(i)->getLocal().second << " | ";
 		cout << " Data: " << acidentes.at(i)->getData().getDataFormato() << " | ";
 
 		cout << this->acidentes.at(i)->getAllInfoFormatoPrint() << endl;
