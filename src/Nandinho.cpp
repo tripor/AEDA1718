@@ -3,42 +3,39 @@
 #include "Acidente.h"
 #include "PostoSocorro.h"
 
-template <class Comparable>
-void insertionSort(std::vector<Comparable> &v)
-{
-	for (unsigned int p = 1; p < v.size(); p++)
-	{
-		Comparable tmp = v[p];
-		int j;
-		for (j = p; j > 0 && (*tmp) < (*v[j-1]); j--)
-			v[j] = v[j-1];
-		v[j] = tmp;
-	}
-}
+#include <algorithm>
+
+//Preciso de globais
+
+int x_glob;
+int y_glob;
+
 
 bool Acidente::operator< (const Acidente & aci) const{
 	return (this->getData() < aci.getData());
 }
 
-bool PostoSocorro::menorDistancia(PostoSocorro & a, PostoSocorro & b, std::pair<int, int> p){
-	int x = p.first;
-	int y = p.second;
+bool menorDistancia(PostoSocorro* a, PostoSocorro* b){
 
-	return (sqrt(pow((a.local.first - x),2) + pow((a.local.second - y),2)) < sqrt(pow((b.local.first - x),2) + pow((b.local.second - y),2)));
+	return (sqrt(pow((a->getPos().first - x_glob),2) + pow((a->getPos().second - y_glob),2)) < sqrt(pow((b->getPos().first - x_glob),2) + pow((b->getPos().second - y_glob),2)));
 
 }
 
+
+bool CompareAcidentes(Acidente* a1, Acidente* a2){
+	return (a1->getData()) < (a2->getData());
+}
 
 
 void Menu::ordenaVetorAcidentes(){
-	// Ordena os acidentes por data
-	insertionSort(this->acidentes);
+	std::sort(this->acidentes.begin(), acidentes.end(), CompareAcidentes);
 }
 
 
-void Menu::ordenaVetorPostosSocorro(){
-	//Ordena por distancia a um acidente
 
+void Menu::ordenaVetorPostosSocorro(std::vector<PostoSocorro*> &v1){
+	//Ordena por distancia a um acidente
+	std::sort(v1.begin(), v1.end(), menorDistancia);
 }
 
 
@@ -65,18 +62,43 @@ void Menu::atribuiAcidentes(){
 
 		if(tipo == "Florestal"){
 			//Precisa de posto de bombeiros
-			std::vector<Acidente*> temp_bombeiros;
+			std::vector<PostoSocorro*> temp_bombeiros;
 
 			for(unsigned int j = 0; j < this->postos_socorro.size(); j++){
 				if(this->postos_socorro.at(j)->getTipo() == "Bombeiros"){
-					//Acidente* temp = this->postos_socorro.at(j);
-					//temp_bombeiros.push_back(temp);
+					temp_bombeiros.push_back(postos_socorro.at(j));
 				}
 			}
 
 
 			//Ordenar em relacao a distancia ao acidente
+			x_glob = this->acidentes.at(i)->getLocal().first;
+			y_glob = this->acidentes.at(i)->getLocal().second;
+			this->ordenaVetorPostosSocorro(temp_bombeiros);
 
+			//Correr o vetor de postos
+
+			for(unsigned int k = 0; k < temp_bombeiros.size(); k++){
+				//Verificar se, na data do acidente não existem já acidentes liberados do vetor "a tratar"
+
+				bool parar = false; // para quando deixa de haver acidentes a tratar com datas de resolucao inferiores
+
+				//ordena o vetor de acidentes a tratar por data de resolucao
+				std::sort(temp_bombeiros.at(k)->getAcidentesTratar().begin(), temp_bombeiros.at(k)->getAcidentesTratar().end());
+
+				while(!parar && !(temp_bombeiros.at(k)->getAcidentesTratar().empty())){
+					//testa se a data é menor, se sim, vai atualizar os recursos disponiveis, e depois apagar o elemento
+						if(temp_bombeiros.at(k)->getAcidentesTratar().at(0)->data < acidentes.at(i)->getData()){
+							temp_bombeiros.at(k)->getAllInfo(); //incompleto, falta o set virtual
+
+						}
+
+				}
+
+
+
+
+			}
 
 
 
