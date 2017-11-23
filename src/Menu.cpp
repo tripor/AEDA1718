@@ -17,11 +17,11 @@ void eNumero(std::string testar) {
 
 
 u_int nCarrosBombeirosArea(u_int a){
-	return ((a/1000) + 1);
+	return ((a/100) + 1);
 }
 
 u_int nBombeirosArea(u_int a){
-	return (a/100) + 1;
+	return (a/10) + 1;
 }
 
 // Incendios Domesticos
@@ -312,7 +312,6 @@ void Menu::EscreveFicheiroAcidente() {
 
 	//Limpar os vetores
 	this->acidentes.clear();
-	this->postos_socorro.clear();
 }
 
 void Menu::lerFicheiroPostoSocorro() {
@@ -357,7 +356,6 @@ void Menu::escreverFicheiroPostoSocorro() {
 	ficheiro.close();
 
 	//Limpar os vetores
-	this->acidentes.clear();
 	this->postos_socorro.clear();
 }
 

@@ -32,12 +32,17 @@ public:
 	void setSocorristas(u_int numero_Socorristas);
 	void setVeiculos(u_int numero_Veiculos);
 	void setPosicao(std::pair<int, int> local);
+	void setAcidentesTratar(std::vector<Acidente*> v1);
+	void setAcidentesAtribuidos(std::vector<Acidente*> v1);
 
 	//get
 	u_int getSocorristas();
 	u_int getVeiculos();
 	std::pair<int, int> getPos();
 	void printAcidentesAtribuidos();
+	std::vector<Acidente*> getAcidentesTratar(){return this->acidenteATratar;}
+	std::vector<Acidente*> getAcidentesAtribuidos(){return this->acidenteAtribuidos;}
+
 
 	//outros metodos
 	bool operator<(const PostoSocorro & p) const;
@@ -46,10 +51,10 @@ public:
 	virtual std::string getAllInfoFormatoPrint()  = 0;
 	virtual void guardarInformacao(std::stringstream &receber)=0;
 	virtual void infoUtilizador() = 0;
-
-	bool menorDistancia(PostoSocorro & a, PostoSocorro & b, std::pair<int, int> p);
+	virtual void setAllInfo(std::string s) = 0;
 
 	void infoUtilizadorGeral();
+
 
 };
 
@@ -76,9 +81,13 @@ public:
 	}
 	std::string getAllInfo();
 	std::string getAllInfoFormatoPrint() ;
+
+	void setAllInfo(std::string s){}
 	//set
 	void guardarInformacao(std::stringstream &receber);
 	void infoUtilizador();
+
+
 };
 
 class Policia: public PostoSocorro {
@@ -100,6 +109,7 @@ public:
 	}
 	std::string getAllInfo();
 	std::string getAllInfoFormatoPrint() ;
+	void setAllInfo(std::string s){}
 	//set
 	void guardarInformacao(std::stringstream &receber);
 	void infoUtilizador();
@@ -125,6 +135,7 @@ public:
 	}
 	std::string getAllInfo();
 	std::string getAllInfoFormatoPrint() ;
+	void setAllInfo(std::string s){}
 	//set
 	void guardarInformacao(std::stringstream &receber);
 	void infoUtilizador();

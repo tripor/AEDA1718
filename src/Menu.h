@@ -45,7 +45,7 @@ public:
 
 	//Ordenar vetores
 	void ordenaVetorAcidentes();
-	void ordenaVetorPostosSocorro();
+	void ordenaVetorPostosSocorro(std::vector<PostoSocorro*> &v1);
 
 	//Varios menus
 	void menuOpcoesIniciais_0();

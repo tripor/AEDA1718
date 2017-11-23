@@ -28,6 +28,14 @@ void PostoSocorro::setPosicao(pair<int,int> local)
 {
 	this->local=local;
 }
+void PostoSocorro::setAcidentesTratar(std::vector<Acidente*> v1){
+	this->acidenteATratar = v1;
+}
+void PostoSocorro::setAcidentesAtribuidos(std::vector<Acidente*> v1){
+	this->acidenteAtribuidos = v1;
+}
+
+
 u_int PostoSocorro::getSocorristas()
 {
 	return this->numero_Socorristas;

@@ -4,6 +4,9 @@
 #include "PostoSocorro.h"
 
 #include <algorithm>
+//#include <sstream>
+
+///// Já feito!
 
 //Preciso de globais
 
@@ -16,9 +19,7 @@ bool Acidente::operator< (const Acidente & aci) const{
 }
 
 bool menorDistancia(PostoSocorro* a, PostoSocorro* b){
-
 	return (sqrt(pow((a->getPos().first - x_glob),2) + pow((a->getPos().second - y_glob),2)) < sqrt(pow((b->getPos().first - x_glob),2) + pow((b->getPos().second - y_glob),2)));
-
 }
 
 
@@ -31,13 +32,12 @@ void Menu::ordenaVetorAcidentes(){
 	std::sort(this->acidentes.begin(), acidentes.end(), CompareAcidentes);
 }
 
-
-
 void Menu::ordenaVetorPostosSocorro(std::vector<PostoSocorro*> &v1){
 	//Ordena por distancia a um acidente
 	std::sort(v1.begin(), v1.end(), menorDistancia);
 }
 
+///////////////////
 
 void Menu::atribuiAcidentes(){
 	//Ordenar o vetor de acidentes por data
@@ -88,13 +88,44 @@ void Menu::atribuiAcidentes(){
 
 				while(!parar && !(temp_bombeiros.at(k)->getAcidentesTratar().empty())){
 					//testa se a data é menor, se sim, vai atualizar os recursos disponiveis, e depois apagar o elemento
-						if(temp_bombeiros.at(k)->getAcidentesTratar().at(0)->data < acidentes.at(i)->getData()){
-							temp_bombeiros.at(k)->getAllInfo(); //incompleto, falta o set virtual
+						if(temp_bombeiros.at(k)->getAcidentesTratar().at(0)->getData() < acidentes.at(i)->getData()){
+
+							//preciso de libertar os recursos dos acidentes anteriores, HELP!
+
+
+
 
 						}
-
+						else{
+							parar = true; // encontrou um acidente que ainda não foi resolvido, pára
+						}
 				}
 
+
+				std::string allInfo_A = this->acidentes.at(i)->getAllInfo();
+				std::stringstream ss;
+				ss << allInfo_A;
+				u_int n_bombeiros_precisos, n_carros_precisos;
+				ss >> n_bombeiros_precisos >> n_carros_precisos;
+
+				std::string allInfo_Posto = temp_bombeiros.at(k)->getAllInfo();
+				std::stringstream ss_disponivel;
+				ss_disponivel << allInfo_Posto;
+
+				//eliminar info desnecessária
+				u_int n_bombeiros_disp, n_carros_disp;
+				u_int elim;
+				std::string elim_pos;
+
+				ss_disponivel >> n_bombeiros_disp >> elim >> elim_pos >> elim >> n_carros_disp;
+
+
+				if(n_bombeiros_disp >= n_bombeiros_precisos && n_carros_disp >= n_carros_precisos){
+					std::vector<Acidente*> v1 = temp_bombeiros.at(k)->getAcidentesAtribuidos();
+					v1.push_back(this->acidentes.at(i));
+					temp_bombeiros.at(k)->setAcidentesAtribuidos(v1);
+					break;
+				}
 
 
 
@@ -103,6 +134,8 @@ void Menu::atribuiAcidentes(){
 
 
 		}
+
+
 		if(tipo == "Domestico"){
 			//Precisa de posto de bombeiros
 
