@@ -119,6 +119,16 @@ public:
 		return info.str();
 	}
 };
+class Data_Invalida: public Erro {
+	std::stringstream info;
+public:
+	Data_Invalida(int numero,std::string tipo) {
+		info << "(!) O/A " << tipo << " inserido não é valido \"" << numero << "\" (!)";
+	}
+	std::string getInfoErro() const {
+		return info.str();
+	}
+};
 
 
 #endif /* SRC_ERROS_H_ */

@@ -75,26 +75,31 @@ void Acidente::infoUtilizadorGeral(){
 	getline(cin,anot);
 	eNumero(anot);
 	ano = stoi(anot);
+	if(ano<=0)throw new Data_Invalida(ano,"ano");
 
 	cout << "\nMes: ";
 	getline(cin, mest);
 	eNumero(mest);
 	mes = stoi(mest);
+	if(mes>12 || mes<=0)throw new Data_Invalida(mes,"mês");
 
 	cout << "\nDia: ";
 	getline(cin, diat);
 	eNumero(diat);
 	dia = stoi(diat);
+	if(dia>31 || dia<=0)throw new Data_Invalida(dia,"dia");
 
 	cout << "\nHora: ";
 	getline(cin, horat);
 	eNumero(horat);
 	hora = stoi(horat);
+	if(hora>23 || hora<=0)throw new Data_Invalida(hora,"hora");
 
 	cout << "\nMinuto: ";
 	getline(cin, minutot);
 	eNumero(minutot);
 	minuto = stoi(minutot);
+	if(minuto>=60 || minuto<=0)throw new Data_Invalida(minuto,"minuto");
 
 	this->setData(Data(ano, mes, dia, hora, minuto));
 
