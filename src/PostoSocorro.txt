@@ -1,1 +1,2 @@
-Bombeiros 50000 50000 400-400 25000 25000
+Policia 20 10 234-325 Moto
+Inem 20 10 300-123 Ambulancia

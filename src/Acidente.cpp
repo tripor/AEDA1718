@@ -41,6 +41,14 @@ void Acidente::setLocal(pair<int,int> par){
 
 // Outros metodos
 
+
+
+
+bool Acidente::operator< (const Acidente & aci) const{
+	return (this->getData() < aci.getData());
+}
+
+
 bool Acidente::acidenteIgual(Acidente* a1) const{
 	if(a1->getTipoAcidente() != this->getTipoAcidente()){
 			return false;

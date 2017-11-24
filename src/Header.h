@@ -10,6 +10,7 @@
 #include "math.h"
 
 #include <cstdlib>
+#include <algorithm>
 
 typedef unsigned int u_int;
 
