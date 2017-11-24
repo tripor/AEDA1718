@@ -270,7 +270,7 @@ string Domesticos::getAllInfoFormatoPrint() const {
 void Domesticos::infoUtilizador(){
 
 	string opcao;
-	cout << "Lista de opções: ";
+	cout << "\nLista de opções: \n";
 	cout << "1 - Apartamento\n";
 	cout << "2 - Moradia\n";
 
@@ -282,11 +282,13 @@ void Domesticos::infoUtilizador(){
 	if(opcao == "1"){
 		this->setNumeroCarrosBombeiros(numeroCarBombeirosApart());
 		this->setNumeroBombeiros(numeroBombeirosApart());
+		this->setTipoCasa("Apartamento");
 	}
 
 	else if(opcao == "2"){
 		this->setNumeroCarrosBombeiros(numeroCarBombeirosMoradia());
 		this->setNumeroBombeiros(numeroBombeirosMoradia());
+		this->setTipoCasa("Moradia");
 	}
 	else
 	{
