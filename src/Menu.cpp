@@ -758,7 +758,7 @@ void Menu::atribuiAcidentes(){
 			std::stringstream ss;
 			ss << allInfo_A;
 			u_int n_bombeiros_precisos, n_carros_precisos;
-			ss >> n_bombeiros_precisos >> n_carros_precisos;
+			ss >> n_carros_precisos >> n_bombeiros_precisos;
 
 
 			//Correr o vetor de postos
@@ -812,7 +812,7 @@ void Menu::atribuiAcidentes(){
 			std::stringstream ss;
 			ss << allInfo_A;
 			u_int n_bombeiros_precisos, n_carros_precisos;
-			ss >> n_bombeiros_precisos >> n_carros_precisos;
+			ss >> n_carros_precisos >> n_bombeiros_precisos;
 
 
 			//Correr o vetor de postos

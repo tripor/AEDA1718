@@ -1,4 +1,2 @@
-Domestico 1263-6-23-2-3 235 3256 3 15 
-Florestal 2000-3-4-1-4 12 124 41 401 4000
-Domestico 2015-12-4-6-6 1255 125667 2 10 
-AcidenteViacao 2016-11-12-4-5 5000 500 12 3 Auto-Estrada
+Florestal 2016-5-25-16-20 6000 8000 4 31 300
+Domestico 2016-7-1-10-30 6000 7000 3 15 Moradia

@@ -1,2 +1,7 @@
-Policia 20 10 234-325 Moto
-Inem 20 10 300-123 Ambulancia
+Bombeiros 50 10 1000-9000 2 8
+Policia 75 30 9000-9000 Moto
+Policia 60 18 500-500 Carro
+Inem 58 23 8000-2000 Ambulancia
+Bombeiros 5 1 5000-8000 0 1
+Bombeiros 42 6 7000-8000 0 6
+Bombeiros 40 13 8000-4000 3 10
