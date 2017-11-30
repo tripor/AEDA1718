@@ -256,7 +256,7 @@ public:
 	//Metodos Get
 
 	/**
-	* @return retorna o tipo de casa onde ocorreu o incêndio (Apartamento ou Moradia)
+	* @return retorna o tipo de casa onde ocorreu o incendio (Apartamento ou Moradia)
 	*/
 	std::string getTipoCasa() const;
 	//Metodos Set
@@ -303,7 +303,7 @@ public:
  * @brief Classe derivada da classe acidente (Assaltos)
 */
 class Assalto : public Acidente{
-	bool existe_Feridos; /**< True caso existam e false caso não existam feridos no assalto*/
+	bool existe_Feridos; /**< True caso existam e false caso nao existam feridos no assalto*/
 	std::string tipo_casa; /**< String com o tipo de casa onde ocorreu o assalto (particular ou comercial)*/
 public:
 	//Construtores e destrutor
@@ -348,7 +348,7 @@ public:
 	//Outros Metodos
 
 	/**
-    * @brief recebe uma stringstream por referencia e cria um objeto da classe respectiva (Assalto) com os parâmetros da stringstream que foi lida do ficheiro de acidentes.
+    * @brief recebe uma stringstream por referencia e cria um objeto da classe respectiva (Assalto) com os parametros da stringstream que foi lida do ficheiro de acidentes.
     * @param ss stringstream com a informacao do assalto
     * @return void
 	*/
@@ -360,7 +360,7 @@ public:
 	std::string getTipoAcidente() const{return "Assalto";}
 
 	/**
-    * @return retorna uma string com a informação do assalto
+    * @return retorna uma string com a informacao do assalto
 	*/
 	std::string getAllInfo() const;
 
@@ -384,7 +384,7 @@ public:
 */
 class AcidenteViacao : public Acidente{
 	u_int numero_FeridosGraves; /**< Numero de feridos graves no acidente*/
-	u_int numero_VeiculosEnvolvidos; /**< Numero de veículos envolvidos no acidente*/
+	u_int numero_VeiculosEnvolvidos; /**< Numero de veiculos envolvidos no acidente*/
 	std::string tipo_Estrada; /**< String com o tipo de estrada do acidente de viação (Nacional ou Auto-Estrada)*/ // "Nacional" ou "Auto-Estrada"
 public:
 	//Construtores e destrutor
@@ -411,7 +411,7 @@ public:
 	u_int getNumeroVeiculosEnvolvidos() const;
 
 	/**
-	 * @return Retorna uma string com o tipo de estrada do acidente de viação(nacional ou autoestrata)
+	 * @return Retorna uma string com o tipo de estrada do acidente de viacao(nacional ou autoestrata)
 	 */
 	std::string getTipoEstrada() const;
 
@@ -446,7 +446,7 @@ public:
 	void lerInfo(std::stringstream &ss);
 
 	/**
-	* @brief retorna uma string que caracteriza um acidente de viação (AcidenteViacao)
+	* @brief retorna uma string que caracteriza um acidente de viacao (AcidenteViacao)
     * @return void
 	*/
 	std::string getTipoAcidente() const{return "AcidenteViacao";}

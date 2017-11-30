@@ -49,13 +49,13 @@ public:
 	*/
 	void setSocorristas(u_int numero_Socorristas);
 	/**
-	  * @brief atribui um numero de veículos ao posto
+	  * @brief atribui um numero de veiculos ao posto
 	  * @param numero_Veiculos Numero de veiculos
 	  * @return void
 	*/
 	void setVeiculos(u_int numero_Veiculos);
 	/**
-	  * @brief atribui uma posição no referêncial a este posto
+	  * @brief atribui uma posicao no referencial a este posto
 	  * @param local local do acidente representado por um par de inteiros([x,y])
 	  * @return void
 	*/
@@ -86,7 +86,7 @@ public:
 	*/
 	u_int getSocorristas();
 	/**
-	* @return retorna o numero de veículos presentes no posto
+	* @return retorna o numero de veiculos presentes no posto
 	*/
 	u_int getVeiculos();
 	/**
@@ -112,7 +112,7 @@ public:
 	/**
 	  * @brief Compara dois postos de socorro
 	  * @param p Objeto da classe posto de socorro
-	  * @return retorna true se o primeiro posto estiver mais próximo do local do acidente que o segundo, caso contrário retorna false.
+	  * @return retorna true se o primeiro posto estiver mais proximo do local do acidente que o segundo, caso contrario retorna false.
 	*/
 	bool operator<(const PostoSocorro & p) const;
 	virtual std::string getTipo()=0;
@@ -122,7 +122,7 @@ public:
 	virtual void infoUtilizador() = 0;
 	virtual void setAllInfo(std::string s) = 0;
 	/**
-	* @brief pergunta ao utilizador os parâmetros gerais de um posto
+	* @brief pergunta ao utilizador os parametros gerais de um posto
 	*/
 	void infoUtilizadorGeral();
 };
@@ -161,7 +161,7 @@ public:
 	;
 	//get
 	/**
-	* @return retorna o numero de ambulâncias no posto de bombeiros
+	* @return retorna o numero de ambulancias no posto de bombeiros
 	*/
 	u_int getAmbulancias();
 	/**
@@ -187,7 +187,7 @@ public:
 	//set
 	/**
 	 * @param string com a informacao
-	 * @brief Guarda num objeto informação de um posto de bombeiros que recebe através de uma stringstream
+	 * @brief Guarda num objeto informacao de um posto de bombeiros que recebe atraves de uma stringstream
 	 * @return Void
 	 */
 	void guardarInformacao(std::stringstream &receber);
@@ -204,7 +204,7 @@ public:
 * @brief Classe Derivada da classe PostosSocorro
 */
 class Policia: public PostoSocorro {
-	std::string veiculo; /**< String com o tipo de veiculo no posto (do tipo “Moto” ou “Carro”)*/
+	std::string veiculo; /**< String com o tipo de veiculo no posto (do tipo Moto ou Carro)*/
 public:
 	//construtor
 	/**
@@ -219,7 +219,7 @@ public:
 		 * @param numero_Socorristas Numero de socorristas
 		 * @param numero_Veiculos Numero de veiculos
 		 * @param local Coordenadas do posto
-		 * @param veiculo string com o tipo de veiculo do posto (“Moto” ou “Carro”)
+		 * @param veiculo string com o tipo de veiculo do posto (Moto ou Carro)
 		 * @return void
 		 */
 	Policia(u_int numero_Socorristas, u_int numero_Veiculos,
@@ -231,11 +231,11 @@ public:
 	}
 	//get
 	/**
-	* @return retorna uma string com o tipo de veículo de um determinado posto de polícia(“Moto”, Carro”)
+	* @return retorna uma string com o tipo de veículo de um determinado posto de policia(Moto, Carro)
 	*/
 	std::string getVeiculo();
 	/**
-	* @return  Retorna uma string com o tipo de Posto - Policia ("Policia")
+	* @return  Retorna uma string com o tipo de Posto - Policia (Policia)
 	*/
 	std::string getTipo() {
 		return "Policia";
@@ -267,7 +267,7 @@ public:
 * @brief Classe Derivada da classe PostosSocorro
 */
 class Inem: public PostoSocorro {
-	std::string veiculo; /**<string com o tipo de veiculo no posto (“Moto”, Carro” ou “Ambulancia”)*/
+	std::string veiculo; /**<string com o tipo de veiculo no posto (Moto, Carro ou Ambulancia)*/
 public:
 	//contrutor
 	/**
@@ -282,7 +282,7 @@ public:
 		 * @param numero_Socorristas Numero de socorristas
 		 * @param numero_Veiculos Numero de veiculos
 		 * @param local Coordenadas do posto
-		 * @param veiculo string com o tipo de veiculo do posto (“Moto”, Carro” ou “Ambulancia”)
+		 * @param veiculo string com o tipo de veiculo do posto (Moto, Carro ou Ambulancia)
 		 * @return void
 		 */
 	Inem(u_int numero_Socorristas, u_int numero_Veiculos,
@@ -294,32 +294,32 @@ public:
 	}
 	//get
 	/**
-	 * @return retorna uma string com o tipo de veiculo do posto de INEM (“Moto”, Carro” ou “Ambulancia”)
+	 * @return retorna uma string com o tipo de veiculo do posto de INEM (Moto, Carro ou Ambulancia)
 	 */
 	std::string getVeiculo();
 	/**
-	* @return  Retorna uma string com o tipo de Posto - Inem ("Inem")
+	* @return  Retorna uma string com o tipo de Posto - Inem (Inem)
 	*/
 	std::string getTipo() {
 		return "Inem";
 	}
 	/**
-	* @return retorna uma string com a informação de um posto de Inem
+	* @return retorna uma string com a informacao de um posto de Inem
 	*/
 	std::string getAllInfo();
 	/**
-	* @return retorna uma string com a informação de um posto de inem pronta para ser mostrada em consola
+	* @return retorna uma string com a informacao de um posto de inem pronta para ser mostrada em consola
 	*/
 	std::string getAllInfoFormatoPrint() ;
 	void setAllInfo(std::string s){}
 	//set
 	/**
-	 * @brief Guarda num objeto informação de um posto de Inem que recebe através de uma stringstream
+	 * @brief Guarda num objeto informacao de um posto de Inem que recebe atraves de uma stringstream
 	 * @return Void
 	 */
 	void guardarInformacao(std::stringstream &receber);
 	/**
-	* @brief pergunta ao utilizador os parâmetros especificos de um posto
+	* @brief pergunta ao utilizador os parametros especificos de um posto
 	*/
 	void infoUtilizador();
 
