@@ -5,3 +5,8 @@ Inem 58 23 8000-2000 Ambulancia
 Bombeiros 5 1 5000-8000 0 1
 Bombeiros 42 6 7000-8000 0 6
 Bombeiros 40 13 8000-4000 3 10
+Policia 60 36 2500-5500 Moto
+Inem 85 46 500-3500 Ambulancia
+Bombeiros 120 26 3500-2500 6 20
+Inem 40 24 7000-0 Moto
+Inem 48 25 10000-8000 Ambulancia

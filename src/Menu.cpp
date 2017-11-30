@@ -185,7 +185,7 @@ void Menu::menuOpcoesIniciais_0(){
 	cout << "|   1 - Acoes sobre Acidentes         |" << endl;
 	cout << "|   2 - Acoes sobre Postos de Socorro |" << endl;
 	cout << "|   3 - Listar Acidentes Atribuidos   |" << endl;
-	cout << "|   4 - Listar Atribuicoes de Posto   |" << endl;
+	cout << "|   4 - Listar Postos Atribuidos      |" << endl;
 	cout << "|   5 - Listar Acidentes              |" << endl;
 	cout << "|   6 - Listar Postos de Socorro      |" << endl;
 	cout << "|   0 - Sair                          |" << endl;
@@ -1029,7 +1029,7 @@ void Menu::atribuiAcidentes(){
 				ss_disponivel >> n_policias_disp >> n_veiculos_disp >> elim_pos >> tipo_veiculo;
 
 
-				if((tipo_estrada == "Nacional" && n_policias_disp >= (n_veiculos_env/2) && n_veiculos_disp >= (n_veiculos_env/4)) || (tipo_estrada == "Auto-Estrada" && n_policias_disp >= (n_veiculos_env/2) && n_veiculos_disp >= (n_veiculos_env/2))){
+				if((tipo_estrada == "Nacional" && n_policias_disp >= (n_veiculos_env/2) && n_veiculos_disp >= (n_veiculos_env/4) && tipo_veiculo == "Carro") || (tipo_estrada == "Auto-Estrada" && n_policias_disp >= (n_veiculos_env/2) && n_veiculos_disp >= (n_veiculos_env/2) && tipo_veiculo == "Moto")){
 					std::vector<Acidente*> v1 = temp_policia.at(k)->getAcidentesAtribuidos();
 					v1.push_back(this->acidentes.at(i));
 					temp_policia.at(k)->setAcidentesAtribuidos(v1);
