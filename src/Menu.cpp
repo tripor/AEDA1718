@@ -1,5 +1,6 @@
 #include "Header.h"
 #include "Acidente.h"
+#include "Oficina.h"
 #include "PostoSocorro.h"
 #include "Menu.h"
 #include "erros.h"
@@ -956,8 +957,12 @@ void Menu::atribuiAcidentes(){
 			std::stringstream ss;
 			ss << s_aci;
 			u_int n_feridos_g, n_veiculos_env;
-			std::string tipo_estrada;
+			std::string tipo_estrada, marcas; // e marcas dos veiculos
 			ss >> n_feridos_g >> n_veiculos_env >> tipo_estrada;
+			vector<std::string> MarcasVeiculos; //tipo de veiculos
+				while (ss >> marcas) {
+					MarcasVeiculos.push_back(marcas);
+				}
 
 			// INEM
 
@@ -1038,7 +1043,26 @@ void Menu::atribuiAcidentes(){
 
 			}
 
+			////Arranjar os carros/////
 
+			Prior_queu temp = oficinas;
+			for(unsigned int i = 0; i < MarcasVeiculos.size(); i++){
+				Oficina x = oficinas.top();
+				for(unsigned int j = 0; j < oficinas.top().getMarcas().size(); j++){
+					while(!oficinas.empty()){
+						if(oficinas.top().getMarcas() == MarcasVeiculos.at(i)){
+							oficinas.top().setDisponibilidade(oficinas.top().getDisponibilidade() + 1);
+							temp.push(oficinas.top());//coloca no temporario
+							oficinas.pop();
+						}
+						else{
+							temp.push(oficinas.top());
+							oficinas.pop();
+						}
+					}
+
+				}
+			}
 		}
 
 

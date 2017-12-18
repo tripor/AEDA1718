@@ -419,6 +419,10 @@ string AcidenteViacao::getTipoEstrada() const{
 	return this->tipo_Estrada;
 }
 
+vector<string> AcidenteViacao::getVeiculosEnvolvidos(){
+	return veiculosEnvolvidos;
+}
+
 	//Metodos Set
 
 void AcidenteViacao::setNumeroFeridosGraves(u_int n){
@@ -428,8 +432,13 @@ void AcidenteViacao::setNumeroFeridosGraves(u_int n){
 void AcidenteViacao::setNumeroVeiculosEnvolvidos(u_int n){
 	this->numero_VeiculosEnvolvidos = n;
 }
+
 void AcidenteViacao::setTipoEstrada(string s){
 	this->tipo_Estrada = s;
+}
+
+void AcidenteViacao::setVeiculosEnvolvidos(std::vector<std::string> veiculos){
+	this->veiculosEnvolvidos = veiculos;
 }
 
 	//Outros metodos
@@ -441,11 +450,14 @@ void AcidenteViacao::setTipoEstrada(string s){
 void AcidenteViacao::lerInfo(stringstream &ss)
 {
 
-	string d, s; // data e string "tipo_estrada"
+	string d, s, any; // data , string "tipo_estrada", string tipo veiculo
 	int x, y; // coordenadas
 	u_int n_feridos, n_veiculos_env; // numero de feridos graves e veiculos envolvidos
-
 	ss >> d >> x >> y >> n_feridos >> n_veiculos_env >> s;
+	vector<string> vetor; //tipo de veiculos
+		while (ss >> any) {
+			vetor.push_back(any);
+		}
 
 	pair<int,int> p = make_pair(x,y); // construir o par
 	this->setData(d);
@@ -453,6 +465,7 @@ void AcidenteViacao::lerInfo(stringstream &ss)
 	this->setNumeroFeridosGraves(n_feridos);
 	this->setNumeroVeiculosEnvolvidos(n_veiculos_env);
 	this->setTipoEstrada(s);
+	this->setVeiculosEnvolvidos(vetor); //marcas dos carros
 
 }
 
@@ -462,8 +475,16 @@ string AcidenteViacao::getAllInfo() const{
 
 	ss << this->numero_FeridosGraves << ' ' << this->numero_VeiculosEnvolvidos << ' ' << this->tipo_Estrada;
 
+	for(unsigned int i = 0; i < this->veiculosEnvolvidos.size(); i++){
+		if(i == (this->veiculosEnvolvidos.size() - 1)){
+			ss << veiculosEnvolvidos.at(i);
+		}
+		ss << veiculosEnvolvidos.at(i) << " ";
+	}
+
 	return ss.str();
 }
+
 string AcidenteViacao::getAllInfoFormatoPrint() const {
 	stringstream ss;
 

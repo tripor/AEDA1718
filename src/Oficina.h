@@ -2,20 +2,26 @@
 #define OFICINA_H_
 #include "Header.h"
 
+class Oficina;
+typedef std::priority_queue<Oficina> Prior_queu;
+
 class Oficina{
 
 protected:
 	u_int disponibilidade;
-	std::vector<std::string> veiculos;
+	std::vector<std::string> marcas;
 public:
 	Oficina();
 	u_int getDisponibilidade();
-	std::vector<std::string> getVeiculos();
+	std::vector<std::string> getMarcas();
 	void setDisponibilidade(u_int disponibilidade);
-	bool operator<(Oficina& of1)const;
+	bool operator<(Oficina& of1);
 };
 
-typedef std::priority_queue<Oficina> oficinas;
+Prior_queu oficinas;
+
+
+
 
 
 #endif /* OFICINA_H_ */

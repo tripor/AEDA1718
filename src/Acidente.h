@@ -384,6 +384,7 @@ public:
 */
 class AcidenteViacao : public Acidente{
 	u_int numero_FeridosGraves; /**< Numero de feridos graves no acidente*/
+	std::vector<std::string> veiculosEnvolvidos; /**< Tipo de veiculos envolvidos*/
 	u_int numero_VeiculosEnvolvidos; /**< Numero de veiculos envolvidos no acidente*/
 	std::string tipo_Estrada; /**< String com o tipo de estrada do acidente de viação (Nacional ou Auto-Estrada)*/ // "Nacional" ou "Auto-Estrada"
 public:
@@ -410,6 +411,9 @@ public:
 	 */
 	u_int getNumeroVeiculosEnvolvidos() const;
 
+
+	std::vector<std::string> getVeiculosEnvolvidos();
+
 	/**
 	 * @return Retorna uma string com o tipo de estrada do acidente de viacao(nacional ou autoestrata)
 	 */
@@ -423,6 +427,8 @@ public:
 	 * @return void
 	 */
 	void setNumeroFeridosGraves(u_int n);
+
+	void setVeiculosEnvolvidos(std::vector<std::string> veiculosEnvolvidos);
 
 	/**
 	 * @brief  Atribui um numero de veiculos envolvidos

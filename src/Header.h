@@ -29,7 +29,6 @@ typedef unsigned int u_int;
 
 extern int x_aci;
 extern int y_aci;
-
 class Data{
 private:
 	u_int ano;

@@ -8,14 +8,15 @@ u_int Oficina::getDisponibilidade(){
 	return disponibilidade;
 }
 
-std::vector<std::string> Oficina:: getVeiculos(){
-	return veiculos;
+std::vector<std::string> Oficina:: getMarcas(){
+	return marcas;
 }
 
 void Oficina::setDisponibilidade(u_int disponibilidade){
 	this->disponibilidade = disponibilidade;
 }
 
-bool Oficina::operator<(Oficina &of1) const{
+bool Oficina::operator<(Oficina &of1){
 	return (disponibilidade < of1.getDisponibilidade());
 }
+
