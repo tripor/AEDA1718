@@ -1043,17 +1043,20 @@ void Menu::atribuiAcidentes(){
 
 			}
 
+			//depois de atribuir acidentes
+
 			////Arranjar os carros/////
 
 			Prior_queu temp = oficinas;
-			for(unsigned int i = 0; i < MarcasVeiculos.size(); i++){
-				Oficina x = oficinas.top();
-				for(unsigned int j = 0; j < oficinas.top().getMarcas().size(); j++){
+
+			for(unsigned int i = 0; i < MarcasVeiculos.size(); i++){ //para cada marca
+				for(unsigned int j = 0; j < oficinas.top().getMarcas().size(); j++){ // para cada marca da oficina
 					while(!oficinas.empty()){
-						if(oficinas.top().getMarcas() == MarcasVeiculos.at(i)){
-							oficinas.top().setDisponibilidade(oficinas.top().getDisponibilidade() + 1);
-							temp.push(oficinas.top());//coloca no temporario
+						if(oficinas.top().getMarcas().at(j) == MarcasVeiculos.at(i)){
+							Oficina oftemp = oficinas.top();
 							oficinas.pop();
+							oftemp.setDisponibilidade(oftemp.getDisponibilidade() + 1);
+							temp.push(oftemp);//coloca no temporario
 						}
 						else{
 							temp.push(oficinas.top());
@@ -1063,6 +1066,7 @@ void Menu::atribuiAcidentes(){
 
 				}
 			}
+			oficinas = temp;
 		}
 
 

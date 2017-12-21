@@ -8,7 +8,7 @@ u_int Oficina::getDisponibilidade(){
 	return disponibilidade;
 }
 
-std::vector<std::string> Oficina:: getMarcas(){
+std::vector<std::string> Oficina::getMarcas() const{
 	return marcas;
 }
 

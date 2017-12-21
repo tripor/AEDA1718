@@ -13,12 +13,11 @@ protected:
 public:
 	Oficina();
 	u_int getDisponibilidade();
-	std::vector<std::string> getMarcas();
+	std::vector<std::string> getMarcas() const;
 	void setDisponibilidade(u_int disponibilidade);
 	bool operator<(Oficina& of1);
 };
 
-Prior_queu oficinas;
 
 
 

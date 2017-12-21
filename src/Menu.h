@@ -2,12 +2,13 @@
 #define MENU_H
 
 #include "Header.h"
+#include "Oficina.h"
 #include "Acidente.h"
 #include "PostoSocorro.h"
 
 void eNumero(std::string testar);
 class Menu{
-
+	Prior_queu oficinas;
 	std::vector<Acidente*> acidentes; /**< Vetor de acidentes*/
 	std::vector<PostoSocorro*> postos_socorro; /**< Vetor dos postos de socorro*/
 	bool terminar; /**< booleana para parar o ciclo do menu*/
