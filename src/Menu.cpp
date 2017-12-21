@@ -174,9 +174,22 @@ void Menu::retirarPosto(u_int posicao)
 //----------------------------MENUS--------------------------------
 //-----------------------------------------------------------------
 
+void Menu::inicializaOficinas(){
+	vector<Oficina*> temp;
+	while(!oficinas.empty()){
+		temp.push_back(oficinas.top());
+		oficinas.pop();
+	}
+	Data date (0,1,1,0,0);
+	for(unsigned int i = 0; i < temp.size(); i++){
+		temp.at(i)->setData(date);
+	}
+
+}
 
 void Menu::menuOpcoesIniciais_0(){
 
+	inicializaOficinas();
 	this->clearVetoresDosPostos();
 	this->atribuiAcidentes();
 	string opcao;
@@ -715,6 +728,29 @@ void Menu::clearVetoresDosPostos(){
 	}
 }
 
+void Menu::atualizaDisponibilidade(Data date){
+	vector<Oficina*> temp;
+	while(!oficinas.empty()){
+		temp.push_back(oficinas.top());
+		oficinas.pop();
+	}
+	int disp = 0;
+	for(unsigned int i = 0; i < temp.size(); i++){
+		disp = date - temp.at(i)->getUltimaData();
+		if((temp.at(i)->getDisponibilidade() - i) <= 0){
+			temp.at(i)->setDisponibilidade(0);
+		}
+		else {
+			temp.at(i)->setDisponibilidade((temp.at(i)->getDisponibilidade() - i));
+		}
+	}
+
+	for(unsigned int i = 0; i < temp.size(); i++){
+		oficinas.push(temp.at(i));
+	}
+}
+
+
 
 void Menu::atribuiAcidentes(){
 	//Ordenar o vetor de acidentes por data
@@ -1047,15 +1083,18 @@ void Menu::atribuiAcidentes(){
 
 			////Arranjar os carros/////
 
-			Prior_queu temp = oficinas;
 
-			for(unsigned int i = 0; i < MarcasVeiculos.size(); i++){ //para cada marca
-				for(unsigned int j = 0; j < oficinas.top().getMarcas().size(); j++){ // para cada marca da oficina
+			Prior_queu temp = oficinas;
+			atualizaDisponibilidade(acidentes.at(i)->getData());
+			for(unsigned int m = 0; m < MarcasVeiculos.size(); m++){ //para cada marca
+				for(unsigned int n = 0; n < oficinas.top()->getMarcas().size(); n++){ // para cada marca da oficina
 					while(!oficinas.empty()){
-						if(oficinas.top().getMarcas().at(j) == MarcasVeiculos.at(i)){
-							Oficina oftemp = oficinas.top();
+						if(oficinas.top()->getMarcas().at(n) == MarcasVeiculos.at(m)){
+							Oficina *oftemp = new Oficina();
+							oftemp = oficinas.top();
 							oficinas.pop();
-							oftemp.setDisponibilidade(oftemp.getDisponibilidade() + 1);
+							oftemp->setDisponibilidade(oftemp->getDisponibilidade() + 1);
+							oftemp->setData(acidentes.at(i)->getData()); //atualiza a utima data
 							temp.push(oftemp);//coloca no temporario
 						}
 						else{
@@ -1074,5 +1113,103 @@ void Menu::atribuiAcidentes(){
 
 
 
+}
+
+void Menu::adicionaOficina(Oficina *oficina){
+	oficinas.push(oficina);
+}
+
+
+void Menu::lerFicheiroOficina() {
+	string linha;
+	ifstream ficheiro;
+	ficheiro.open("src/Oficina.txt");
+	while (getline(ficheiro, linha)) {
+		stringstream ss(linha);
+		Oficina* temp = new Oficina();
+		temp->lerInfo(ss);
+		this->adicionaOficina(temp);
+	}
+	ficheiro.close();
+}
+
+void Menu::EscreveFicheiroOficina() {
+	stringstream ss;
+	ofstream ficheiro("src/Oficina.txt",ofstream::out|ofstream::trunc);
+
+	//Escrever no ficheiro
+	Prior_queu temp = oficinas;
+	while(!temp.empty()){
+		ficheiro << temp.top()->getNome() << " ";
+		for(unsigned int i = 0; i < temp.top()->getMarcas().size(); i++){
+			if(i == (temp.top()->getMarcas().size() - 1)){
+				ficheiro << temp.top()->getMarcas().at(i); // se for o ultimo
+			}
+			else
+				ficheiro << temp.top()->getMarcas().at(i) << " ";
+		}
+	}
+	ficheiro.close();
+
+	//Limpar o priority queue
+	while(!this->oficinas.empty()){
+		this->oficinas.pop();
+	}
+}
+
+
+void Menu::ciarOficina(){
+	cout << "Indique o nome da Oficina: ";
+	string nome;
+	cin >> nome;
+	Oficina *a;
+	a->setNome(nome); //atribui um nome
+	cout << "Indique as marcas de automóveis que a oficina pode reparar: ";
+	int i = 0; // para escolher
+	vector<string> marcas;//para guardar as marcas do utilizador
+	do{
+	cout << endl;
+	cout << "+----------------------------------------+" << endl;
+	cout << "|   Indique a marca do carro:            |" << endl;
+	cout << "|   1 - Audi                             |" << endl;
+	cout << "|   2 - BMW                              |" << endl;
+	cout << "|   3 - Mercedes                         |" << endl;
+	cout << "|   4 - Volkswagen                       |" << endl;
+	cout << "|   5 - Ferrari                          |" << endl;
+	cout << "|   6 - Porsche                          |" << endl;
+	cout << "|   0 - Concluir                         |" << endl;
+	cout << "+----------------------------------------+" << endl;
+	cin >> i;
+	switch(i){
+		case(1): {
+			marcas.push_back("Audi");
+			break;
+		}
+		case(2):{
+			marcas.push_back("BMW");
+			break;
+		}
+		case(3):{
+			marcas.push_back("Mercedes");
+			break;
+		}
+		case(4):{
+			marcas.push_back("Volkswagen");
+			break;
+		}
+		case(5):{
+			marcas.push_back("Ferrari");
+			break;
+		}
+		case(6):{
+			marcas.push_back("Porsche");
+			break;
+		}
+	}
+	system("cls");
+	}
+	while(i!=0);
+
+	a->setMarcas(marcas);
 }
 

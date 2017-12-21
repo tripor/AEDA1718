@@ -215,6 +215,17 @@ public:
 
 	//Outros
 
+	void atualizaDisponibilidade(Data date);
+
+	void inicializaOficinas();
+
+	void adicionaOficina(Oficina *oficina);
+
+	void lerFicheiroOficina();
+
+	void EscreveFicheiroOficina();
+
+	void ciarOficina();
 };
 
 

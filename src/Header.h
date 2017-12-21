@@ -83,6 +83,11 @@ public:
 	u_int getMinuto() {
 		return minuto;
 	}
+
+	void setDia(u_int dia){
+		this->dia = dia;
+	}
+
 	std::string getDataString(){
 		std::stringstream devolver;
 		devolver << ano << "-" << mes << "-" << dia << "-" << hora << "-" << minuto;
@@ -93,6 +98,38 @@ public:
 		return Data(this->ano + a.ano, this->mes + a.mes, this->dia + a.dia,
 				this->hora + a.hora, this->minuto + a.minuto);
 	}
+
+	int operator -(const Data & a){
+		Data temp (this->ano, this->mes, this->dia, this->hora, this->minuto);
+		Data temp1 = a;
+		int ndias = 0;
+		if(temp < temp1){
+			while(true){
+			if(temp.getAno()==temp1.getAno() && temp.getMes()==temp1.getMes() && (temp1.getDia() == (temp.getDia() + 1)) && temp.getHora() >= temp1.getHora()){
+				if(temp.getMinuto() > temp1.getMinuto()){
+					return ndias;
+				}
+			}
+			temp.setDia(temp.getDia() + 1);
+			}
+		}
+		else if(temp1 < temp){
+			while(true){
+			if(temp1.getAno()==temp.getAno() && temp1.getMes()==temp.getMes() && (temp.getDia() == (temp1.getDia() + 1)) && temp1.getHora() >= temp.getHora()){
+				if(temp1.getMinuto() > temp.getMinuto()){
+					return ndias;
+				}
+			}
+			temp1.setDia(temp1.getDia() + 1);
+			}
+		}
+
+		else{ // se forem iguais
+			return ndias;
+		}
+	}
+
+
 	bool operator ==(const Data & a) {
 		return (this->ano == a.ano && this->mes == a.mes && this->dia == a.dia
 				&& this->hora == a.hora && this->minuto == a.minuto);
