@@ -105,20 +105,28 @@ public:
 		int ndias = 0;
 		if(temp < temp1){
 			while(true){
-			if(temp.getAno()==temp1.getAno() && temp.getMes()==temp1.getMes() && (temp1.getDia() == (temp.getDia() + 1)) && temp.getHora() >= temp1.getHora()){
-				if(temp.getMinuto() > temp1.getMinuto()){
-					return ndias;
+			if(temp.getAno()==temp1.getAno() && temp.getMes()==temp1.getMes() && (temp1.getDia() == (temp.getDia() + 1))){
+				if(temp.getHora() == temp1.getHora()){
+					if(temp.getMinuto() >= temp1.getMinuto()){
+						return ndias;
+					}
 				}
+				else if(temp.getHora() > temp1.getHora())
+					return ndias;
 			}
 			temp.setDia(temp.getDia() + 1);
 			}
 		}
 		else if(temp1 < temp){
 			while(true){
-			if(temp1.getAno()==temp.getAno() && temp1.getMes()==temp.getMes() && (temp.getDia() == (temp1.getDia() + 1)) && temp1.getHora() >= temp.getHora()){
-				if(temp1.getMinuto() > temp.getMinuto()){
-					return ndias;
+			if(temp1.getAno()==temp.getAno() && temp1.getMes()==temp.getMes() && (temp.getDia() == (temp1.getDia() + 1))){
+				if(temp1.getHora() == temp.getHora()){
+					if(temp1.getMinuto() >= temp.getMinuto()){
+						return ndias;
+					}
 				}
+				else if(temp1.getHora() > temp.getHora())
+					return ndias;
 			}
 			temp1.setDia(temp1.getDia() + 1);
 			}
