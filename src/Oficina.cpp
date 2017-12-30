@@ -4,11 +4,27 @@
 using namespace std;
 
 
-u_int Oficina::getDisponibilidade(){
+u_int Oficina::getDisponibilidade() const{
 	return disponibilidade;
 }
 
-std::vector<std::string> Oficina::getMarcas() const{
+Data Oficina::getUltimaData() const{
+	return utimaData;
+}
+
+void Oficina::setData(Data date){
+	this->utimaData = date;
+}
+
+string Oficina::getNome(){
+	return nome;
+}
+
+void Oficina::setNome(string nome){
+	this->nome = nome;
+}
+
+vector<string> Oficina::getMarcas() const{
 	return marcas;
 }
 
@@ -16,7 +32,22 @@ void Oficina::setDisponibilidade(u_int disponibilidade){
 	this->disponibilidade = disponibilidade;
 }
 
+void Oficina::setMarcas(vector<string> marcas){
+	this->marcas = marcas;
+}
+
 bool Oficina::operator<(Oficina &of1){
 	return (disponibilidade < of1.getDisponibilidade());
+}
+
+void Oficina::lerInfo(stringstream &ss){
+	string nome;
+	vector<string> marcas;
+	ss >> nome;
+	while (ss >> nome){
+		marcas.push_back(nome);
+	}
+	this->setNome(nome);
+	this->setMarcas(marcas);
 }
 
