@@ -5,12 +5,15 @@
 #include "Oficina.h"
 #include "Acidente.h"
 #include "PostoSocorro.h"
+#include "Condutor.h"
 
 void eNumero(std::string testar);
+
 class Menu{
 	Prior_queu oficinas;
 	std::vector<Acidente*> acidentes; /**< Vetor de acidentes*/
 	std::vector<PostoSocorro*> postos_socorro; /**< Vetor dos postos de socorro*/
+	tabHCondutor condutores;
 	bool terminar; /**< booleana para parar o ciclo do menu*/
 public:
 	//Construtores
@@ -225,7 +228,15 @@ public:
 
 	void EscreveFicheiroOficina();
 
-	void ciarOficina();
+	void criarOficina();
+
+
+	//unordered set
+	void adiciona_condutor(Condutor c1);
+
+	void remover_condutores_antigos(Data d1);
+
+
 };
 
 

@@ -1081,6 +1081,10 @@ void Menu::atribuiAcidentes(){
 
 			//depois de atribuir acidentes
 
+
+
+			/*
+
 			////Arranjar os carros/////
 
 
@@ -1106,6 +1110,8 @@ void Menu::atribuiAcidentes(){
 				}
 			}
 			oficinas = temp;
+
+			*/
 		}
 
 
@@ -1158,7 +1164,7 @@ void Menu::EscreveFicheiroOficina() {
 }
 
 
-void Menu::ciarOficina(){
+void Menu::criarOficina(){
 	cout << "Indique o nome da Oficina: ";
 	string nome;
 	cin >> nome;
@@ -1212,4 +1218,60 @@ void Menu::ciarOficina(){
 
 	a->setMarcas(marcas);
 }
+
+
+
+
+//unordered_set
+
+void Menu::adiciona_condutor(Condutor c1){
+	auto it = this->condutores.find(c1);
+
+	if(it == condutores.end()){
+		//não existe ainda ninguém com esse nome
+		condutores.insert(c1);
+		return;
+	}
+	else{
+		//já existe alguém com esse nome
+		if((*it).getData() < c1.getData()){
+			condutores.erase(it);
+			condutores.insert(c1);
+		}
+	}
+
+	return;
+}
+
+
+
+
+
+void Menu::remover_condutores_antigos(Data d1){
+
+	auto it_aux = condutores.begin();
+
+	while(dif_maior_5_anos(((*it_aux).getData()),d1)){
+		condutores.erase(it_aux);
+		it_aux = condutores.begin();
+
+		if(it_aux == condutores.end()){
+			return;
+		}
+	}
+
+
+	for(auto it = condutores.begin(); it != condutores.end();){
+		it++;
+		if(dif_maior_5_anos(((*it).getData()),d1)){
+			condutores.erase(it);
+			it = it_aux;
+		}
+		it_aux = it;
+	}
+
+}
+
+
+
 

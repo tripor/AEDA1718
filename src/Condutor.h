@@ -3,7 +3,6 @@
 
 #include "Header.h"
 
-
 class Condutor{
 protected:
 	std::string nome;
@@ -20,7 +19,22 @@ public:
 
 };
 
+typedef std::unordered_set<Condutor> tabH;
 
+struct condutor_Hash
+{
+	int operator() (const Condutor & cond) const
+	{
+		return 0;
+	}
+
+	bool operator() (const Condutor & c1, const Condutor & c2) const
+	{
+		return (c1.getName() == c2.getName());
+	}
+};
+
+typedef std::unordered_set<Condutor, condutor_Hash, condutor_Hash> tabHCondutor;
 
 
 

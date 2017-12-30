@@ -11,6 +11,7 @@
 #include <queue>
 #include <cstdlib>
 #include <algorithm>
+#include <unordered_set>
 
 typedef unsigned int u_int;
 
@@ -171,7 +172,26 @@ public:
 		ss << ano << "-" << mes << "-" << dia << " " << hora << ":" << minuto;
 		return ss.str();
 	}
+
 };
+
+bool dif_maior_5_anos(Data d1, Data d2){
+
+	if(d2.getAno() - d1.getAno() > 5){
+		return true;
+	}
+	else if(d2.getAno() - d1.getAno() < 5){
+		return false;
+	}
+	else if(d2.getMes() > d1.getMes()){
+		return true;
+	}
+	else if((d2.getMes() == d1.getMes()) && (d2.getDia() > d1.getDia())){
+		return true;
+	}
+	return false;
+
+}
 
 
 u_int nCarrosBombeirosArea(u_int a);
