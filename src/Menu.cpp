@@ -695,63 +695,50 @@ void Menu::criarPosto(){
 
 void Menu::criarCondutor(){
 
+	string nome;
+	Condutor a;
 
+	getline(cin,nome);
 
-	/*
-	string opcao;
-	cout << endl;
-	cout << "+----------------------------------------+" << endl;
-	cout << "|   Indique o tipo de posto:             |" << endl;
-	cout << "|   1 - Bombeiros                        |" << endl;
-	cout << "|   2 - Policia                          |" << endl;
-	cout << "|   3 - INEM                             |" << endl;
-	cout << "|   0 - Voltar ao Menu Inicial           |" << endl;
-	cout << "+----------------------------------------+" << endl;
-
-	cout << "Indique o tipo de acidente: ";
-	getline(cin,opcao);
-
-	if (opcao.size() != 1) {
-		throw new Tamanho_Input_Invalido(opcao.size());
+	if (nome.size() != 1) {
+		throw new Tamanho_Input_Invalido(nome.size());
 	}
 
+	string anot, mest, diat, horat, minutot;
+	u_int ano, mes, dia, hora, minuto;
+	cout << "\nAno: ";
+	getline(cin,anot);
+	eNumero(anot);
+	ano = stoi(anot);
+	if(ano<=0)throw new Data_Invalida(ano,"ano");
 
-	PostoSocorro *a;
+	cout << "\nMes: ";
+	getline(cin, mest);
+	eNumero(mest);
+	mes = stoi(mest);
+	if(mes>12 || mes<=0)throw new Data_Invalida(mes,"mês");
 
-	if (opcao == "1") {
-		try {
-			a = new Bombeiros;
-			a->infoUtilizadorGeral();
-			a->infoUtilizador();
-			this->adicionaPostosSocorro(a);
-		} catch (Erro *e) {
-			cout << e->getInfoErro() << endl;
-		}
-	}
+	cout << "\nDia: ";
+	getline(cin, diat);
+	eNumero(diat);
+	dia = stoi(diat);
+	if(dia>31 || dia<=0)throw new Data_Invalida(dia,"dia");
 
-	else if (opcao == "2") {
-		try {
-			a = new Policia;
-			a->infoUtilizadorGeral();
-			a->infoUtilizador();
-			this->adicionaPostosSocorro(a);
-		} catch (Erro *e) {
-			cout << e->getInfoErro() << endl;
-		}
-	} else if (opcao == "3") {
-		try {
-			a = new Inem;
-			a->infoUtilizadorGeral();
-			a->infoUtilizador();
-			this->adicionaPostosSocorro(a);
-		} catch (Erro *e) {
-			cout << e->getInfoErro() << endl;
-		}
-	} else if (opcao == "0") {
-		return;
-	} else
-		throw new Opcao_Nao_Valida(opcao);
-*/
+	cout << "\nHora: ";
+	getline(cin, horat);
+	eNumero(horat);
+	hora = stoi(horat);
+	if(hora>23 || hora<=0)throw new Data_Invalida(hora,"hora");
+
+	cout << "\nMinuto: ";
+	getline(cin, minutot);
+	eNumero(minutot);
+	minuto = stoi(minutot);
+	if(minuto>=60 || minuto<=0)throw new Data_Invalida(minuto,"minuto");
+
+	a.setName(nome);
+	a.setData(Data(ano, mes, dia, hora, minuto));
+	this->adiciona_condutor(a);
 
 }
 
