@@ -13,6 +13,25 @@ int x_glob;
 int y_glob;
 
 
+bool dif_maior_5_anos(Data d1, Data d2){
+
+	if(d2.getAno() - d1.getAno() > 5){
+		return true;
+	}
+	else if(d2.getAno() - d1.getAno() < 5){
+		return false;
+	}
+	else if(d2.getMes() > d1.getMes()){
+		return true;
+	}
+	else if((d2.getMes() == d1.getMes()) && (d2.getDia() > d1.getDia())){
+		return true;
+	}
+	return false;
+
+}
+
+
 bool menorDistancia(PostoSocorro* a, PostoSocorro* b){
 	return (sqrt(pow((a->getPos().first - x_glob),2) + pow((a->getPos().second - y_glob),2)) < sqrt(pow((b->getPos().first - x_glob),2) + pow((b->getPos().second - y_glob),2)));
 }
@@ -559,6 +578,41 @@ void Menu::escreverFicheiroPostoSocorro() {
 	//Limpar os vetores
 	this->postos_socorro.clear();
 }
+
+
+void Menu::lerFicheiroCondutores() {
+
+	string linha,nome,data;
+	ifstream ficheiro;
+	ficheiro.open("src/Condutor.txt");
+	while (getline(ficheiro, linha)) {
+		stringstream ss(linha);
+		ss >> nome >> data;
+		Condutor c;
+		c.setName(nome);
+		c.setData(data);
+	}
+	ficheiro.close();
+
+}
+
+void Menu::escreveFicheiroCondutores() {
+	//Abrir o ficheiro e também apagar o que lá esta
+	stringstream ss;
+	ofstream ficheiro("src/Condutor.txt",ofstream::out|ofstream::trunc);
+
+	//Escrever no ficheiro
+	for (auto it = this->condutores.begin(); it != condutores.end(); it++) {
+		ficheiro << (*it).getName() << ' ' << (*it).getData() << endl;
+	}
+	ficheiro.close();
+
+	//Limpar os vetores
+	this->condutores.clear();
+}
+
+
+
 
 
 /////////////////////////////////////

@@ -74,6 +74,17 @@ public:
 	 */
 	void escreverFicheiroPostoSocorro();
 
+	/**
+	* @brief  Le o ficheiro de condutores e adiciona os postos ao vetor de condutores
+	* @return void
+	 */
+	void lerFicheiroCondutores();
+
+	/**
+	* @brief  Escreve no ficheiro de condutores os postos presentes no vetor dos mesmos
+	* @return void
+	 */
+	void escreveFicheiroCondutores();
 
 	//Operacoes com os vetores
 	/**
