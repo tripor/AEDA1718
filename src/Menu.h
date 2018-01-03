@@ -164,6 +164,17 @@ public:
 	 */
 	void menuOpcoesPostosSocorro_1();
 
+	/**
+	* @brief  Menu com as opcoes especificas da classe Condutor
+	* @return void
+	 */
+	void menuOpcoesCondutores_1();
+
+	/**
+	* @brief  Menu com as opcoes especificas da classe Oficina
+	* @return void
+	 */
+	void menuOpcoesOficinas_1();
 
 	//Funcoes menu acidente
 	/**
@@ -179,7 +190,7 @@ public:
 	void removerAcidente();
 
 	/**
-	* @brief   Pergunta ao utilizador o posto a remover
+	* @brief   Pergunta ao utilizador o posto a criar
 	* @return void
 	 */
 	void criarPosto();
@@ -189,6 +200,12 @@ public:
 	* @return void
 	 */
 	void removerPosto();
+
+	/**
+	* @brief   Pergunta ao utilizador o condutor a criar
+	* @return void
+	 */
+	void criarCondutor();
 
 	/**
 	* @brief  Imprime os acidentes alocados a um posto
@@ -232,10 +249,14 @@ public:
 
 
 	//unordered set
+
+
+
 	void adiciona_condutor(Condutor c1);
 
 	void remover_condutores_antigos(Data d1);
 
+	void printCondutores();
 
 };
 

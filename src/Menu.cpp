@@ -198,10 +198,8 @@ void Menu::menuOpcoesIniciais_0(){
 	cout << "|   Lista de Acoes:                   |" << endl;
 	cout << "|   1 - Acoes sobre Acidentes         |" << endl;
 	cout << "|   2 - Acoes sobre Postos de Socorro |" << endl;
-	cout << "|   3 - Listar Acidentes Atribuidos   |" << endl;
-	cout << "|   4 - Listar Postos Atribuidos      |" << endl;
-	cout << "|   5 - Listar Acidentes              |" << endl;
-	cout << "|   6 - Listar Postos de Socorro      |" << endl;
+	cout << "|   3 - Acoes sobre Condutores        |" << endl;
+	cout << "|   4 - Acoes sobre Oficinas          |" << endl;
 	cout << "|   0 - Sair                          |" << endl;
 	cout << "+-------------------------------------+" << endl;
 
@@ -224,22 +222,12 @@ void Menu::menuOpcoesIniciais_0(){
 	}
 	else if(opcao == "3")
 	{
-		this->printAcidentesAlocados();
+		this->menuOpcoesCondutores_1();
 		//system("pause");
 	}
 	else if(opcao == "4")
 	{
-		this->printPostosComAcidenteAlocado();
-		//system("pause");
-	}
-	else if(opcao == "5")
-	{
-		this->printAcidentes();
-		//system("pause");
-	}
-	else if(opcao == "6")
-	{
-		this->printPostos();
+		this->menuOpcoesOficinas_1();
 		//system("pause");
 	}
 	else if (opcao == "0")
@@ -263,6 +251,8 @@ void Menu::menuOpcoesAcidente_1() {
 	cout << "|   Lista de Acoes:                     |" << endl;
 	cout << "|   1 - Reportar um Acidente            |" << endl;
 	cout << "|   2 - Remover um Acidente             |" << endl;
+	cout << "|   3 - Listar todos os Acidentes       |" << endl;
+	cout << "|   4 - Listar os Postos Atribuidos     |" << endl;
 	cout << "|   0 - Voltar ao menu inicial          |" << endl;
 	cout << "+---------------------------------------+" << endl;
 
@@ -286,6 +276,19 @@ void Menu::menuOpcoesAcidente_1() {
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
+	} else if (opcao == "3") {
+		try {
+			this->printAcidentes();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "4") {
+		try {
+			this->printPostosComAcidenteAlocado();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+
 	} else if (opcao == "0") {
 		return;
 	} else {
@@ -299,12 +302,14 @@ void Menu::menuOpcoesPostosSocorro_1(){
 
 	string opcao;
 	cout << endl;
-	cout << "+---------Menu Opcoes de Postos de Socorro------+" << endl;
-	cout << "|    Lista de Acoes:                            |" << endl;
-	cout << "|    1 - Adicionar um Posto                     |" << endl;
-	cout << "|    2 - Remover um Posto                       |" << endl;
-	cout << "|    0 - Voltar ao menu inicial                 |" << endl;
-	cout << "+-----------------------------------------------+" << endl;
+	cout << "+---------Menu Opcoes de Postos de Socorro---------+" << endl;
+	cout << "|    Lista de Acoes:                               |" << endl;
+	cout << "|    1 - Adicionar um Posto                        |" << endl;
+	cout << "|    2 - Remover um Posto                          |" << endl;
+	cout << "|    3 - Listar todos os Postos                    |" << endl;
+	cout << "|    4 - Listar Acidentes Atribuidos a um Posto    |" << endl;
+	cout << "|    0 - Voltar ao menu inicial                    |" << endl;
+	cout << "+--------------------------------------------------+" << endl;
 
 	cout << "Indique o digito correspondente a opcao desejada: ";
 
@@ -326,6 +331,18 @@ void Menu::menuOpcoesPostosSocorro_1(){
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
+	} else if (opcao == "3") {
+		try {
+			this->printPostos();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "4") {
+		try {
+			this->printAcidentesAlocados();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
 	} else if (opcao == "0") {
 		return;
 	} else {
@@ -333,6 +350,108 @@ void Menu::menuOpcoesPostosSocorro_1(){
 	}
 
 }
+
+void Menu::menuOpcoesCondutores_1(){
+
+	string opcao;
+	cout << endl;
+	cout << "+-----------Menu Opcoes de Condutores-----------+" << endl;
+	cout << "|    Lista de Acoes:                            |" << endl;
+	cout << "|    1 - Adicionar um Condutor                  |" << endl;
+	cout << "|    2 - Remover um Condutor                    |" << endl;
+	cout << "|    3 - Remover Condutores com mais de 5 anos  |" << endl;
+	cout << "|    4 - Listar todos os Condutores             |" << endl;
+	cout << "|    0 - Voltar ao menu inicial                 |" << endl;
+	cout << "+-----------------------------------------------+" << endl;
+
+	cout << "Indique o digito correspondente a opcao desejada: ";
+
+	getline(cin,opcao);
+
+	if (opcao.size() != 1)
+	{
+		throw new Tamanho_Input_Invalido(opcao.size());
+	}
+	if (opcao == "1") {
+		try {
+			//this->criarPosto();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "2") {
+		try {
+			//this->removerPosto();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "3") {
+		try {
+			//this->removerPosto();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "4") {
+		try {
+			//this->removerPosto();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "0") {
+		return;
+	} else {
+		throw new Opcao_Nao_Valida(opcao);
+	}
+
+}
+
+
+
+void Menu::menuOpcoesOficinas_1(){
+
+	string opcao;
+	cout << endl;
+	cout << "+------------Menu Opcoes de Oficinas------------+" << endl;
+	cout << "|    Lista de Acoes:                            |" << endl;
+	cout << "|    1 - Adicionar uma Oficina                  |" << endl;
+	cout << "|    2 - Remover uma Oficina                    |" << endl;
+	cout << "|    3 - Listar todas as Oficinas               |" << endl;
+	cout << "|    0 - Voltar ao menu inicial                 |" << endl;
+	cout << "+-----------------------------------------------+" << endl;
+
+	cout << "Indique o digito correspondente a opcao desejada: ";
+
+	getline(cin,opcao);
+
+	if (opcao.size() != 1)
+	{
+		throw new Tamanho_Input_Invalido(opcao.size());
+	}
+	if (opcao == "1") {
+		try {
+			//this->criarPosto();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "2") {
+		try {
+			//this->removerPosto();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "3") {
+		try {
+			//this->removerPosto();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "0") {
+		return;
+	} else {
+		throw new Opcao_Nao_Valida(opcao);
+	}
+
+}
+
 
 
 /////////////////////////////////
@@ -573,6 +692,72 @@ void Menu::criarPosto(){
 
 
 }
+
+void Menu::criarCondutor(){
+
+
+
+	/*
+	string opcao;
+	cout << endl;
+	cout << "+----------------------------------------+" << endl;
+	cout << "|   Indique o tipo de posto:             |" << endl;
+	cout << "|   1 - Bombeiros                        |" << endl;
+	cout << "|   2 - Policia                          |" << endl;
+	cout << "|   3 - INEM                             |" << endl;
+	cout << "|   0 - Voltar ao Menu Inicial           |" << endl;
+	cout << "+----------------------------------------+" << endl;
+
+	cout << "Indique o tipo de acidente: ";
+	getline(cin,opcao);
+
+	if (opcao.size() != 1) {
+		throw new Tamanho_Input_Invalido(opcao.size());
+	}
+
+
+	PostoSocorro *a;
+
+	if (opcao == "1") {
+		try {
+			a = new Bombeiros;
+			a->infoUtilizadorGeral();
+			a->infoUtilizador();
+			this->adicionaPostosSocorro(a);
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	}
+
+	else if (opcao == "2") {
+		try {
+			a = new Policia;
+			a->infoUtilizadorGeral();
+			a->infoUtilizador();
+			this->adicionaPostosSocorro(a);
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "3") {
+		try {
+			a = new Inem;
+			a->infoUtilizadorGeral();
+			a->infoUtilizador();
+			this->adicionaPostosSocorro(a);
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "0") {
+		return;
+	} else
+		throw new Opcao_Nao_Valida(opcao);
+*/
+
+}
+
+
+
+
 
 void Menu::removerAcidente(){
 
@@ -1260,7 +1445,6 @@ void Menu::remover_condutores_antigos(Data d1){
 		}
 	}
 
-
 	for(auto it = condutores.begin(); it != condutores.end();){
 		it++;
 		if(dif_maior_5_anos(((*it).getData()),d1)){
@@ -1273,5 +1457,19 @@ void Menu::remover_condutores_antigos(Data d1){
 }
 
 
+void Menu::printCondutores() {
+	cout << endl;
+	unsigned int i = 1;
+
+	for (auto it = this->condutores.begin(); it != condutores.end(); it++) {
+
+		cout << "=====================" << endl;
+		cout << i << "- ";
+		cout << "Nome: " << (*it).getName() << " | ";
+		cout << "Ultima ocorrencia: " << (*it).getData().getDataFormato();
+
+	}
+	cout << "=====================" << endl;
+}
 
 
