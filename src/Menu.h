@@ -274,9 +274,13 @@ public:
 
 	void adiciona_condutor(Condutor c1);
 
-	void remover_condutores_antigos(Data d1);
+	void retirarCondutor(int posicao);
+
+	void remover_condutores_antigos();
 
 	void printCondutores();
+
+	void removerCondutor();
 
 };
 

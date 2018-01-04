@@ -393,25 +393,25 @@ void Menu::menuOpcoesCondutores_1(){
 	}
 	if (opcao == "1") {
 		try {
-			//this->criarPosto();
+			this->criarCondutor();
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
 	} else if (opcao == "2") {
 		try {
-			//this->removerPosto();
+			this->removerCondutor();
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
 	} else if (opcao == "3") {
 		try {
-			//this->removerPosto();
+			this->remover_condutores_antigos();
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
 	} else if (opcao == "4") {
 		try {
-			//this->removerPosto();
+			this->printCondutores();
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
@@ -752,11 +752,9 @@ void Menu::criarCondutor(){
 	string nome;
 	Condutor a;
 
-	getline(cin,nome);
+	cout << "\nNome do condutor: ";
 
-	if (nome.size() != 1) {
-		throw new Tamanho_Input_Invalido(nome.size());
-	}
+	getline(cin,nome);
 
 	string anot, mest, diat, horat, minutot;
 	u_int ano, mes, dia, hora, minuto;
@@ -1307,7 +1305,7 @@ void Menu::atribuiAcidentes(){
 
 			//depois de atribuir acidentes
 
-
+			/*
 
 			////Arranjar os carros/////
 
@@ -1334,6 +1332,9 @@ void Menu::atribuiAcidentes(){
 			}
 			oficinas = temp;
 			////acaba
+
+			*/
+
 		}
 
 
@@ -1513,7 +1514,44 @@ void Menu::adiciona_condutor(Condutor c1){
 
 
 
-void Menu::remover_condutores_antigos(Data d1){
+void Menu::remover_condutores_antigos(){
+
+	if(this->condutores.size()==0) throw new Nao_existem_acidentes(); //mudar a excecao, preciso de uma para condutores
+
+	Data d1;
+	string anot, mest, diat, horat, minutot;
+	u_int ano, mes, dia, hora, minuto;
+	cout << "\nAno: ";
+	getline(cin,anot);
+	eNumero(anot);
+	ano = stoi(anot);
+	if(ano<=0)throw new Data_Invalida(ano,"ano");
+
+	cout << "\nMes: ";
+	getline(cin, mest);
+	eNumero(mest);
+	mes = stoi(mest);
+	if(mes>12 || mes<=0)throw new Data_Invalida(mes,"mês");
+
+	cout << "\nDia: ";
+	getline(cin, diat);
+	eNumero(diat);
+	dia = stoi(diat);
+	if(dia>31 || dia<=0)throw new Data_Invalida(dia,"dia");
+
+	cout << "\nHora: ";
+	getline(cin, horat);
+	eNumero(horat);
+	hora = stoi(horat);
+	if(hora>23 || hora<=0)throw new Data_Invalida(hora,"hora");
+
+	cout << "\nMinuto: ";
+	getline(cin, minutot);
+	eNumero(minutot);
+	minuto = stoi(minutot);
+	if(minuto>=60 || minuto<=0)throw new Data_Invalida(minuto,"minuto");
+
+	d1 = Data(ano, mes, dia, hora, minuto);
 
 	auto it_aux = condutores.begin();
 
@@ -1542,6 +1580,11 @@ void Menu::printCondutores() {
 	cout << endl;
 	unsigned int i = 1;
 
+	if(condutores.size() == 0){
+		cout << "Nao existem condutores registados!\n\n";
+		return;
+	}
+
 	for (auto it = this->condutores.begin(); it != condutores.end(); it++) {
 
 		cout << "=====================" << endl;
@@ -1552,5 +1595,48 @@ void Menu::printCondutores() {
 	}
 	cout << "=====================" << endl;
 }
+
+void Menu::retirarCondutor(int posicao){
+	if(posicao> this->condutores.size())throw new Acidente_Nao_Existente(posicao); //preciso de mais uma exceção
+	u_int ondeEstou=0;
+	for(auto it=this->condutores.begin();it!=this->condutores.end();it++)
+	{
+		if(ondeEstou==posicao-1)
+		{
+			this->condutores.erase(it);
+			return;
+		}
+		ondeEstou++;
+	}
+	throw new Acidente_Nao_Existente(posicao); //preciso de mais exceções
+
+}
+
+
+void Menu::removerCondutor(){
+
+	if(this->condutores.size()==0) throw new Nao_existem_acidentes(); //preciso de mais exceções!
+
+	string opcao;
+
+	this->printCondutores();
+
+	cout << "Indique o numero do condutor a remover: ";
+	getline(cin, opcao);
+	if (opcao == "0") {
+		return;
+	}
+	eNumero(opcao);
+
+	int numero=stoi(opcao);
+	if(numero<0) throw new Numero_negativo(numero);
+	this->retirarCondutor(numero);
+
+
+
+	return;
+
+}
+
 
 

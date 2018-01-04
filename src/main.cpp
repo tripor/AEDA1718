@@ -12,6 +12,8 @@ int main()
 	Menu e1;
 	e1.lerFicheiroAcidente();
 	e1.lerFicheiroPostoSocorro();
+	e1.lerFicheiroCondutores();
+	//e1.lerFicheiroOficina();
 	e1.ordenaVetorAcidentes();
 
 	while (!e1.getTerminar())
@@ -27,6 +29,8 @@ int main()
 	e1.ordenaVetorAcidentes();
 	e1.EscreveFicheiroAcidente();
 	e1.escreverFicheiroPostoSocorro();
+	e1.escreveFicheiroCondutores();
+	//e1.EscreveFicheiroOficina();
 	return 0;
 }
 
