@@ -246,6 +246,11 @@ public:
 
 	//Outros
 
+	/**
+	 * @brief  Atualiza a disponibilidade da oficina
+	 * @param data data do ultimo acdente de viacao
+	 * @return void
+	 */
 	void atualizaDisponibilidade(Data date);
 
 	void inicializaOficinas();

@@ -1437,7 +1437,7 @@ void Menu::criarOficina(){
 	system("cls");
 	}
 	while(i!=0);
-
+	a->setDisponibilidade(0);
 	a->setMarcas(marcas);
 }
 
@@ -1462,6 +1462,7 @@ void Menu::verOficina(){ //para ver a disponibilidade de uma oficina e os carros
 	}
 }
 
+
 void Menu::verOficinaMarcas(){
 	string marca;
 	cout << "Introduza a marca do automóvel" << endl << endl;
@@ -1474,6 +1475,7 @@ void Menu::verOficinaMarcas(){
 				if(oficinas.top()->getMarcas().at(i)==marca){
 					cout<<oficinas.top()->getNome()<<endl;
 					existe = true;
+					break;
 			}
 		}
 			oficinas.pop();
