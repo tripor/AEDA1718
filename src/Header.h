@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <algorithm>
 #include <unordered_set>
+#include <set>
 
 typedef unsigned int u_int;
 
@@ -145,7 +146,7 @@ public:
 		return (this->ano == a.ano && this->mes == a.mes && this->dia == a.dia
 				&& this->hora == a.hora && this->minuto == a.minuto);
 	}
-	bool operator <(const Data & a) {
+	bool operator <(const Data & a) const {
 		if(this->ano < a.ano){
 			return true;
 		}
