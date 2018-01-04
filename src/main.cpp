@@ -13,6 +13,7 @@ int main()
 	e1.lerFicheiroAcidente();
 	e1.lerFicheiroPostoSocorro();
 	e1.ordenaVetorAcidentes();
+	e1.lerFicheiroVeiculo();
 
 	while (!e1.getTerminar())
 	{
@@ -27,6 +28,7 @@ int main()
 	e1.ordenaVetorAcidentes();
 	e1.EscreveFicheiroAcidente();
 	e1.escreverFicheiroPostoSocorro();
+	e1.EscreveFicheiroVeiculo();
 	return 0;
 }
 

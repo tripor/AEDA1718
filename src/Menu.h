@@ -6,6 +6,8 @@
 #include "Acidente.h"
 #include "PostoSocorro.h"
 #include "Condutor.h"
+#include "Veiculo.h"
+#include "BST.h"
 
 void eNumero(std::string testar);
 
@@ -14,6 +16,7 @@ class Menu{
 	std::vector<Acidente*> acidentes; /**< Vetor de acidentes*/
 	std::vector<PostoSocorro*> postos_socorro; /**< Vetor dos postos de socorro*/
 	tabHCondutor condutores;
+	set<Veiculo> veiculos;
 	bool terminar; /**< booleana para parar o ciclo do menu*/
 public:
 	//Construtores
@@ -187,6 +190,12 @@ public:
 	 */
 	void menuOpcoesOficinas_1();
 
+	/**
+	* @brief  Menu com as opcoes especificas da classe Veiculos
+	* @return void
+	*/
+	void menuOpcoesVeiculo_1();
+
 	//Funcoes menu acidente
 	/**
 	* @brief  Permite ao utilizador criar um acidente
@@ -277,6 +286,21 @@ public:
 	void remover_condutores_antigos(Data d1);
 
 	void printCondutores();
+
+	//BST
+
+	void adicionaVeiculo(Veiculo *por);
+
+	void criarVeiculo();
+
+	void removerVeiculo();
+
+	void printVeiculo();
+
+	void lerFicheiroVeiculo();
+
+	void EscreveFicheiroVeiculo();
+
 
 };
 

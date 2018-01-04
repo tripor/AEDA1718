@@ -102,7 +102,7 @@ u_int numeroBombeirosMoradia(){
 }
 
 //Construtor
-Menu::Menu() {
+Menu::Menu(){
 	this->terminar = false;
 	this->acidentes.clear();
 	this->postos_socorro.clear();
@@ -219,6 +219,7 @@ void Menu::menuOpcoesIniciais_0(){
 	cout << "|   2 - Acoes sobre Postos de Socorro |" << endl;
 	cout << "|   3 - Acoes sobre Condutores        |" << endl;
 	cout << "|   4 - Acoes sobre Oficinas          |" << endl;
+	cout << "|   5 - Acoes sobre Veiculos          |" << endl;
 	cout << "|   0 - Sair                          |" << endl;
 	cout << "+-------------------------------------+" << endl;
 
@@ -247,6 +248,11 @@ void Menu::menuOpcoesIniciais_0(){
 	else if(opcao == "4")
 	{
 		this->menuOpcoesOficinas_1();
+		//system("pause");
+	}
+	else if(opcao == "5")
+	{
+		this->menuOpcoesVeiculo_1();
 		//system("pause");
 	}
 	else if (opcao == "0")
@@ -471,6 +477,51 @@ void Menu::menuOpcoesOficinas_1(){
 
 }
 
+void Menu::menuOpcoesVeiculo_1()
+{
+	string opcao;
+	cout << endl;
+	cout << "+------------Menu Opcoes de Veiculos------------+" << endl;
+	cout << "|    Lista de Acoes:                            |" << endl;
+	cout << "|    1 - Adicionar um Veiculo num Acidente      |" << endl;
+	cout << "|    2 - Remover um Veiculo                     |" << endl;
+	cout << "|    3 - Listar todos os Veiculos               |" << endl;
+	cout << "|    0 - Voltar ao menu inicial                 |" << endl;
+	cout << "+-----------------------------------------------+" << endl;
+
+	cout << "Indique o digito correspondente a opcao desejada: ";
+
+	getline(cin,opcao);
+
+	if (opcao.size() != 1)
+	{
+		throw new Tamanho_Input_Invalido(opcao.size());
+	}
+	if (opcao == "1") {
+		try {
+			this->criarVeiculo();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "2") {
+		try {
+			this->removerVeiculo();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "3") {
+		try {
+			this->printVeiculo();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "0") {
+		return;
+	} else {
+		throw new Opcao_Nao_Valida(opcao);
+	}
+
+}
 
 
 /////////////////////////////////
@@ -1554,3 +1605,115 @@ void Menu::printCondutores() {
 }
 
 
+//BST
+void Menu::adicionaVeiculo(Veiculo *por)
+{
+	this->veiculos.insert(*por);
+}
+void Menu::criarVeiculo()
+{
+	string marca;
+	cout << "Marca do veiculo:";
+	getline(cin,marca);
+
+	string anot, mest, diat, horat, minutot;
+	u_int ano, mes, dia, hora, minuto;
+	cout << "\nAno: ";
+	getline(cin,anot);
+	eNumero(anot);
+	ano = stoi(anot);
+	if(ano<=0)throw new Data_Invalida(ano,"ano");
+
+	cout << "\nMes: ";
+	getline(cin, mest);
+	eNumero(mest);
+	mes = stoi(mest);
+	if(mes>12 || mes<=0)throw new Data_Invalida(mes,"mês");
+
+	cout << "\nDia: ";
+	getline(cin, diat);
+	eNumero(diat);
+	dia = stoi(diat);
+	if(dia>31 || dia<=0)throw new Data_Invalida(dia,"dia");
+
+	cout << "\nHora: ";
+	getline(cin, horat);
+	eNumero(horat);
+	hora = stoi(horat);
+	if(hora>23 || hora<=0)throw new Data_Invalida(hora,"hora");
+
+	cout << "\nMinuto: ";
+	getline(cin, minutot);
+	eNumero(minutot);
+	minuto = stoi(minutot);
+	if(minuto>=60 || minuto<=0)throw new Data_Invalida(minuto,"minuto");
+
+	for(set<Veiculo>::iterator it=this->veiculos.begin();it!=this->veiculos.end();it++)
+	{
+		Veiculo temp=(*it);
+		if((*it).getMarca()==marca)
+		{
+			Veiculo testar(marca,temp.getQuantidade()+1,Data(ano, mes, dia, hora, minuto));
+			this->veiculos.erase(it);
+			this->veiculos.insert(testar);
+			return;
+		}
+	}
+	Veiculo testar(marca,1,Data(ano, mes, dia, hora, minuto));
+	this->veiculos.insert(testar);
+}
+
+void Menu::removerVeiculo()
+{
+	string testar,marca;
+	unsigned int numero;
+	cout << "Qual a marca para apagar: ";
+	getline(cin,marca);
+	cout << "\nQual o ano até que pretende apagar: ";
+	getline(cin, testar);
+	eNumero (testar);
+	numero = stoi(testar);
+	for(set<Veiculo>::iterator it=this->veiculos.begin();it!=this->veiculos.end();it++)
+	{
+		if((*it).getData().getAno()<=numero && (*it).getMarca()==marca)
+		{
+			this->veiculos.erase(it);
+			return;
+		}
+	}
+}
+
+void Menu::printVeiculo()
+{
+	for(set<Veiculo>::iterator it=this->veiculos.begin();it!=this->veiculos.end();it++)
+	{
+		cout << "Marca: " << (*it).getMarca() << " | " << "Quantidades de acidentes: " << (*it).getQuantidade() << " | " << "Data: " << (*it).getData().getDataFormato() << endl;
+	}
+}
+
+void Menu::lerFicheiroVeiculo()
+{
+	string linha;
+	ifstream ficheiro;
+	ficheiro.open("src/Veiculo.txt");
+	while (getline(ficheiro, linha)) {
+		stringstream ss(linha);
+		Veiculo* temp = new Veiculo();
+		temp->lerInfo(ss);
+		this->adicionaVeiculo(temp);
+	}
+	ficheiro.close();
+}
+
+void Menu::EscreveFicheiroVeiculo()
+{
+	stringstream ss;
+	ofstream ficheiro("src/Veiculo.txt", ofstream::out | ofstream::trunc);
+
+	//Escrever no ficheiro
+	for(set<Veiculo>::iterator it=this->veiculos.begin();it!=this->veiculos.end();it++) {
+		ficheiro << (*it).getMarca() << " " << (*it).getQuantidade() << " " << (*it).getData().getDataString() << endl;
+	}
+	ficheiro.close();
+	this->veiculos.clear();
+}
