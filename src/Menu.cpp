@@ -963,11 +963,11 @@ void Menu::atualizaDisponibilidade(Data date){
 	int disp = 0;
 	for(unsigned int i = 0; i < temp.size(); i++){
 		disp = date - temp.at(i)->getUltimaData();
-		if((temp.at(i)->getDisponibilidade() - i) <= 0){
+		if((temp.at(i)->getDisponibilidade() - disp) <= 0){
 			temp.at(i)->setDisponibilidade(0);
 		}
 		else {
-			temp.at(i)->setDisponibilidade((temp.at(i)->getDisponibilidade() - i));
+			temp.at(i)->setDisponibilidade((temp.at(i)->getDisponibilidade() - disp));
 		}
 	}
 
@@ -1309,16 +1309,14 @@ void Menu::atribuiAcidentes(){
 
 
 
-			/*
-
 			////Arranjar os carros/////
 
 
 			Prior_queu temp = oficinas;
 			atualizaDisponibilidade(acidentes.at(i)->getData());
 			for(unsigned int m = 0; m < MarcasVeiculos.size(); m++){ //para cada marca
-				for(unsigned int n = 0; n < oficinas.top()->getMarcas().size(); n++){ // para cada marca da oficina
-					while(!oficinas.empty()){
+				while(!oficinas.empty()){
+					for(unsigned int n = 0; n < oficinas.top()->getMarcas().size(); n++){ // para cada marca da oficina
 						if(oficinas.top()->getMarcas().at(n) == MarcasVeiculos.at(m)){
 							Oficina *oftemp = new Oficina();
 							oftemp = oficinas.top();
@@ -1326,26 +1324,24 @@ void Menu::atribuiAcidentes(){
 							oftemp->setDisponibilidade(oftemp->getDisponibilidade() + 1);
 							oftemp->setData(acidentes.at(i)->getData()); //atualiza a utima data
 							temp.push(oftemp);//coloca no temporario
+							break; //ja encontrou
 						}
-						else{
-							temp.push(oficinas.top());
-							oficinas.pop();
-						}
+
 					}
 
+					oficinas.pop();
 				}
 			}
 			oficinas = temp;
-
-			*/
+			////acaba
 		}
 
 
 	}
 
 
-
 }
+
 
 void Menu::adicionaOficina(Oficina *oficina){
 	oficinas.push(oficina);
@@ -1394,7 +1390,7 @@ void Menu::criarOficina(){
 	cout << "Indique o nome da Oficina: ";
 	string nome;
 	cin >> nome;
-	Oficina *a;
+	Oficina *a = new Oficina;
 	a->setNome(nome); //atribui um nome
 	cout << "Indique as marcas de automóveis que a oficina pode reparar: ";
 	int i = 0; // para escolher
@@ -1443,6 +1439,48 @@ void Menu::criarOficina(){
 	while(i!=0);
 
 	a->setMarcas(marcas);
+}
+
+
+void Menu::verOficina(){ //para ver a disponibilidade de uma oficina e os carros que repara
+	string name;
+	cout << "Introduza o nome da Oficina" << endl << endl;
+	cin >> name;
+	Prior_queu temp = oficinas;
+	while(!oficinas.empty()){
+		if(oficinas.top()->getNome()==name){
+			cout<<"Disponibilidade: "<<oficinas.top()->getDisponibilidade()<<endl;
+			cout<<"Marcas que repara: "<<endl;
+			for(unsigned int i = 0; i < oficinas.top()->getMarcas().size(); i++){
+				cout << oficinas.top()->getMarcas().at(i) << endl;
+			}
+			break;
+		}
+		else{
+			oficinas.pop();
+		}
+	}
+}
+
+void Menu::verOficinaMarcas(){
+	string marca;
+	cout << "Introduza a marca do automóvel" << endl << endl;
+	cin >> marca;
+	bool existe = false;
+	Prior_queu temp = oficinas;
+	cout<<"Oficinas que reparam: "<<marca<<endl;
+	while(!oficinas.empty()){
+			for(unsigned int i = 0; i < oficinas.top()->getMarcas().size(); i++){
+				if(oficinas.top()->getMarcas().at(i)==marca){
+					cout<<oficinas.top()->getNome()<<endl;
+					existe = true;
+			}
+		}
+			oficinas.pop();
+	}
+	if(!existe){
+		cout<<"Nao existem oficinas que reparam: "<<marca<<endl;
+	}
 }
 
 

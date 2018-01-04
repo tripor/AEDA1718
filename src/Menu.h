@@ -258,6 +258,10 @@ public:
 
 	void criarOficina();
 
+	void verOficina();
+
+	void verOficinaMarcas();
+
 
 	//unordered set
 

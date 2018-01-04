@@ -116,6 +116,7 @@ public:
 					return ndias;
 			}
 			temp.setDia(temp.getDia() + 1);
+			ndias++;
 			}
 		}
 		else if(temp1 < temp){
@@ -130,6 +131,7 @@ public:
 					return ndias;
 			}
 			temp1.setDia(temp1.getDia() + 1);
+			ndias++;
 			}
 		}
 
