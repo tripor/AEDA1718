@@ -262,48 +262,127 @@ public:
 	 */
 	void atualizaDisponibilidade(Data date);
 
+	/**
+	 * @brief  "Reinicia" os valores temporarios das oficinas
+	 * @return void
+	 */
 	void inicializaOficinas();
 
+	/**
+	 * @brief  Adiciona uma oficina
+	 * @param  Oficina a adicionar
+	 * @return void
+	 */
 	void adicionaOficina(Oficina oficina);
 
+	/**
+	 * @brief  Ler o ficheiro e atualizar a priority queue
+	 * @return void
+	 */
 	void lerFicheiroOficina();
 
+	/**
+	 * @brief  Escreve no ficheiro os valores na priority queue "oficinas"
+	 * @return void
+	 */
 	void EscreveFicheiroOficina();
 
+	/**
+	 * @brief  Criar uma oficina, e pergunta ao utilizador os valores
+	 * @return void
+	 */
 	void criarOficina();
 
+	/**
+	 * @brief  Lista as oficinas com o nome que pergunta ao utilizador
+	 * @return void
+	 */
 	void verOficina();
 
+	/**
+	 * @brief  Lista as oficinas que reparam a marca indicada pelo utilizador
+	 * @return void
+	 */
 	void verOficinaMarcas();
 
+	/**
+	 * @brief  Lista todas as oficinas
+	 * @return void
+	 */
 	void printOficinas();
 
 	//unordered set
 
 
-
+	/**
+	 * @brief  Adiciona um condutor
+	 * @param  Condutor a adicionar
+	 * @return void
+	 */
 	void adiciona_condutor(Condutor c1);
 
+	/**
+	 * @brief  Retira um condutor
+	 * @param  Posicao da lista do condutor a retirar
+	 * @return void
+	 */
 	void retirarCondutor(u_int posicao);
 
+	/**
+	 * @brief  Retira todos os condutor cujo ultima ocorrência foi há mais de 5 anos
+	 * @return void
+	 */
 	void remover_condutores_antigos();
 
+	/**
+	 * @brief  Imprime todos os condutores
+	 * @return void
+	 */
 	void printCondutores();
 
+	/**
+	 * @brief  Remove o condutor indicado pelo utilizador
+	 * @return void
+	 */
 	void removerCondutor();
 
 	//BST
 
+	/**
+	 * @brief  Adiciona um veiculo
+	 * @param  Veiculo a adicionar
+	 * @return void
+	 */
 	void adicionaVeiculo(Veiculo *por);
 
+	/**
+	 * @brief  Cria um veiculo
+	 * @return void
+	 */
 	void criarVeiculo();
 
+	/**
+	 * @brief  Remove um veiculo
+	 * @return void
+	 */
 	void removerVeiculo();
 
+	/**
+	 * @brief  Lista todos os veiculos
+	 * @return void
+	 */
 	void printVeiculo();
 
+	/**
+	 * @brief  Le o ficheiro de veiculos
+	 * @return void
+	 */
 	void lerFicheiroVeiculo();
 
+	/**
+	 * @brief  Escreve no ficheiro de veiculos
+	 * @return void
+	 */
 	void EscreveFicheiroVeiculo();
 
 };

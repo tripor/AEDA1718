@@ -108,21 +108,21 @@ public:
 
 		struct tm data1, data2;
 
-		data1.tm_year = temp.ano;
+		data1.tm_year = temp.ano - 1900;
 		data1.tm_mon = temp.mes;
 		data1.tm_mday = temp.dia;
 		data1.tm_hour = temp.hora;
 		data1.tm_min = temp.minuto;
 		data1.tm_sec = 0;
 
-		data2.tm_year = temp1.ano;
+		data2.tm_year = temp1.ano - 1900;
 		data2.tm_mon = temp1.mes;
 		data2.tm_mday = temp1.dia;
 		data2.tm_hour = temp1.hora;
 		data2.tm_min = temp1.minuto;
 		data2.tm_sec = 0;
 
-		double seconds = difftime(mktime(&data2),mktime(&data1));
+		double seconds = difftime(mktime(&data1),mktime(&data2));
 
 		int dias = (seconds/86400);
 

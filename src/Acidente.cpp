@@ -511,9 +511,9 @@ void AcidenteViacao::infoUtilizador(){
 	cout << "\nNumero de veiculos envolvidos: ";
 	getline(cin,opcao);
 	eNumero(opcao);
-	n = stoi(opcao);
+	u_int m = stoi(opcao);
 
-	this->setNumeroVeiculosEnvolvidos(n);
+	this->setNumeroVeiculosEnvolvidos(m);
 
 	cout << "\nLista de opções: \n";
 	cout << "1 - Estrada Nacional\n";
@@ -532,7 +532,8 @@ void AcidenteViacao::infoUtilizador(){
 	else throw new Opcao_Nao_Valida(opcao);
 
 	vector<string> marcas;//para guardar as marcas do utilizador
-	for(unsigned int i = 0; i <= n; i++){
+	string value;
+	for(unsigned int i = 0; i < m; i++){
 
 		cout << endl;
 		cout << "+----------------------------------------+" << endl;
@@ -545,8 +546,9 @@ void AcidenteViacao::infoUtilizador(){
 		cout << "|   6 - Porsche                          |" << endl;
 		cout << "+----------------------------------------+" << endl;
 		cout << "Indique a marca: ";
-		cin >> i;
-		switch(i){
+		getline(cin,value);
+		int val = stoi(value);
+		switch(val){
 			case(1): {
 				marcas.push_back("Audi");
 				break;

@@ -202,6 +202,7 @@ void Menu::inicializaOficinas(){
 	Data date = Data(1,1,1,1,1);
 	for(unsigned int i = 0; i < temp.size(); i++){
 		temp.at(i).setData(date);
+		temp.at(i).setDisponibilidade(0);
 		oficinas.push(temp.at(i));
 	}
 
@@ -899,7 +900,7 @@ void Menu::removerPosto(){
 
 void Menu::printAcidentesAlocados(){
 
-	if(this->postos_socorro.size()==0) throw new Nao_existem_postos();
+	if(this->postos_socorro.size()==0) throw new Nao_existem_postos_listar();
 
 	string opcao;
 
@@ -924,7 +925,7 @@ void Menu::printAcidentesAlocados(){
 
 void Menu::printPostosComAcidenteAlocado(){
 
-	if(this->acidentes.size()==0) throw new Nao_existem_acidentes();
+	if(this->acidentes.size()==0) throw new Nao_existem_acidentes_listar();
 
 	string opcao;
 
@@ -968,6 +969,8 @@ void Menu::printPostosComAcidenteAlocado(){
 
 
 void Menu::printAcidentes() {
+	if(this->acidentes.size() ==0) throw new Nao_existem_acidentes_listar();
+
 	cout << endl;
 	for (unsigned int i = 0; i < acidentes.size(); i++) {
 
@@ -985,6 +988,8 @@ void Menu::printAcidentes() {
 }
 
 void Menu::printPostos(){
+	if(this->postos_socorro.size()==0) throw new Nao_existem_postos_listar();
+
 	cout << endl;
 	for(unsigned int i = 0; i<postos_socorro.size(); i++){
 		cout << "=====================" << endl;
@@ -1013,11 +1018,12 @@ void Menu::atualizaDisponibilidade(Data date){
 	int disp = 0;
 	for(unsigned int i = 0; i < temp.size(); i++){
 		disp = date - temp.at(i).getUltimaData();
-		if((temp.at(i).getDisponibilidade() - disp) <= 0){
+		int val = temp.at(i).getDisponibilidade();
+		if((val - disp) <= 0){
 			temp.at(i).setDisponibilidade(0);
 		}
 		else {
-			temp.at(i).setDisponibilidade((temp.at(i).getDisponibilidade() - disp));
+			temp.at(i).setDisponibilidade((val - disp));
 		}
 	}
 
@@ -1441,30 +1447,14 @@ void Menu::EscreveFicheiroOficina() {
 	}
 }
 
-/*
-
-
-	//Abrir o ficheiro e também apagar o que lá esta
-	stringstream ss;
-	ofstream ficheiro("src/Condutor.txt",ofstream::out|ofstream::trunc);
-
-	//Escrever no ficheiro
-	for (auto it = this->condutores.begin(); it != condutores.end(); it++) {
-		ficheiro << (*it).getName() << ' ' << (*it).getData() << endl;
-	}
-	ficheiro.close();
-
-
-*/
-
 void Menu::criarOficina(){
 	cout << "Indique o nome da Oficina: ";
-	string nome;
+	string nome, opcao;
 	cin >> nome;
 	Oficina a;
 	a.setNome(nome); //atribui um nome
 	cout << "Indique as marcas de automóveis que a oficina pode reparar: ";
-	int i = 0; // para escolher
+	int val = 0; // para escolher
 	vector<string> marcas;//para guardar as marcas do utilizador
 	do{
 	cout << endl;
@@ -1479,8 +1469,14 @@ void Menu::criarOficina(){
 	cout << "|   0 - Concluir                         |" << endl;
 	cout << "+----------------------------------------+" << endl;
 	cout << "Indique as marcas pretendidas: ";
-	cin >> i;
-	switch(i){
+	getline(cin,opcao);
+	val = stoi(opcao);
+	if(opcao.size()!=1)
+	{
+		throw new Tamanho_Input_Invalido(opcao.size());
+	}
+
+	switch(val){
 		case(1): {
 			marcas.push_back("Audi");
 			break;
@@ -1513,7 +1509,7 @@ void Menu::criarOficina(){
 		cout << "repete\n";
 	}
 	cout << "\n";
-	}while(i != 0);
+	}while(val != 0);
 	a.setDisponibilidade(0);
 	a.setMarcas(marcas);
 	this->oficinas.push(a);
@@ -1567,12 +1563,17 @@ void Menu::verOficinaMarcas(){
 			oficinas.pop();
 	}
 	if(!existe){
-		cout<<"Nao existem oficinas que reparam: "<<marca<<endl;
+		cout << "Nao existem oficinas que reparam: " << marca << endl;
 	}
 }
 
 
 void Menu::printOficinas(){
+
+	if(this->oficinas.size() == 0){
+		cout << "Nao existem oficinas!"<< endl;
+	}
+
 	Prior_queu temp = oficinas;
 	cout << "\nOficinas: " << endl;
 	cout << "=====================" << endl;
@@ -1707,7 +1708,7 @@ void Menu::printCondutores() {
 }
 
 void Menu::retirarCondutor(u_int posicao){
-	if(posicao> this->condutores.size()) throw new Acidente_Nao_Existente(posicao); //preciso de mais uma exceção
+	if(posicao> this->condutores.size()) throw new Condutor_Nao_Existente(posicao); //preciso de mais uma exceção
 	u_int ondeEstou=0;
 	for(auto it=this->condutores.begin();it!=this->condutores.end();it++)
 	{
@@ -1718,14 +1719,14 @@ void Menu::retirarCondutor(u_int posicao){
 		}
 		ondeEstou++;
 	}
-	throw new Acidente_Nao_Existente(posicao); //preciso de mais exceções
+	throw new Condutor_Nao_Existente(posicao); //preciso de mais exceções
 
 }
 
 
 void Menu::removerCondutor(){
 
-	if(this->condutores.size()==0) throw new Nao_existem_acidentes(); //preciso de mais exceções!
+	if(this->condutores.size()==0) throw new Nao_existem_condutores_listar(); //preciso de mais exceções!
 
 	string opcao;
 

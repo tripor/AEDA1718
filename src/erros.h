@@ -53,6 +53,49 @@ public:
 	}
 };
 
+class Nao_existem_acidentes_listar: public Erro {
+	std::stringstream info;
+public:
+	Nao_existem_acidentes_listar() {
+		info << "(!) Não existem acidentes para serem listados (!)";
+	}
+	std::string getInfoErro() const {
+		return info.str();
+	}
+};
+class Nao_existem_postos_listar: public Erro {
+	std::stringstream info;
+public:
+	Nao_existem_postos_listar() {
+		info << "(!) Não existem postos de socorro para serem listados (!)";
+	}
+	std::string getInfoErro() const {
+		return info.str();
+	}
+};
+
+class Nao_existem_condutores_listar: public Erro {
+	std::stringstream info;
+public:
+	Nao_existem_condutores_listar() {
+		info << "(!) Não existem condutores para serem listados (!)";
+	}
+	std::string getInfoErro() const {
+		return info.str();
+	}
+};
+class Nao_existem_oficinas_listar: public Erro {
+	std::stringstream info;
+public:
+	Nao_existem_oficinas_listar() {
+		info << "(!) Não existem oficinas para serem listadas (!)";
+	}
+	std::string getInfoErro() const {
+		return info.str();
+	}
+};
+
+
 class Acidente_Nao_Existente: public Erro {
 	std::stringstream info;
 public:
@@ -70,6 +113,18 @@ public:
 	Posto_Nao_Existente(u_int posicao) {
 		info << "(!) Não existe nenhum posto na posição " << posicao
 				<< " do vetor (!)";
+	}
+	std::string getInfoErro() const {
+		return info.str();
+	}
+};
+
+class Condutor_Nao_Existente: public Erro {
+	std::stringstream info;
+public:
+	Condutor_Nao_Existente(u_int posicao) {
+		info << "(!) Não existe nenhum Condutor na posição " << posicao
+				<< " da lista mostrada (!)";
 	}
 	std::string getInfoErro() const {
 		return info.str();

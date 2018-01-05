@@ -37,7 +37,7 @@ void Oficina::setMarcas(vector<string> marcas){
 }
 
 bool Oficina::operator<(const Oficina &of1) const{
-	return (this->disponibilidade < of1.getDisponibilidade());
+	return (this->disponibilidade > of1.getDisponibilidade());
 }
 
 void Oficina::lerInfo(stringstream &ss){
