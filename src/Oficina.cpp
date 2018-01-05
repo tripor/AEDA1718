@@ -41,13 +41,13 @@ bool Oficina::operator<(const Oficina &of1) const{
 }
 
 void Oficina::lerInfo(stringstream &ss){
-	string nome;
-	vector<string> marcas;
-	ss >> nome;
-	while (ss >> nome){
-		marcas.push_back(nome);
+	string nome1;
+	vector<string> marcas1;
+	ss >> nome1;
+	this->setNome(nome1);
+	while (ss >> nome1){
+		marcas1.push_back(nome1);
 	}
-	this->setNome(nome);
-	this->setMarcas(marcas);
+	this->setMarcas(marcas1);
 }
 

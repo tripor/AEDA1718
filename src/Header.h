@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <unordered_set>
 #include <set>
+#include <time.h>
 
 typedef unsigned int u_int;
 
@@ -104,41 +105,28 @@ public:
 	int operator -(const Data & a){
 		Data temp (this->ano, this->mes, this->dia, this->hora, this->minuto);
 		Data temp1 = a;
-		int ndias = 0;
-		if(temp < temp1){
-			while(true){
-			if(temp.getAno()==temp1.getAno() && temp.getMes()==temp1.getMes() && (temp1.getDia() == (temp.getDia() + 1))){
-				if(temp.getHora() == temp1.getHora()){
-					if(temp.getMinuto() >= temp1.getMinuto()){
-						return ndias;
-					}
-				}
-				else if(temp.getHora() > temp1.getHora())
-					return ndias;
-			}
-			temp.setDia(temp.getDia() + 1);
-			ndias++;
-			}
-		}
-		else if(temp1 < temp){
-			while(true){
-			if(temp1.getAno()==temp.getAno() && temp1.getMes()==temp.getMes() && (temp.getDia() == (temp1.getDia() + 1))){
-				if(temp1.getHora() == temp.getHora()){
-					if(temp1.getMinuto() >= temp.getMinuto()){
-						return ndias;
-					}
-				}
-				else if(temp1.getHora() > temp.getHora())
-					return ndias;
-			}
-			temp1.setDia(temp1.getDia() + 1);
-			ndias++;
-			}
-		}
 
-		else{ // se forem iguais
-			return ndias;
-		}
+		struct tm data1, data2;
+
+		data1.tm_year = temp.ano;
+		data1.tm_mon = temp.mes;
+		data1.tm_mday = temp.dia;
+		data1.tm_hour = temp.hora;
+		data1.tm_min = temp.minuto;
+		data1.tm_sec = 0;
+
+		data2.tm_year = temp1.ano;
+		data2.tm_mon = temp1.mes;
+		data2.tm_mday = temp1.dia;
+		data2.tm_hour = temp1.hora;
+		data2.tm_min = temp1.minuto;
+		data2.tm_sec = 0;
+
+		double seconds = difftime(mktime(&data2),mktime(&data1));
+
+		int dias = (seconds/86400);
+
+		return dias;
 	}
 
 

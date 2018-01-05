@@ -13,7 +13,7 @@ int main()
 	e1.lerFicheiroAcidente();
 	e1.lerFicheiroPostoSocorro();
 	e1.lerFicheiroCondutores();
-	//e1.lerFicheiroOficina();
+	e1.lerFicheiroOficina();
 	e1.ordenaVetorAcidentes();
 	e1.lerFicheiroVeiculo();
 
@@ -27,11 +27,12 @@ int main()
 			cout << e->getInfoErro() << endl;
 		}
 	}
+
 	e1.ordenaVetorAcidentes();
 	e1.EscreveFicheiroAcidente();
 	e1.escreverFicheiroPostoSocorro();
 	e1.escreveFicheiroCondutores();
-	//e1.EscreveFicheiroOficina();
+	e1.EscreveFicheiroOficina();
 	e1.EscreveFicheiroVeiculo();
 
 	return 0;

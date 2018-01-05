@@ -196,19 +196,20 @@ void Menu::retirarPosto(u_int posicao)
 void Menu::inicializaOficinas(){
 	vector<Oficina> temp;
 	while(!oficinas.empty()){
-		temp.push_back(oficinas.top());
+		temp.push_back((oficinas.top()));
 		oficinas.pop();
 	}
-	Data date (0,1,1,0,0);
+	Data date = Data(1,1,1,1,1);
 	for(unsigned int i = 0; i < temp.size(); i++){
 		temp.at(i).setData(date);
+		oficinas.push(temp.at(i));
 	}
 
 }
 
 void Menu::menuOpcoesIniciais_0(){
 
-	inicializaOficinas();
+	this->inicializaOficinas();
 	this->clearVetoresDosPostos();
 	this->atribuiAcidentes();
 	string opcao;
@@ -313,7 +314,6 @@ void Menu::menuOpcoesAcidente_1() {
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
-
 	} else if (opcao == "0") {
 		return;
 	} else {
@@ -454,6 +454,7 @@ void Menu::menuOpcoesOficinas_1(){
 	if (opcao == "1") {
 		try {
 			this->criarOficina();
+			cout << "\nmenu 1\n";
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
@@ -1243,15 +1244,10 @@ void Menu::atribuiAcidentes(){
 						temp_inem.at(k)->setAcidentesAtribuidos(v1);
 						break;
 					}
-
 				}
-
 			}
-
-
-
-
 		}
+
 		if(tipo == "AcidenteViacao"){
 			//Se só houver 1 ferido grave, mota INEM
 			//Se houver 2 a 4, 1 a 2 carros INEM
@@ -1426,14 +1422,16 @@ void Menu::EscreveFicheiroOficina() {
 	//Escrever no ficheiro
 	Prior_queu temp = oficinas;
 	while(!temp.empty()){
-		ficheiro << temp.top().getNome() << " ";
+		ficheiro << temp.top().getNome() << ' ';
 		for(unsigned int i = 0; i < temp.top().getMarcas().size(); i++){
 			if(i == (temp.top().getMarcas().size() - 1)){
 				ficheiro << temp.top().getMarcas().at(i) << endl; // se for o ultimo
 			}
-			else
-				ficheiro << temp.top().getMarcas().at(i) << " ";
+			else{
+				ficheiro << temp.top().getMarcas().at(i) << ' ';
+			}
 		}
+		temp.pop();
 	}
 	ficheiro.close();
 
@@ -1443,6 +1441,21 @@ void Menu::EscreveFicheiroOficina() {
 	}
 }
 
+/*
+
+
+	//Abrir o ficheiro e também apagar o que lá esta
+	stringstream ss;
+	ofstream ficheiro("src/Condutor.txt",ofstream::out|ofstream::trunc);
+
+	//Escrever no ficheiro
+	for (auto it = this->condutores.begin(); it != condutores.end(); it++) {
+		ficheiro << (*it).getName() << ' ' << (*it).getData() << endl;
+	}
+	ficheiro.close();
+
+
+*/
 
 void Menu::criarOficina(){
 	cout << "Indique o nome da Oficina: ";
@@ -1456,7 +1469,7 @@ void Menu::criarOficina(){
 	do{
 	cout << endl;
 	cout << "+----------------------------------------+" << endl;
-	cout << "|   Indique a marca do carro:            |" << endl;
+	cout << "|   Possíveis marcas:                    |" << endl;
 	cout << "|   1 - Audi                             |" << endl;
 	cout << "|   2 - BMW                              |" << endl;
 	cout << "|   3 - Mercedes                         |" << endl;
@@ -1465,6 +1478,7 @@ void Menu::criarOficina(){
 	cout << "|   6 - Porsche                          |" << endl;
 	cout << "|   0 - Concluir                         |" << endl;
 	cout << "+----------------------------------------+" << endl;
+	cout << "Indique as marcas pretendidas: ";
 	cin >> i;
 	switch(i){
 		case(1): {
@@ -1491,11 +1505,19 @@ void Menu::criarOficina(){
 			marcas.push_back("Porsche");
 			break;
 		}
+		default:{
+			break;
+		}
+
+
+		cout << "repete\n";
 	}
-	cout << "\n\n\n";
-	}while(i!=0);
+	cout << "\n";
+	}while(i != 0);
 	a.setDisponibilidade(0);
 	a.setMarcas(marcas);
+	this->oficinas.push(a);
+	cout << "fim da funcao";
 }
 
 
