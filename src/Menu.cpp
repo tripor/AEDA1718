@@ -964,33 +964,110 @@ void Menu::printPostosComAcidenteAlocado(){
 }
 
 
-
+bool porTipo(Acidente *a1, Acidente *a2) {
+	return a1->getTipoAcidente() < a2->getTipoAcidente();
+}
+bool porLocalX(Acidente *a1, Acidente *a2) {
+	return a1->getLocal().first < a2->getLocal().first;
+}
+bool porLocalY(Acidente *a1, Acidente *a2) {
+	return a1->getLocal().second < a2->getLocal().second;
+}
+bool porData(Acidente *a1, Acidente *a2) {
+	return a1->getData() < a2->getData();
+}
 
 
 void Menu::printAcidentes() {
 	cout << endl;
-	for (unsigned int i = 0; i < acidentes.size(); i++) {
+	vector<Acidente*> guardar=this->acidentes;
+	cout << "Apresentar por que ordem? 1-Tipo, 2-Local X, 3-Local Y, 4-Data" << endl << "Opcao escolhida: " ;
+	string testar;
+	getline(cin,testar);
+	if(testar=="1")
+	{
+		std::sort(guardar.begin(),guardar.end(),porTipo);
+	}
+	else if(testar=="2")
+	{
+		std::sort(guardar.begin(),guardar.end(),porLocalX);
+	}
+	else if(testar=="3")
+	{
+		std::sort(guardar.begin(),guardar.end(),porLocalY);
+	}
+	else if(testar=="4")
+	{
+		std::sort(guardar.begin(),guardar.end(),porData);
+	}
+	else
+	{
+		throw new Opcao_Nao_Valida(testar);
+	}
+	for (unsigned int i = 0; i < guardar.size(); i++) {
 
 		cout << "=====================" << endl;
 		cout << i+1 << "- ";
-		cout << "Tipo: " << acidentes.at(i)->getTipoAcidente() << " | ";
-		cout << "Local: X=" << acidentes.at(i)->getLocal().first << " | ";
-		cout << "Y=" << acidentes.at(i)->getLocal().second << " | ";
-		cout << "Data: " << acidentes.at(i)->getData().getDataFormato() << " | ";
+		cout << "Tipo: " << guardar.at(i)->getTipoAcidente() << " | ";
+		cout << "Local: X=" << guardar.at(i)->getLocal().first << " | ";
+		cout << "Y=" << guardar.at(i)->getLocal().second << " | ";
+		cout << "Data: " << guardar.at(i)->getData().getDataFormato() << " | ";
 
-		cout << this->acidentes.at(i)->getAllInfoFormatoPrint() << endl;
+		cout << guardar.at(i)->getAllInfoFormatoPrint() << endl;
 
 	}
 	cout << "=====================" << endl;
 }
-
+bool porTipoPosto(PostoSocorro *a1, PostoSocorro *a2) {
+	return a1->getTipo() < a2->getTipo();
+}
+bool porNumeroSocPosto(PostoSocorro *a1, PostoSocorro *a2){
+	return a1->getSocorristas()< a2->getSocorristas();
+}
+bool porNumeroVeiPosto(PostoSocorro *a1, PostoSocorro *a2){
+	return a1->getVeiculos()< a2->getVeiculos();
+}
+bool porLocalXPosto(PostoSocorro *a1, PostoSocorro *a2) {
+	return a1->getPos().first < a2->getPos().first;
+}
+bool porLocalYPosto(PostoSocorro *a1, PostoSocorro *a2) {
+	return a1->getPos().second < a2->getPos().second;
+}
 void Menu::printPostos(){
 	cout << endl;
-	for(unsigned int i = 0; i<postos_socorro.size(); i++){
+	vector<PostoSocorro*> guardar=this->postos_socorro;
+	cout << "Apresentar por que ordem? 1-Tipo, 2-Local X, 3-Local Y, 4-Numero socorristas, 5-Numero de veiculos" << endl << "Opcao escolhida: " ;
+	string testar;
+	getline(cin,testar);
+	if(testar=="1")
+	{
+		std::sort(guardar.begin(),guardar.end(),porTipoPosto);
+	}
+	else if(testar=="2")
+	{
+		std::sort(guardar.begin(),guardar.end(),porLocalXPosto);
+	}
+	else if(testar=="3")
+	{
+		std::sort(guardar.begin(),guardar.end(),porLocalYPosto);
+	}
+	else if(testar=="4")
+	{
+		std::sort(guardar.begin(),guardar.end(),porNumeroSocPosto);
+	}
+	else if(testar=="5")
+	{
+		std::sort(guardar.begin(),guardar.end(),porNumeroVeiPosto);
+	}
+	else
+	{
+		throw new Opcao_Nao_Valida(testar);
+	}
+	for(unsigned int i = 0; i<guardar.size(); i++){
 		cout << "=====================" << endl;
 		cout << i+1 << "- ";
-		cout << "Tipo de posto: " << this->postos_socorro.at(i)->getTipo() << " | ";
-		cout << this->postos_socorro.at(i)->getAllInfoFormatoPrint()<< endl;
+		cout << "Tipo de posto: " << guardar.at(i)->getTipo() << " | ";
+		cout << guardar.at(i)->getAllInfoFormatoPrint()<< endl;
 
 	}
 	cout << "=====================" << endl;
