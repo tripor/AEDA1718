@@ -264,7 +264,7 @@ public:
 
 	void inicializaOficinas();
 
-	void adicionaOficina(Oficina *oficina);
+	void adicionaOficina(Oficina oficina);
 
 	void lerFicheiroOficina();
 
@@ -283,7 +283,7 @@ public:
 
 	void adiciona_condutor(Condutor c1);
 
-	void retirarCondutor(int posicao);
+	void retirarCondutor(u_int posicao);
 
 	void remover_condutores_antigos();
 

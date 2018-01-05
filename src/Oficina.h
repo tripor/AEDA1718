@@ -3,7 +3,7 @@
 #include "Header.h"
 
 class Oficina;
-typedef std::priority_queue<Oficina*> Prior_queu;
+typedef std::priority_queue<Oficina> Prior_queu;
 
 /**
  * @class Oficina)
@@ -26,7 +26,7 @@ public:
 	/**
 	 * @return Retorna uma string com o nome da Oficina
 	 */
-	std::string getNome();
+	std::string getNome() const;
 
 	/**
 	 * @return Retorna a disponibilidade da oficina
@@ -76,7 +76,7 @@ public:
 	 * @param of1 objeto da classe oficina
 	 * @return true caso a disponibilidade da primeira oficina seja menor que a da segunda
 	 */
-	bool operator<(Oficina& of1);
+	bool operator<(const Oficina& of1) const;
 
 	/**
 	 * @brief  Cria um objeto da classe oficina atraves das informacoes que receb

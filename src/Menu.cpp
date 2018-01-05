@@ -194,14 +194,14 @@ void Menu::retirarPosto(u_int posicao)
 //-----------------------------------------------------------------
 
 void Menu::inicializaOficinas(){
-	vector<Oficina*> temp;
+	vector<Oficina> temp;
 	while(!oficinas.empty()){
 		temp.push_back(oficinas.top());
 		oficinas.pop();
 	}
 	Data date (0,1,1,0,0);
 	for(unsigned int i = 0; i < temp.size(); i++){
-		temp.at(i)->setData(date);
+		temp.at(i).setData(date);
 	}
 
 }
@@ -453,7 +453,7 @@ void Menu::menuOpcoesOficinas_1(){
 	}
 	if (opcao == "1") {
 		try {
-			//this->criarPosto();
+			this->criarOficina();
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
@@ -1004,19 +1004,19 @@ void Menu::clearVetoresDosPostos(){
 }
 
 void Menu::atualizaDisponibilidade(Data date){
-	vector<Oficina*> temp;
+	vector<Oficina> temp;
 	while(!oficinas.empty()){
 		temp.push_back(oficinas.top());
 		oficinas.pop();
 	}
 	int disp = 0;
 	for(unsigned int i = 0; i < temp.size(); i++){
-		disp = date - temp.at(i)->getUltimaData();
-		if((temp.at(i)->getDisponibilidade() - disp) <= 0){
-			temp.at(i)->setDisponibilidade(0);
+		disp = date - temp.at(i).getUltimaData();
+		if((temp.at(i).getDisponibilidade() - disp) <= 0){
+			temp.at(i).setDisponibilidade(0);
 		}
 		else {
-			temp.at(i)->setDisponibilidade((temp.at(i)->getDisponibilidade() - disp));
+			temp.at(i).setDisponibilidade((temp.at(i).getDisponibilidade() - disp));
 		}
 	}
 
@@ -1354,25 +1354,27 @@ void Menu::atribuiAcidentes(){
 
 			}
 
-			//depois de atribuir acidentes
 
-			/*
+
+			//depois de atribuir acidentes
 
 			////Arranjar os carros/////
 
-
 			Prior_queu temp = oficinas;
+			bool atribuido = false;
 			atualizaDisponibilidade(acidentes.at(i)->getData());
 			for(unsigned int m = 0; m < MarcasVeiculos.size(); m++){ //para cada marca
-				while(!oficinas.empty()){
-					for(unsigned int n = 0; n < oficinas.top()->getMarcas().size(); n++){ // para cada marca da oficina
-						if(oficinas.top()->getMarcas().at(n) == MarcasVeiculos.at(m)){
-							Oficina *oftemp = new Oficina();
+
+				while(!oficinas.empty() && !atribuido){
+					for(unsigned int n = 0; n < oficinas.top().getMarcas().size(); n++){ // para cada marca da oficina
+						if(oficinas.top().getMarcas().at(n) == MarcasVeiculos.at(m)){
+							Oficina oftemp;
 							oftemp = oficinas.top();
 							oficinas.pop();
-							oftemp->setDisponibilidade(oftemp->getDisponibilidade() + 1);
-							oftemp->setData(acidentes.at(i)->getData()); //atualiza a utima data
-							temp.push(oftemp);//coloca no temporario
+							oftemp.setDisponibilidade(oftemp.getDisponibilidade() + 1);
+							oftemp.setData(acidentes.at(i)->getData()); //atualiza a utima data
+							oficinas.push(oftemp);//coloca no temporario
+							atribuido = true;
 							break; //ja encontrou
 						}
 
@@ -1380,11 +1382,15 @@ void Menu::atribuiAcidentes(){
 
 					oficinas.pop();
 				}
+
+				oficinas = temp;
+				atribuido = false;
+
 			}
-			oficinas = temp;
+			//oficinas = temp;
 			////acaba
 
-			*/
+
 
 		}
 
@@ -1395,7 +1401,7 @@ void Menu::atribuiAcidentes(){
 }
 
 
-void Menu::adicionaOficina(Oficina *oficina){
+void Menu::adicionaOficina(Oficina oficina){
 	oficinas.push(oficina);
 }
 
@@ -1406,8 +1412,8 @@ void Menu::lerFicheiroOficina() {
 	ficheiro.open("src/Oficina.txt");
 	while (getline(ficheiro, linha)) {
 		stringstream ss(linha);
-		Oficina* temp = new Oficina();
-		temp->lerInfo(ss);
+		Oficina temp;
+		temp.lerInfo(ss);
 		this->adicionaOficina(temp);
 	}
 	ficheiro.close();
@@ -1420,13 +1426,13 @@ void Menu::EscreveFicheiroOficina() {
 	//Escrever no ficheiro
 	Prior_queu temp = oficinas;
 	while(!temp.empty()){
-		ficheiro << temp.top()->getNome() << " ";
-		for(unsigned int i = 0; i < temp.top()->getMarcas().size(); i++){
-			if(i == (temp.top()->getMarcas().size() - 1)){
-				ficheiro << temp.top()->getMarcas().at(i); // se for o ultimo
+		ficheiro << temp.top().getNome() << " ";
+		for(unsigned int i = 0; i < temp.top().getMarcas().size(); i++){
+			if(i == (temp.top().getMarcas().size() - 1)){
+				ficheiro << temp.top().getMarcas().at(i) << endl; // se for o ultimo
 			}
 			else
-				ficheiro << temp.top()->getMarcas().at(i) << " ";
+				ficheiro << temp.top().getMarcas().at(i) << " ";
 		}
 	}
 	ficheiro.close();
@@ -1442,8 +1448,8 @@ void Menu::criarOficina(){
 	cout << "Indique o nome da Oficina: ";
 	string nome;
 	cin >> nome;
-	Oficina *a = new Oficina;
-	a->setNome(nome); //atribui um nome
+	Oficina a;
+	a.setNome(nome); //atribui um nome
 	cout << "Indique as marcas de automóveis que a oficina pode reparar: ";
 	int i = 0; // para escolher
 	vector<string> marcas;//para guardar as marcas do utilizador
@@ -1486,11 +1492,10 @@ void Menu::criarOficina(){
 			break;
 		}
 	}
-	system("cls");
-	}
-	while(i!=0);
-	a->setDisponibilidade(0);
-	a->setMarcas(marcas);
+	cout << "\n\n\n";
+	}while(i!=0);
+	a.setDisponibilidade(0);
+	a.setMarcas(marcas);
 }
 
 
@@ -1499,18 +1504,26 @@ void Menu::verOficina(){ //para ver a disponibilidade de uma oficina e os carros
 	cout << "Introduza o nome da Oficina" << endl << endl;
 	cin >> name;
 	Prior_queu temp = oficinas;
+	bool existe = false;
 	while(!oficinas.empty()){
-		if(oficinas.top()->getNome()==name){
-			cout<<"Disponibilidade: "<<oficinas.top()->getDisponibilidade()<<endl;
-			cout<<"Marcas que repara: "<<endl;
-			for(unsigned int i = 0; i < oficinas.top()->getMarcas().size(); i++){
-				cout << oficinas.top()->getMarcas().at(i) << endl;
+		if(oficinas.top().getNome() == name){
+			existe = true;
+			cout << "Disponibilidade: " << oficinas.top().getDisponibilidade() << endl;
+			cout << "Marcas que repara: " << endl;
+			for(unsigned int i = 0; i < oficinas.top().getMarcas().size(); i++){
+				cout << oficinas.top().getMarcas().at(i) << endl;
 			}
 			break;
 		}
 		else{
 			oficinas.pop();
 		}
+	}
+
+	oficinas = temp;
+
+	if(existe == false){
+		cout << "\nNão existe nenhuma oficina com esse nome.\n";
 	}
 }
 
@@ -1523,9 +1536,9 @@ void Menu::verOficinaMarcas(){
 	Prior_queu temp = oficinas;
 	cout<<"Oficinas que reparam: "<<marca<<endl;
 	while(!oficinas.empty()){
-			for(unsigned int i = 0; i < oficinas.top()->getMarcas().size(); i++){
-				if(oficinas.top()->getMarcas().at(i)==marca){
-					cout<<oficinas.top()->getNome()<<endl;
+			for(unsigned int i = 0; i < oficinas.top().getMarcas().size(); i++){
+				if(oficinas.top().getMarcas().at(i)==marca){
+					cout << oficinas.top().getNome() << endl;
 					existe = true;
 					break;
 			}
@@ -1647,12 +1660,12 @@ void Menu::printCondutores() {
 	cout << "=====================" << endl;
 }
 
-void Menu::retirarCondutor(int posicao){
-	if(posicao> this->condutores.size())throw new Acidente_Nao_Existente(posicao); //preciso de mais uma exceção
+void Menu::retirarCondutor(u_int posicao){
+	if(posicao> this->condutores.size()) throw new Acidente_Nao_Existente(posicao); //preciso de mais uma exceção
 	u_int ondeEstou=0;
 	for(auto it=this->condutores.begin();it!=this->condutores.end();it++)
 	{
-		if(ondeEstou==posicao-1)
+		if(ondeEstou == posicao-1)
 		{
 			this->condutores.erase(it);
 			return;

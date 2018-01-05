@@ -16,7 +16,7 @@ void Oficina::setData(Data date){
 	this->utimaData = date;
 }
 
-string Oficina::getNome(){
+string Oficina::getNome() const{
 	return nome;
 }
 
@@ -36,8 +36,8 @@ void Oficina::setMarcas(vector<string> marcas){
 	this->marcas = marcas;
 }
 
-bool Oficina::operator<(Oficina &of1){
-	return (disponibilidade < of1.getDisponibilidade());
+bool Oficina::operator<(const Oficina &of1) const{
+	return (this->disponibilidade < of1.getDisponibilidade());
 }
 
 void Oficina::lerInfo(stringstream &ss){

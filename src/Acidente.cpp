@@ -473,13 +473,16 @@ void AcidenteViacao::lerInfo(stringstream &ss)
 string AcidenteViacao::getAllInfo() const{
 	stringstream ss;
 
-	ss << this->numero_FeridosGraves << ' ' << this->numero_VeiculosEnvolvidos << ' ' << this->tipo_Estrada;
+	ss << this->numero_FeridosGraves << ' ' << this->numero_VeiculosEnvolvidos << ' ' << this->tipo_Estrada << ' ';
 
 	for(unsigned int i = 0; i < this->veiculosEnvolvidos.size(); i++){
 		if(i == (this->veiculosEnvolvidos.size() - 1)){
 			ss << veiculosEnvolvidos.at(i);
 		}
-		ss << veiculosEnvolvidos.at(i) << " ";
+		else{
+			ss << veiculosEnvolvidos.at(i) << ' ';
+		}
+
 	}
 
 	return ss.str();
@@ -498,7 +501,7 @@ void AcidenteViacao::infoUtilizador(){
 
 	string opcao;
 
-	cout << "Numero de feridos graves: ";
+	cout << "\nNumero de feridos graves: ";
 	getline(cin,opcao);
 	eNumero(opcao);
 	u_int n = stoi(opcao);
@@ -527,6 +530,51 @@ void AcidenteViacao::infoUtilizador(){
 		this->setTipoEstrada("Auto-Estrada");
 	}
 	else throw new Opcao_Nao_Valida(opcao);
+
+	vector<string> marcas;//para guardar as marcas do utilizador
+	for(unsigned int i = 0; i <= n; i++){
+
+		cout << endl;
+		cout << "+----------------------------------------+" << endl;
+		cout << "|   Marcas possíveis:                    |" << endl;
+		cout << "|   1 - Audi                             |" << endl;
+		cout << "|   2 - BMW                              |" << endl;
+		cout << "|   3 - Mercedes                         |" << endl;
+		cout << "|   4 - Volkswagen                       |" << endl;
+		cout << "|   5 - Ferrari                          |" << endl;
+		cout << "|   6 - Porsche                          |" << endl;
+		cout << "+----------------------------------------+" << endl;
+		cout << "Indique a marca: ";
+		cin >> i;
+		switch(i){
+			case(1): {
+				marcas.push_back("Audi");
+				break;
+			}
+			case(2):{
+				marcas.push_back("BMW");
+				break;
+			}
+			case(3):{
+				marcas.push_back("Mercedes");
+				break;
+			}
+			case(4):{
+				marcas.push_back("Volkswagen");
+				break;
+			}
+			case(5):{
+				marcas.push_back("Ferrari");
+				break;
+			}
+			case(6):{
+				marcas.push_back("Porsche");
+				break;
+			}
+		}
+			cout << "\n";
+	}
+	this->setVeiculosEnvolvidos(marcas);
 
 }
 
