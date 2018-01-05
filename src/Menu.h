@@ -12,11 +12,11 @@
 void eNumero(std::string testar);
 
 class Menu{
-	Prior_queu oficinas;
+	Prior_queu oficinas; /**< Priority queue de oficinas*/
 	std::vector<Acidente*> acidentes; /**< Vetor de acidentes*/
 	std::vector<PostoSocorro*> postos_socorro; /**< Vetor dos postos de socorro*/
-	tabHCondutor condutores;
-	set<Veiculo> veiculos;
+	tabHCondutor condutores; /**< Hash de condutores */
+	set<Veiculo> veiculos; /**< Set de veiculos*/
 	bool terminar; /**< booleana para parar o ciclo do menu*/
 public:
 	//Construtores

@@ -441,6 +441,8 @@ void Menu::menuOpcoesOficinas_1(){
 	cout << "|    1 - Adicionar uma Oficina                  |" << endl;
 	cout << "|    2 - Remover uma Oficina                    |" << endl;
 	cout << "|    3 - Listar todas as Oficinas               |" << endl;
+	cout << "|    4 - Listar por nome                        |" << endl;
+	cout << "|    5 - Listar por marcas                      |" << endl;
 	cout << "|    0 - Voltar ao menu inicial                 |" << endl;
 	cout << "+-----------------------------------------------+" << endl;
 
@@ -467,6 +469,18 @@ void Menu::menuOpcoesOficinas_1(){
 	} else if (opcao == "3") {
 		try {
 			this->printOficinas();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "4") {
+		try {
+			this->verOficina();
+		} catch (Erro *e) {
+			cout << e->getInfoErro() << endl;
+		}
+	} else if (opcao == "5") {
+		try {
+			this->verOficinaMarcas();
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
@@ -1595,10 +1609,11 @@ void Menu::criarOficina(){
 
 void Menu::verOficina(){ //para ver a disponibilidade de uma oficina e os carros que repara
 	string name;
-	cout << "Introduza o nome da Oficina" << endl << endl;
-	cin >> name;
+	cout << "Introduza o nome da Oficina: ";
+	getline(cin,name);
 	Prior_queu temp = oficinas;
 	bool existe = false;
+	cout<<endl<<endl;
 	while(!oficinas.empty()){
 		if(oficinas.top().getNome() == name){
 			existe = true;
@@ -1624,10 +1639,11 @@ void Menu::verOficina(){ //para ver a disponibilidade de uma oficina e os carros
 
 void Menu::verOficinaMarcas(){
 	string marca;
-	cout << "Introduza a marca do automóvel" << endl << endl;
-	cin >> marca;
+	cout << "Introduza a marca do automóvel";
+	getline(cin,marca);
 	bool existe = false;
 	Prior_queu temp = oficinas;
+	cout<< endl << endl;
 	cout<<"Oficinas que reparam: "<<marca<<endl;
 	while(!oficinas.empty()){
 			for(unsigned int i = 0; i < oficinas.top().getMarcas().size(); i++){
