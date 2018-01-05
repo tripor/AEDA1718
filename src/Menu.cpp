@@ -454,7 +454,6 @@ void Menu::menuOpcoesOficinas_1(){
 	if (opcao == "1") {
 		try {
 			this->criarOficina();
-			cout << "\nmenu 1\n";
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
@@ -466,7 +465,7 @@ void Menu::menuOpcoesOficinas_1(){
 		}
 	} else if (opcao == "3") {
 		try {
-			//this->removerPosto();
+			this->printOficinas();
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
@@ -729,6 +728,7 @@ void Menu::criarAcidente(){
 			a->infoUtilizadorGeral();
 			a->infoUtilizador();
 			this->adicionaAcidente(a);
+
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
@@ -1517,7 +1517,6 @@ void Menu::criarOficina(){
 	a.setDisponibilidade(0);
 	a.setMarcas(marcas);
 	this->oficinas.push(a);
-	cout << "fim da funcao";
 }
 
 
@@ -1572,6 +1571,31 @@ void Menu::verOficinaMarcas(){
 	}
 }
 
+
+void Menu::printOficinas(){
+	Prior_queu temp = oficinas;
+	cout << "\nOficinas: " << endl;
+	cout << "=====================" << endl;
+	int cnt = 1;
+	while(!temp.empty()){
+		cout << cnt << ": \nNome da Oficina: " << temp.top().getNome();
+		if(temp.top().getDisponibilidade() == 0){
+			cout << "\nDisponivel agora";
+		}
+		else{
+			cout << "\nDisponivel em: " << temp.top().getDisponibilidade() << " dias";
+		}
+
+		cout << "\nMarcas: ";
+		for(unsigned int i = 0; i < temp.top().getMarcas().size() - 1 ; i++){
+			cout << temp.top().getMarcas().at(i) << ", ";
+		}
+		cout << temp.top().getMarcas().at(temp.top().getMarcas().size() - 1);
+		cout << endl << "=====================" << endl;
+		temp.pop();
+		cnt++;
+	}
+}
 
 
 
