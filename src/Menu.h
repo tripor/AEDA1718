@@ -240,7 +240,6 @@ public:
 	void printPostosComAcidenteAlocado();
 
 	//Funcoes print dos vetores
-
 	/**
 	* @brief   Funcao para mostrar ao utilizador os acidentes considerados
 	* @return void
@@ -386,8 +385,67 @@ public:
 	void EscreveFicheiroVeiculo();
 
 };
-
-
-
-
+/**
+ * @brief Ordenar a impressao dos veiculos por tipo
+ * @param Acidente 1 a comparar
+ * @param Acidente 2 a comparar
+ * @return boleano correspondente a comparacao
+ */
+bool porTipo(Acidente *a1, Acidente *a2);
+/**
+ * @brief Ordenar a impressao dos veiculos pelo local X
+ * @param Acidente 1 a comparar
+ * @param Acidente 2 a comparar
+ * @return boleano correspondente a comparacao
+ */
+bool porLocalX(Acidente *a1, Acidente *a2);
+/**
+ * @brief Ordenar a impressao dos veiculos pelo local Y
+ * @param Acidente 1 a comparar
+ * @param Acidente 2 a comparar
+ * @return boleano correspondente a comparacao
+ */
+bool porLocalY(Acidente *a1, Acidente *a2);
+/**
+ * @brief Ordenar a impressao dos veiculos pela data
+ * @param Acidente 1 a comparar
+ * @param Acidente 2 a comparar
+ * @return boleano correspondente a comparacao
+ */
+bool porData(Acidente *a1, Acidente *a2);
+/**
+ * @brief Ordenar a impressao dos postos de socorro pelo tipo
+ * @param Posto de socorro 1 a comparar
+ * @param Posto de socorro 2 a comparar
+ * @return boleano correspondente a comparacao
+ */
+bool porTipoPosto(PostoSocorro *a1, PostoSocorro *a2);
+/**
+ * @brief Ordenar a impressao dos postos de socorro pelo numero de socorristas
+ * @param Posto de socorro 1 a comparar
+ * @param Posto de socorro 2 a comparar
+ * @return boleano correspondente a comparacao
+ */
+bool porNumeroSocPosto(PostoSocorro *a1, PostoSocorro *a2);
+/**
+ * @brief Ordenar a impressao dos postos de socorro pelo numero de veiculos
+ * @param Posto de socorro 1 a comparar
+ * @param Posto de socorro 2 a comparar
+ * @return boleano correspondente a comparacao
+ */
+bool porNumeroVeiPosto(PostoSocorro *a1, PostoSocorro *a2);
+/**
+ * @brief Ordenar a impressao dos postos de socorro pelo local X
+ * @param Posto de socorro 1 a comparar
+ * @param Posto de socorro 2 a comparar
+ * @return boleano correspondente a comparacao
+ */
+bool porLocalXPosto(PostoSocorro *a1, PostoSocorro *a2);
+/**
+ * @brief Ordenar a impressao dos postos de socorro pelo local Y
+ * @param Posto de socorro 1 a comparar
+ * @param Posto de socorro 2 a comparar
+ * @return boleano correspondente a comparacao
+ */
+bool porLocalYPosto(PostoSocorro *a1, PostoSocorro *a2);
 #endif /* MENU_H_ */
