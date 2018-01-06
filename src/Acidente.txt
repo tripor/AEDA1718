@@ -1,8 +1,2 @@
-AcidenteViacao 2000-10-10-10-30 5000 5000 3 5 Auto-Estrada BMW BMW BMW Ferrari
-AcidenteViacao 2000-10-10-11-30 5000 5000 3 5 Auto-Estrada BMW BMW BMW Mercedes
-Florestal 2016-5-25-16-20 6000 8000 4 31 300
-Assalto 2016-6-4-16-30 2000 5000 0 Particular
-Domestico 2016-7-1-10-30 6000 7000 3 15 Moradia
-Assalto 2017-4-12-4-30 1000 6000 1 Comercial
-AcidenteViacao 2019-10-10-10-30 5000 5000 3 5 Auto-Estrada Ferrari BMW BMW BMW BMW Ferrari Ferrari Ferrari Ferrari
 AcidenteViacao 2030-10-12-11-30 5000 5000 3 5 Auto-Estrada Ferrari BMW BMW BMW BMW Ferrari Ferrari Ferrari Ferrari
+AcidenteViacao 2050-10-12-11-30 5000 5000 3 5 Auto-Estrada Ferrari BMW BMW BMW BMW Ferrari Ferrari Ferrari Ferrari

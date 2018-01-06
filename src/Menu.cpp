@@ -13,6 +13,36 @@ int x_glob;
 int y_glob;
 
 
+int dif_anos(const Data & rec, const Data & ant){
+
+	Data rec1 = rec;
+	Data ant1 = ant;
+
+	double final = 0;
+	double anos = 0;
+	double mes = 0;
+	double dia = 0;
+	double hora = 0;
+	double min = 0;
+
+	anos = rec1.getAno() - ant1.getAno();
+	final += 365*24*60*anos;
+	mes = rec1.getMes() - ant1.getMes();
+	final += 30*24*60*mes;
+	dia += rec1.getDia() - ant1.getDia();
+	final += 24*60*dia;
+	hora = rec1.getHora()- ant1.getHora();
+	final += 60*hora;
+	min = rec1.getMinuto() - ant1.getMinuto();
+	final += min;
+
+	final = final / (86400);
+
+	int dias = final;
+	return dias;
+}
+
+
 bool dif_maior_5_anos(Data d1, Data d2){
 
 	if(d2.getAno() - d1.getAno() > 5){
@@ -1108,13 +1138,16 @@ void Menu::atualizaDisponibilidade(Data date){
 	}
 	int disp = 0;
 	for(unsigned int i = 0; i < temp.size(); i++){
-		disp = date - temp.at(i).getUltimaData();
+		//cout<<temp.at(i).getUltimaData()<<endl;
+		//cout<<date<<endl;
+		disp = dif_anos(date, temp.at(i).getUltimaData());//date - temp.at(i).getUltimaData();
+		//cout<<"DISPONIBILIDADE: "<<disp<<endl;
 		int val = temp.at(i).getDisponibilidade();
 		if((val - disp) <= 0){
 			temp.at(i).setDisponibilidade(0);
 		}
 		else {
-			temp.at(i).setDisponibilidade((val - disp));
+			temp.at(i).setDisponibilidade(val - disp);
 		}
 	}
 
@@ -1122,7 +1155,6 @@ void Menu::atualizaDisponibilidade(Data date){
 		oficinas.push(temp.at(i));
 	}
 }
-
 
 
 void Menu::atribuiAcidentes(){
@@ -1453,34 +1485,42 @@ void Menu::atribuiAcidentes(){
 
 			////Arranjar os carros/////
 
+			atualizaDisponibilidade(acidentes.at(i)->getData());
 			Prior_queu temp = oficinas;
 			bool atribuido = false;
-			atualizaDisponibilidade(acidentes.at(i)->getData());
-			for(unsigned int m = 0; m < MarcasVeiculos.size(); m++){ //para cada marca
 
-				while(!oficinas.empty() && !atribuido){
-					for(unsigned int n = 0; n < oficinas.top().getMarcas().size(); n++){ // para cada marca da oficina
-						if(oficinas.top().getMarcas().at(n) == MarcasVeiculos.at(m)){
-							Oficina oftemp;
-							oftemp = oficinas.top();
-							oficinas.pop();
-							oftemp.setDisponibilidade(oftemp.getDisponibilidade() + 1);
-							oftemp.setData(acidentes.at(i)->getData()); //atualiza a utima data
-							oficinas.push(oftemp);//coloca no temporario
+			vector<Oficina> vetor;
+			for(unsigned int mi = 0; mi < MarcasVeiculos.size(); mi++){ //para cada marca
+				while(!temp.empty()){
+					vetor.push_back(temp.top());
+					temp.pop();
+				}
+				for(unsigned int ja = 0; ja < vetor.size(); ja++){
+					for(unsigned int ka = 0; ka < vetor.at(ja).getMarcas().size();ka++){
+						if(vetor.at(ja).getMarcas().at(ka) == MarcasVeiculos.at(mi)){
+							vetor.at(ja).setDisponibilidade(vetor.at(ja).getDisponibilidade() + 1);
+							vetor.at(ja).setData(acidentes.at(i)->getData()); //atualiza a utima data
+							//cout<<vetor.at(ja).getUltimaData()<<endl;
 							atribuido = true;
 							break; //ja encontrou
 						}
 
 					}
 
-					oficinas.pop();
+					if(atribuido){
+						break;
+					}
+
 				}
 
-				oficinas = temp;
+				for(unsigned int yi = 0; yi < vetor.size();yi++){
+					temp.push(vetor.at(yi));
+				}
 				atribuido = false;
-
+				vetor.clear();
 			}
-			//oficinas = temp;
+
+			oficinas = temp;
 			////acaba
 
 
