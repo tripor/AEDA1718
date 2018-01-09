@@ -93,13 +93,13 @@ void Acidente::infoUtilizadorGeral(){
 	getline(cin, horat);
 	eNumero(horat);
 	hora = stoi(horat);
-	if(hora>23 || hora<=0)throw new Data_Invalida(hora,"hora");
+	if(hora>23 || hora<0)throw new Data_Invalida(hora,"hora");
 
 	cout << "\nMinuto: ";
 	getline(cin, minutot);
 	eNumero(minutot);
 	minuto = stoi(minutot);
-	if(minuto>=60 || minuto<=0)throw new Data_Invalida(minuto,"minuto");
+	if(minuto>=60 || minuto<0)throw new Data_Invalida(minuto,"minuto");
 
 	this->setData(Data(ano, mes, dia, hora, minuto));
 

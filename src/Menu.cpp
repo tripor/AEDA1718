@@ -36,7 +36,7 @@ int dif_anos(const Data & rec, const Data & ant){
 	min = rec1.getMinuto() - ant1.getMinuto();
 	final += min;
 
-	final = final / (86400);
+	final = final / (1440);
 
 	int dias = final;
 	return dias;
@@ -853,6 +853,7 @@ void Menu::criarCondutor(){
 
 	getline(cin,nome);
 
+	cout << "Indique a data da ultima infracao:\n";
 	string anot, mest, diat, horat, minutot;
 	u_int ano, mes, dia, hora, minuto;
 	cout << "\nAno: ";
@@ -877,13 +878,13 @@ void Menu::criarCondutor(){
 	getline(cin, horat);
 	eNumero(horat);
 	hora = stoi(horat);
-	if(hora>23 || hora<=0)throw new Data_Invalida(hora,"hora");
+	if(hora>23 || hora<0)throw new Data_Invalida(hora,"hora");
 
 	cout << "\nMinuto: ";
 	getline(cin, minutot);
 	eNumero(minutot);
 	minuto = stoi(minutot);
-	if(minuto>=60 || minuto<=0)throw new Data_Invalida(minuto,"minuto");
+	if(minuto>=60 || minuto<0)throw new Data_Invalida(minuto,"minuto");
 
 	a.setName(nome);
 	a.setData(Data(ano, mes, dia, hora, minuto));
@@ -1762,6 +1763,7 @@ void Menu::remover_condutores_antigos(){
 
 	if(this->condutores.size()==0) throw new Nao_existem_acidentes(); //mudar a excecao, preciso de uma para condutores
 
+	cout << "Indique a data inicial a considerar:\n";
 	Data d1;
 	string anot, mest, diat, horat, minutot;
 	u_int ano, mes, dia, hora, minuto;
@@ -1787,13 +1789,13 @@ void Menu::remover_condutores_antigos(){
 	getline(cin, horat);
 	eNumero(horat);
 	hora = stoi(horat);
-	if(hora>23 || hora<=0)throw new Data_Invalida(hora,"hora");
+	if(hora>23 || hora<0)throw new Data_Invalida(hora,"hora");
 
 	cout << "\nMinuto: ";
 	getline(cin, minutot);
 	eNumero(minutot);
 	minuto = stoi(minutot);
-	if(minuto>=60 || minuto<=0)throw new Data_Invalida(minuto,"minuto");
+	if(minuto>=60 || minuto<0)throw new Data_Invalida(minuto,"minuto");
 
 	d1 = Data(ano, mes, dia, hora, minuto);
 
@@ -1825,19 +1827,19 @@ void Menu::printCondutores() {
 	unsigned int i = 1;
 
 	if(condutores.size() == 0){
-		cout << "Nao existem condutores registados!\n\n";
+		cout << "Nao existem condutores registados!\n";
 		return;
 	}
 
 	for (auto it = this->condutores.begin(); it != condutores.end(); it++) {
 
-		cout << "=====================" << endl;
+		cout << "\n=====================" << endl;
 		cout << i << "- ";
 		cout << "Nome: " << (*it).getName() << " | ";
 		cout << "Ultima ocorrencia: " << (*it).getData().getDataFormato();
 
 	}
-	cout << "=====================" << endl;
+	cout << "\n=====================" << endl;
 }
 
 void Menu::retirarCondutor(u_int posicao){
@@ -1919,13 +1921,13 @@ void Menu::criarVeiculo()
 	getline(cin, horat);
 	eNumero(horat);
 	hora = stoi(horat);
-	if(hora>23 || hora<=0)throw new Data_Invalida(hora,"hora");
+	if(hora>23 || hora<0)throw new Data_Invalida(hora,"hora");
 
 	cout << "\nMinuto: ";
 	getline(cin, minutot);
 	eNumero(minutot);
 	minuto = stoi(minutot);
-	if(minuto>=60 || minuto<=0)throw new Data_Invalida(minuto,"minuto");
+	if(minuto>=60 || minuto<0)throw new Data_Invalida(minuto,"minuto");
 
 	for(set<Veiculo>::iterator it=this->veiculos.begin();it!=this->veiculos.end();it++)
 	{

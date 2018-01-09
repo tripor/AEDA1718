@@ -1,2 +1,1 @@
-AcidenteViacao 2030-10-12-11-30 5000 5000 3 5 Auto-Estrada Ferrari BMW BMW BMW BMW Ferrari Ferrari Ferrari Ferrari
-AcidenteViacao 2050-10-12-11-30 5000 5000 3 5 Auto-Estrada Ferrari BMW BMW BMW BMW Ferrari Ferrari Ferrari Ferrari
+Assalto 2010-4-3-12-5 1200 300 1 Comercial
