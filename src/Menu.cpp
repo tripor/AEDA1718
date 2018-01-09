@@ -687,6 +687,7 @@ void Menu::lerFicheiroCondutores() {
 		Condutor c;
 		c.setName(nome);
 		c.setData(data);
+		this->condutores.insert(c);
 	}
 	ficheiro.close();
 
@@ -1582,7 +1583,7 @@ void Menu::EscreveFicheiroOficina() {
 void Menu::criarOficina(){
 	cout << "Indique o nome da Oficina: ";
 	string nome, opcao;
-	cin >> nome;
+	getline(cin,nome);
 	Oficina a;
 	a.setNome(nome); //atribui um nome
 	cout << "Indique as marcas de automóveis que a oficina pode reparar: ";
@@ -1696,6 +1697,7 @@ void Menu::verOficinaMarcas(){
 		}
 			oficinas.pop();
 	}
+	oficinas = temp;
 	if(!existe){
 		cout << "Nao existem oficinas que reparam: " << marca << endl;
 	}
@@ -1837,7 +1839,7 @@ void Menu::printCondutores() {
 		cout << i << "- ";
 		cout << "Nome: " << (*it).getName() << " | ";
 		cout << "Ultima ocorrencia: " << (*it).getData().getDataFormato();
-
+		i++;
 	}
 	cout << "\n=====================" << endl;
 }
