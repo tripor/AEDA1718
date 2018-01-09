@@ -492,7 +492,7 @@ void Menu::menuOpcoesOficinas_1(){
 		}
 	} else if (opcao == "2") {
 		try {
-			//this->removerPosto();
+			this->apagarOficina();
 		} catch (Erro *e) {
 			cout << e->getInfoErro() << endl;
 		}
@@ -1801,8 +1801,8 @@ void Menu::remover_condutores_antigos(){
 
 	d1 = Data(ano, mes, dia, hora, minuto);
 
-	auto it_aux = condutores.begin();
-
+	//auto it_aux = condutores.begin();
+/*
 	while(dif_maior_5_anos(((*it_aux).getData()),d1)){
 		condutores.erase(it_aux);
 		it_aux = condutores.begin();
@@ -1811,14 +1811,16 @@ void Menu::remover_condutores_antigos(){
 			return;
 		}
 	}
-
+*/
 	for(auto it = condutores.begin(); it != condutores.end();){
-		it++;
 		if(dif_maior_5_anos(((*it).getData()),d1)){
-			condutores.erase(it);
-			it = it_aux;
+			it = condutores.erase(it);
+
 		}
-		it_aux = it;
+		else{
+			it++;
+		}
+		//it_aux = it;
 	}
 
 }
@@ -2000,3 +2002,31 @@ void Menu::EscreveFicheiroVeiculo()
 	ficheiro.close();
 	this->veiculos.clear();
 }
+
+
+void Menu::apagarOficina(){
+	string name;
+	bool existe = false;
+	cout<<"Introduza o nome da oficina: "<<endl;
+	getline(cin,name);
+	Prior_queu temp = oficinas;
+	Prior_queu final;
+	while(!temp.empty()){
+		if(temp.top().getNome()==name){
+			existe = true;
+			temp.pop();
+		}
+		else{
+		final.push(temp.top());
+		temp.pop();
+
+		}
+	}
+
+	if(!existe){
+		cout<<"Oficina nao existe! "<<endl;
+		return;
+	}
+	oficinas = final;
+}
+

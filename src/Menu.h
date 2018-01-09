@@ -384,7 +384,12 @@ public:
 	 */
 	void EscreveFicheiroVeiculo();
 
+	void apagarOficina();
+
 };
+
+
+
 /**
  * @brief Ordenar a impressao dos veiculos por tipo
  * @param Acidente 1 a comparar
